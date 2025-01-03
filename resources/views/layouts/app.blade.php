@@ -31,8 +31,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <!-- <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet"> -->
   <link href="{{asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/quill/quill.snow.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/quill/quill.bubble.css')}}" rel="stylesheet">
@@ -72,7 +72,7 @@
   <!-- Vendor JS Files -->
   <script src="{{asset('vendor/apexcharts/apexcharts.min.js')}}"></script>
   <script src="{{asset('js/query.js')}}"></script>
-  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> -->
   <script src="{{asset('vendor/chart.js/chart.umd.js')}}"></script>
   <script src="{{asset('vendor/echarts/echarts.min.js')}}"></script>
   <script src="{{asset('vendor/quill/quill.min.js')}}"></script>
