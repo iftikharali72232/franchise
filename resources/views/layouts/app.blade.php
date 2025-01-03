@@ -40,8 +40,9 @@
   <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{asset('css/style.css')}}" rel="stylesheet">
   @vite('resources/js/app.js')
+  @vite('resources/css/app.css')
+  <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <body>
 
     <div class="wrapper">
