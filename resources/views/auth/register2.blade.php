@@ -18,10 +18,8 @@ use App\Helpers\CommonHelper;
         <div class="lg:col-span-5 lg:p-20 p-10 h-full overflow-y-auto scrollbar-hidden">
             <div class="bg-white rounded-2xl">
                 <div class="flex md:flex-row flex-col md:justify-between">
-                    <div class="md:w-[40%]">
-                        <div class="bg-[#F3F7FC] p-10 w-full rounded-bl-[100px]">
-                            <h2 class="text-4xl font-bold bg-gradient-to-b from-[#1F5077] to-[#3A95DD] bg-clip-text text-transparent">Welcome</h2>
-                        </div>
+                    <div class="">
+
                     </div>
                     <div class="md:px-10 pt-4 flex md:justify-start justify-center">
                         <label class="switch btn-color-mode-switch">
@@ -43,20 +41,55 @@ use App\Helpers\CommonHelper;
 
                 <div class="md:p-10 p-6">
                     <div class="">
-                        <h5 class="md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">{{trans('lang.login_to_account')}}</h5>
-                        <p class="text-[#1F507799] md:text-start text-center mt-2">{{trans('lang.enter_username_password')}}</p>
+                        <div class="flex md:justify-start justify-center items-center">
+                            <a href="{{ route('login') }}" 
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
+                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto rotate-[180deg]" alt="Arrow Left" />
+                            </a>
+                            <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
+                                {{ trans('lang.register') }}
+                            </h5>
+                        </div>
+                        <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14">{{trans('lang.enter_username_password')}}</p>
                     </div>
 
                     <form class="needs-validation" method="POST" action="{{ route('login') }}">
                         <div class="flex flex-col items-center mt-10">
-                            <div class="bg-[#D6E7F5] rounded-[40px] md:w-[70%] w-[95%] md:p-10 p-6">
+                            <div class="grid md:grid-cols-2 bg-[#D6E7F5] rounded-[40px] md:w-[90%] w-[95%] md:p-10 p-6 md:gap-6">
                                 @csrf
                                 <div class="">
-                                    <label for="yourUsername" class="text-[#1F507780]">{{trans('lang.username')}}</label>
+                                    <label for="yourUsername" class="text-[#1F507780]">{{ trans('lang.name') }}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 right-0 flex items-center pr-4">
                                             <img src="{{ asset('images/user.png') }}" class="h-[20px]" />
+                                        </div>
+                                        <!-- Input Field -->
+                                        <input 
+                                            id="name"
+                                            type="text" 
+                                            placeholder="{{ trans('lang.name') }}" 
+                                            class="w-full pl-3 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('name') is-invalid @enderror"
+                                            name="name" 
+                                            value="{{ old('name') }}" 
+                                            required 
+                                            autocomplete="name" 
+                                            autofocus
+                                        />
+                                    </div>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="">
+                                    <label for="yourUsername" class="text-[#1F507780]">{{ trans('lang.email_address') }}</label>
+                                    <div class="relative w-full mt-2">
+                                        <!-- Overlapping Icon -->
+                                        <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                            <img src="{{ asset('images/mail.png') }}" class="md:h-[20px] h-[16px]" />
                                         </div>
                                         <!-- Input Field -->
                                         <input 
@@ -78,7 +111,7 @@ use App\Helpers\CommonHelper;
                                     @enderror
                                 </div>
 
-                                <div class="mt-3">
+                                <div class="">
                                     <label for="yourPassword" class="text-[#1F507780]">{{trans('lang.password')}}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
@@ -93,7 +126,7 @@ use App\Helpers\CommonHelper;
                                             class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password') is-invalid @enderror"
                                             name="password" 
                                             required 
-                                            autocomplete="current-password"
+                                            autocomplete="new-password"
                                         />
                                         
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -110,37 +143,53 @@ use App\Helpers\CommonHelper;
                                     @enderror
                                 </div>
 
-                                <div class="mt-2">
-                                    <!-- <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                            <label class="form-check-label" for="remember">
-                                                {{trans('lang.remember_me') }}
-                                            </label>
+                                <div class="">
+                                    <label for="yourPassword" class="text-[#1F507780]">{{ trans('lang.confirm_password') }}</label>
+                                    <div class="relative w-full mt-2">
+                                        <!-- Overlapping Icon -->
+                                        <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                            <img src="{{ asset('images/lock.png') }}" class="h-[20px]" />
                                         </div>
-                                    </div> -->
-
-                                    @if (Route::has('password.request'))
-                                        <a class="text-[#19B2E7]" href="{{ route('password.request') }}">
-                                            {{ trans('lang.forgot_password') }}
-                                        </a>
-                                        @endif
+                                        <!-- Input Field -->
+                                        <input 
+                                            id="password-confirm" 
+                                            type="password" 
+                                            placeholder="Password" 
+                                            class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password-confirm') is-invalid @enderror"
+                                            name="password_confirmation" 
+                                            required 
+                                            autocomplete="new-password"
+                                        />
+                                        
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <button type="button" id="togglePassword" class="focus:outline-none">
+                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
+                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div class="flex items-center flex-col justify-center mt-4">
-                                    <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
-                                        {{ trans('lang.login') }}
-                                    </button>
-
-                                    <p class="text-[#1F507799] mt-3 md:text-start text-center md:px-0 px-4">
-                                        If you do not have an account,
-                                        <span> 
-                                            <a class="text-[#1F5077]" href="{{ route('register') }}">
-                                                Register Now
-                                            </a>
+                                    @error('password-confirm')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
                                         </span>
-                                    </p>
+                                    @enderror
+                                </div>
+
+                            </div>
+                            
+                            <div class="flex items-center flex-col justify-center mt-4">
+                                <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
+                                    {{ trans('lang.login') }}
+                                </button>
+
+                                <p class="text-[#1F507799] mt-3 md:text-start text-center md:px-0 px-4">
+                                    Already have an account, 
+                                    <span> 
+                                        <a class="text-[#1F5077]" href="{{ route('login') }}">
+                                        Login
+                                        </a>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </form>

@@ -33,3 +33,7 @@ Route::get('/login2', function () {
     return view('/auth/login2');
 });
 
+Route::get('/register2', function () {
+    return view('/auth/register2');
+});
+
