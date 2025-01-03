@@ -1,3 +1,9 @@
+@extends('layouts.app')
+<?php
+use App\Helpers\CommonHelper;
+?>
+@section('content')
+
 <div class="h-screen bg-[#F3F7FC]">
     <div class="grid grid-cols-7 gap-4">
         <div class="col-span-2 h-screen bg-[#1F5077] relative">
@@ -12,28 +18,38 @@
 
         <div class="col-span-5 p-20">
             <div class="bg-white rounded-2xl">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between">
                     <div class="w-[40%]">
                         <div class="bg-[#F3F7FC] p-10 w-full rounded-bl-[100px]">
                             <h2 class="text-4xl font-bold bg-gradient-to-b from-[#1F5077] to-[#3A95DD] bg-clip-text text-transparent">Welcome</h2>
                         </div>
                     </div>
-                    <div class="">
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer">
-                        <div class="peer outline-none duration-100 after:duration-500 w-28 h-14 bg-blue-300 peer-focus:outline-none after:content-['EN'] after:absolute after:outline-none after:h-12 after:w-12 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['AR'] peer-checked:after:content-['AR'] peer-checked:after:border-white">
-                        </div>
-                    </label>
-
-                    
-
+                    <div class="px-10 pt-4">
+                        <label class="switch btn-color-mode-switch">
+                            <input 
+                                value="1" 
+                                id="color_mode" 
+                                name="color_mode" 
+                                type="checkbox"
+                                {{ app()->getLocale() == 'ar' ? 'checked' : '' }}>
+                            <label 
+                                class="btn-color-mode-switch-inner" 
+                                data-off="EN" 
+                                data-on="AR" 
+                                for="color_mode">
+                            </label>
+                        </label>
                     </div>
                 </div>
 
                 <div class="p-10">
-
+                    <div class="">
+                        <h5 class="card-title text-center pb-0 fs-4">{{trans('lang.login_to_account')}}</h5>
+                        <p class="text-center small">{{trans('lang.enter_username_password')}}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection

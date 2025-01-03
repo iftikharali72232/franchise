@@ -29,4 +29,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
+Route::get('/login2', function () {
+    return view('/auth/login2');
+});
 
