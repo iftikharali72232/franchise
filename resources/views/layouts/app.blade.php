@@ -39,9 +39,7 @@
   <link href="{{asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  @vite('resources/js/app.js')
-  @vite('resources/css/app.css')
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <body>
 
