@@ -37,3 +37,15 @@ Route::get('/register2', function () {
     return view('/auth/register2');
 });
 
+Route::get('/otp', function () {
+    return view('/auth/otp');
+});
+
+Route::get('/forgot_password', function () {
+    return view('/auth/forgot_password');
+});
+
+
+Route::get('/reset_password', function () {
+    return view('/auth/reset_password');
+});
