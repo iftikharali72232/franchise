@@ -51,12 +51,6 @@ body {
 }
 
 /* Tailwind css */
-.btn-container {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
 .btn-color-mode-switch {
   display: inline-block;
   margin: 0px;
@@ -141,4 +135,79 @@ body {
 .scrollbar-hidden {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+
+/* for round lanuguage btn  */
+.switch-round {
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+}
+
+.switch-round > label.btn-color-mode-round-switch-inner {
+  margin: 0px;
+  width: 140px;
+  height: 50px;
+  background-color: #1D3F5D;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.switch-round > label.btn-color-mode-round-switch-inner:before {
+  content: attr(data-on);
+  position: absolute;
+  font-size: 16px;
+  font-weight: 600;
+  top: 12px;
+  right: 20px;
+  color: white;
+}
+
+.switch-round > label.btn-color-mode-round-switch-inner:after {
+  content: attr(data-off);
+  width: 70px;
+  height: 46px;
+  background: #D6E7F5;
+  border-radius: 50px;
+  position: absolute;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  left: 2px;
+  top: 2px;
+  text-align: center;
+  transition: all 0.3s ease;
+  padding: 10px 0px;
+  color: #222;
+  font-weight: 600;
+}
+
+.switch-round input[type="checkbox"] {
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  margin: 0px;
+}
+
+.switch-round input[type="checkbox"]:checked + label.btn-color-mode-round-switch-inner {
+  background-color: #1D3F5D;
+}
+
+.switch-round input[type="checkbox"]:checked + label.btn-color-mode-round-switch-inner:after {
+  content: attr(data-on);
+  left: 70px;
+}
+
+.switch-round input[type="checkbox"]:checked + label.btn-color-mode-round-switch-inner:before {
+  content: attr(data-off);
+  right: auto;
+  left: 20px;
 }

@@ -319,8 +319,8 @@
 
 })();
 
-function changeLanguage() {
-  const isArabic = document.getElementById('color_mode').checked;
+function changeLanguage(id="color_mode") {
+  const isArabic = document.getElementById(id).checked;
 
   // Redirect to the appropriate language URL
   const newLang = isArabic ? 'ar' : 'en';

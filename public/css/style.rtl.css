@@ -1,0 +1,4 @@
+.switch-round > label.btn-color-mode-round-switch-inner:after {
+    left: auto !important;
+    right: 3px !important;
+  }
