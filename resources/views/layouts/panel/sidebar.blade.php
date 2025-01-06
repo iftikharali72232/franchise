@@ -8,7 +8,7 @@
             <span class="text-center w-full pe-10">Create</span>
         </button> 
 
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col justify-space-between w-full h-full scrollbar-hidden overflow-y-auto">
             <nav class="flex-1">
                 <a href="#" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
                     <img src="{{asset('images/dashboard.png')}}" alt="dashboard" class="w-5 h-5 filter invert brightness-0 group-hover:invert group-hover:brightness-100">
@@ -40,6 +40,18 @@
                     <span class="ps-4">Settings</span>
                 </a>
             </nav>
+
+            <div class="">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
+                    <img src="{{asset('images/exit.png')}}" alt="logout" class="w-5 h-5 filter group-hover:invert group-hover:brightness-100">
+                    <span class="ps-4">{{ trans('lang.logout') }}</span>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+
         </div>
         
     </div>

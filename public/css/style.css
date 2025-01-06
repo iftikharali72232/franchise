@@ -1,8 +1,15 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
 :root {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Alexandria", serif !important;
+  font-optical-sizing: auto;
 }
 
 /*--------------------------------------------------------------
@@ -44,6 +51,72 @@
 }
 
 /* Tailwind css */
+.btn-container {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.btn-color-mode-switch {
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner {
+  margin: 0px;
+  width: 140px;
+  height: 36px;
+  background-color: #1D3F5D;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+    /*box-shadow: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;*/
+  display: block;
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+  content: attr(data-on);
+  position: absolute;
+  font-size: 16px;
+  font-weight: 600;
+  top: 8px;
+  right: 20px;
+  color: white;
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
+  content: attr(data-off);
+  width: 70px;
+  height: 36px;
+  background: #D6E7F5;
+  border-radius: 5px;
+  position: absolute;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  left: 0px;
+  top: 0px;
+  text-align: center;
+  transition: all 0.3s ease;
+  /* box-shadow: 0px 0px 6px -2px #111; */
+  padding: 6px 0px;
+  color: #222;
+  font-weight: 600;
+}
+
+.btn-color-mode-switch input[type="checkbox"] {
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  margin: 0px;
+}
+
 .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner {
   background-color: #1D3F5D;
 }

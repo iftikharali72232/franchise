@@ -4,7 +4,7 @@ use App\Helpers\CommonHelper;
 ?>
 @section('content')
 
-<div class="h-screen bg-[#F3F7FC]">
+<div class="h-screen bg-[#F3F7FC] w-full">
     <div class="grid lg:grid-cols-7 grid-cols-1 lg:gap-4 lg:h-screen">
         <div class="lg:col-span-2 lg:h-screen bg-[#1F5077] relative">
             <div class="absolute bg-[url('/images/design-pattern.png')] bg-repeat h-[100%] w-full"></div>
