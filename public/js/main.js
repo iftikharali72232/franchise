@@ -318,3 +318,11 @@
   }
 
 })();
+
+function changeLanguage() {
+  const isArabic = document.getElementById('color_mode').checked;
+
+  // Redirect to the appropriate language URL
+  const newLang = isArabic ? 'ar' : 'en';
+  window.location.href = `/lang/${newLang}`;
+}

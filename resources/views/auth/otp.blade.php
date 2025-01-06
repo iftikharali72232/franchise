@@ -28,6 +28,7 @@ use App\Helpers\CommonHelper;
                                 id="color_mode" 
                                 name="color_mode" 
                                 type="checkbox"
+                                onchange="changeLanguage()"
                                 {{ app()->getLocale() == 'ar' ? 'checked' : '' }}>
                             <label 
                                 class="btn-color-mode-switch-inner" 
@@ -44,7 +45,7 @@ use App\Helpers\CommonHelper;
                         <div class="flex md:justify-start justify-center items-center">
                             <a href="{{ route('login') }}" 
                                 class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
-                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto rotate-[180deg]" alt="Arrow Left" />
+                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="Arrow Left" />
                             </a>
                             <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
                                 OTP Verification

@@ -28,6 +28,7 @@ use App\Helpers\CommonHelper;
                                 id="color_mode" 
                                 name="color_mode" 
                                 type="checkbox"
+                                onchange="changeLanguage()"
                                 {{ app()->getLocale() == 'ar' ? 'checked' : '' }}>
                             <label 
                                 class="btn-color-mode-switch-inner" 
@@ -44,7 +45,7 @@ use App\Helpers\CommonHelper;
                         <div class="flex md:justify-start justify-center items-center">
                             <a href="{{ route('login') }}" 
                                 class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
-                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto rotate-[180deg]" alt="Arrow Left" />
+                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="Arrow Left" />
                             </a>
                             <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
                                 Forgot Password
@@ -60,7 +61,7 @@ use App\Helpers\CommonHelper;
                             <div class="md:px-[15%] px-[5%]">
                                 <div class="relative w-full mt-2">
                                     <!-- Overlapping Icon -->
-                                    <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                    <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
                                         <img src="{{ asset('images/user.png') }}" class="h-[20px]" />
                                     </div>
                                     <!-- Input Field -->
@@ -68,7 +69,7 @@ use App\Helpers\CommonHelper;
                                         id="email"
                                         type="email" 
                                         placeholder="{{trans('lang.username')}}" 
-                                        class="w-full pl-3 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
+                                        class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pl-12 pr-3' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                                         name="email" 
                                         required 
                                         autocomplete="email" 

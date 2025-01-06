@@ -28,6 +28,7 @@ use App\Helpers\CommonHelper;
                                 id="color_mode" 
                                 name="color_mode" 
                                 type="checkbox"
+                                onchange="changeLanguage()"
                                 {{ app()->getLocale() == 'ar' ? 'checked' : '' }}>
                             <label 
                                 class="btn-color-mode-switch-inner" 
@@ -44,7 +45,7 @@ use App\Helpers\CommonHelper;
                         <div class="flex md:justify-start justify-center items-center">
                             <a href="{{ route('login') }}" 
                                 class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
-                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto rotate-[180deg]" alt="Arrow Left" />
+                                <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="Arrow Left" />
                             </a>
                             <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
                                 Reset Password
@@ -62,7 +63,7 @@ use App\Helpers\CommonHelper;
                                 <div class="">
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
-                                        <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                        <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
                                             <img src="{{ asset('images/lock.png') }}" class="h-[20px]" />
                                         </div>
                                         <!-- Input Field -->
@@ -70,13 +71,13 @@ use App\Helpers\CommonHelper;
                                             id="new-password" 
                                             type="password" 
                                             placeholder="New Password" 
-                                            class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
+                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                                             name="new-password" 
                                             required 
                                             autocomplete="new-password"
                                         />
                                         
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" id="togglePassword" class="focus:outline-none">
                                             <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
                                             <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
@@ -88,7 +89,7 @@ use App\Helpers\CommonHelper;
                                 <div class="">
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
-                                        <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                        <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
                                             <img src="{{ asset('images/lock.png') }}" class="h-[20px]" />
                                         </div>
                                         <!-- Input Field -->
@@ -96,13 +97,13 @@ use App\Helpers\CommonHelper;
                                             id="confirm-new-password" 
                                             type="password" 
                                             placeholder="Confirm New Password" 
-                                            class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
+                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                                             name="confirm-new-password" 
                                             required 
                                             autocomplete="confirm-new-password"
                                         />
                                         
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" id="togglePassword" class="focus:outline-none">
                                             <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
                                             <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />

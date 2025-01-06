@@ -1,5 +1,5 @@
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <header id="header" class="header fixed-top d-flex align-items-center bg-yellow-500">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{route('home')}}" class="logo d-flex align-items-center">
