@@ -30,10 +30,13 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <!-- font awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
   <!-- Vendor CSS Files -->
   <!-- <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet"> -->
-  <link href="{{asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <!-- <link href="{{asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet"> -->
   <link href="{{asset('vendor/quill/quill.snow.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
@@ -43,27 +46,35 @@
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <body>
 
-    <div class="wrapper">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Topnav -->
         @guest
 
         @else
                <!-- Preloader -->
-          <div class="preloader flex-column justify-content-center align-items-center">
+          <!-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__wobble" src="{{asset('img/logo.png')}}" alt="AdminLTELogo" height="60" width="60">
-          </div>
-
-       @include('layouts.penal.nav')
-       @include('layouts.penal.main_manue')
+          </div> -->
+        <!-- Sidebar -->
+        @include('layouts.panel.sidebar')
 
       @endguest
 
       @guest
-      @yield('content')
-        @else
-      <main id="main" class="main">
-            @yield('content')
-        </main>
-        @endguest
+        @yield('content')
+      @else
+      
+      <!-- Main Body -->
+      <div class="flex flex-col flex-1 overflow-y-auto">
+          <!-- Topnav -->
+          @include('layouts.panel.topnav')
+
+          <!-- Content -->
+          <div class="p-4">
+          @yield('content')
+          </div>
+      </div>
+      @endguest
     </div>
 </body>
 </html>

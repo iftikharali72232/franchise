@@ -326,3 +326,14 @@ function changeLanguage() {
   const newLang = isArabic ? 'ar' : 'en';
   window.location.href = `/lang/${newLang}`;
 }
+
+$(document).ready(function() {
+  $('#toggleSidebar').on('click', function() {
+    const sidebar = $('#sidebar');
+    if (sidebar.hasClass('md:flex')) {
+        sidebar.removeClass('md:flex').addClass('hidden');
+    } else {
+        sidebar.addClass('md:flex').removeClass('hidden');
+    }
+  });
+});
