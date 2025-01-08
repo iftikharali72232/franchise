@@ -41,9 +41,15 @@
   <link href="{{asset('vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
-
+  
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- light slider  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightslider@1.1.6/dist/css/lightslider.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/lightslider@1.1.6/dist/js/lightslider.min.js"></script>
+
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <body>
 
@@ -89,7 +95,7 @@
   <script src="{{asset('vendor/simple-datatables/simple-datatables.js')}}"></script>
   <script src="{{asset('vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
 
   <!-- Template Main JS File -->
   <script src="{{asset('js/main.js')}}"></script>

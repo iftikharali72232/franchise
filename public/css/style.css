@@ -213,3 +213,34 @@ body {
   right: auto;
   left: 20px;
 }
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 32%);
+}
+
+#lightSlider {
+  padding-bottom: 25% !important;
+}
+
+.lSAction{
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  z-index: 9999 !important;
+}
+
+.lSAction a{
+  filter: invert() !important;
+  position: relative !important;
+}
+
+.lSAction>.lSPrev {
+  left: -25px !important;
+}
+
+.lSPager{
+  margin-top: -35px !important;
+    margin-left: 10px !important;
+    position: absolute !important;
+}
