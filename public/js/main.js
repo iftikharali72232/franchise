@@ -328,7 +328,7 @@ function changeLanguage(id="color_mode") {
 }
 
 $(document).ready(function() {
-  $('#toggleSidebar').on('click', function() {
+  $('.toggleSidebar').on('click', function() {
     const sidebar = $('#sidebar');
     if (sidebar.hasClass('md:flex')) {
         sidebar.removeClass('md:flex').addClass('hidden');

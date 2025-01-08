@@ -43,6 +43,7 @@
   <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <body>
 
@@ -89,6 +90,7 @@
   <script src="{{asset('vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <!-- Template Main JS File -->
   <script src="{{asset('js/main.js')}}"></script>
 

@@ -1,22 +1,22 @@
-<div class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
-    <div class="flex items-center w-full space-x-6 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+<div class="flex items-center justify-between h-16 px-4 pt-4">
+    <div class="flex items-center w-full lg:pe-4 pe-2 lg:space-x-6 md:space-x-4 space-x-2 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
         <div class="">
-            <button type="button" id="toggleSidebar" class="text-gray-500 text-2xl focus:outline-none">
+            <button type="button" class="toggleSidebar text-gray-500 text-2xl focus:outline-none">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <div class="flex items-center">
+        <div class="hidden md:flex items-center">
             <div class="bg-[#1D3F5D] rounded-full p-2 w-[50px] h-[50px]">
                 <img src="{{asset('images/main-user.png')}}" alt="user" class="">
             </div>
             <div class="ps-3">
                 <h4 class="text-start text-[#1D3F5D] font-semibold text-xl">Grgir Person</h4>
-                <p class="text-start text-gray-300">info@grgirperson.sa</p>
+                <p class="text-start text-gray-400">info@grgirperson.sa</p>
             </div>
         </div>
 
-        <div class="relative w-full">
+        <div class="relative w-auto">
             <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
                 <img src="{{ asset('images/search.png') }}" class="h-[20px]" />
             </div>
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-end w-full {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }} space-x-6" >
+    <div class="flex items-center justify-end w-auto {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }} lg:space-x-6 md:space-x-4 space-x-2" >
         <div class="flex">
             <div class="bg-[#1D3F5D] rounded-full p-3 w-[50px] h-[50px]">
                 <img src="{{asset('images/bell.png')}}" alt="notification" class="">

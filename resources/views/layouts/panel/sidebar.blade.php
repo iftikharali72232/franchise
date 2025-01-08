@@ -1,7 +1,14 @@
-<div id="sidebar" class="hidden md:flex flex-col w-64 bg-gradient-to-b from-[#1F5077] via-[#2E76B0] via-[#3A95DD] to-[#378ED3]">
+<div id="sidebar" class="hidden lg:relative absolute h-full z-50 lg:flex flex-col w-64 bg-gradient-to-b from-[#1F5077] via-[#2E76B0] via-[#3A95DD] to-[#378ED3]">
+    <div class="lg:hidden flex absolute top-0 right-0 px-4 py-2">
+        <button type="button" class="toggleSidebar text-white/50 text-xl focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
     <div class="flex items-center justify-center w-full h-[150px]">
         <img src="{{asset('images/logo.png')}}" alt="Logo" class="w-full h-full object-cover">
     </div>
+
     <div class="flex flex-col flex-1  px-2 pb-4 overflow-y-auto">
         <button type="button" class="w-full flex items-center bg-white rounded-full px-6 py-3 mb-4 font-semibold focus:outline-none">
             <img src="{{asset('images/pencil.png')}}" alt="create" class="w-5 h-5">

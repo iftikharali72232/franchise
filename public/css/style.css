@@ -10,7 +10,9 @@
 body {
   font-family: "Alexandria", serif !important;
   font-optical-sizing: auto;
+  background-color: #F2F8FD !important;
 }
+
 
 /*--------------------------------------------------------------
 # Error 404
