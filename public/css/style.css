@@ -140,7 +140,7 @@ body {
 }
 
 
-/* for round lanuguage btn  */
+/* for round language btn  */
 .switch-round {
   display: inline-block;
   margin: 0px;
@@ -224,7 +224,7 @@ body {
 
 .lSAction{
   position: absolute !important;
-  right: 0 !important;
+  right: 0;
   bottom: 0 !important;
   display: flex !important;
   z-index: 9999 !important;
@@ -241,6 +241,27 @@ body {
 
 .lSPager{
   margin-top: -35px !important;
-    margin-left: 10px !important;
+    margin-left: 10px;
     position: absolute !important;
+}
+
+tr td {
+  padding: 15px 0px 15px 15px;
+}
+
+tr th {
+  padding: 15px 0px 15px 15px;
+  text-align: start;
+  font-weight: 600;
+}
+
+tr td:first-child, tr th:first-child {
+  border-radius: 50px 0 0 50px;
+  padding: 0px 15px 0px 30px;
+}
+
+/* Round the last td */
+tr td:last-child, tr th:last-child {
+  border-radius: 0 50px 50px 0;
+  padding: 0px 30px 0px 15px;
 }

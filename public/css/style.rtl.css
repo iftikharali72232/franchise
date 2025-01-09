@@ -1,4 +1,53 @@
-.switch-round > label.btn-color-mode-round-switch-inner:after {
+  .switch-round > label.btn-color-mode-round-switch-inner:after {
     left: auto !important;
     right: 3px !important;
+  }
+
+  .lSAction{
+    right: auto !important;
+    left: 0 !important;
+  }
+  
+  .lSAction>.lSPrev {
+    left: auto !important;
+    right: -25px !important;
+    transform: rotate(180deg) !important;
+    transform-origin: center !important;
+  }
+
+  .lSAction>.lSNext {
+    right: auto !important;
+    left: 10px !important;
+    transform: rotate(180deg) !important;
+    transform-origin: center !important;
+  }
+  
+  .lSPager{
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+  }
+
+  #lightSlider {
+    transform: translate3d(12px, 0px, 0px) !important;
+  }
+
+  /* for round language  */
+  .switch-round > label.btn-color-mode-round-switch-inner:before {
+    right: auto !important;
+    left: 20px !important;
+  }
+
+  .switch-round > label.btn-color-mode-round-switch-inner:after {
+    left: auto !important;
+    right: 2px !important;
+  }
+
+  .switch-round input[type="checkbox"]:checked + label.btn-color-mode-round-switch-inner:after {
+    left: auto !important;
+    right: 68px !important;
+  }
+  
+  .switch-round input[type="checkbox"]:checked + label.btn-color-mode-round-switch-inner:before {
+    left: auto !important;
+    right: 20px !important;
   }

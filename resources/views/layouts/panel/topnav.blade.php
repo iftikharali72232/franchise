@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between h-16 px-4 pt-4">
-    <div class="flex items-center w-full lg:pe-4 pe-2 lg:space-x-6 md:space-x-4 space-x-2 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+    <div class="flex items-center w-full lg:pe-4 pe-2 {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-3' : 'lg:space-x-6 md:space-x-4 space-x-2' }}">
         <div class="">
             <button type="button" class="toggleSidebar text-gray-500 text-2xl focus:outline-none">
                 <i class="fa-solid fa-bars"></i>
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-end w-auto {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }} lg:space-x-6 md:space-x-4 space-x-2" >
+    <div class="flex items-center justify-end w-auto {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-3' : 'lg:space-x-6 md:space-x-4 space-x-2' }} " >
         <div class="flex">
             <div class="bg-[#1D3F5D] rounded-full p-3 w-[50px] h-[50px]">
                 <img src="{{asset('images/bell.png')}}" alt="notification" class="">

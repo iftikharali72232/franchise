@@ -49,3 +49,15 @@ Route::get('/forgot_password', function () {
 Route::get('/reset_password', function () {
     return view('/auth/reset_password');
 });
+
+Route::get('/branches', function () {
+    return view('/branches');
+});
+
+Route::get('/members', function () {
+    return view('/members');
+});
+
+Route::get('/letters', function () {
+    return view('/letters');
+});

@@ -3,27 +3,27 @@
 @section('content')
 
 <div class="space-y-5 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-    <div class="flex space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-        <div class="relative flex flex-col w-[80%] rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div class="flex justify-between px-6 pt-4">
-            <div class="">
-                <h2 class="text-[30px] font-600 text-[#93C3E6] flex items-center">
-                <span class="text-shadow">Western Region Branches</span>
-                <i class="fa-solid fa-chevron-right text-[20px] ms-4"></i>
-                </h2>
-            </div>
+    <div class="flex lg:flex-row flex-col lg:space-x-4 lg:space-y-0 space-y-4 {{ app()->getLocale() == 'ar' ? 'lg:space-x-reverse' : '' }}">
+        <div class="relative flex flex-col lg:w-[80%] w-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+            <div class="flex md:flex-row flex-col justify-between px-6 pt-4">
+                <div class="flex items-center justify-center lg:mb-0 mb-2">
+                    <h2 class="md:text-[30px] text-[22px] font-600 text-[#93C3E6] flex items-center">
+                    <span class="text-shadow">Western Region Branches</span>
+                    <i class="fa-solid fa-chevron-right {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }} md:text-[20px] text-[16px] ms-4"></i>
+                    </h2>
+                </div>
 
-            <div class="flex items-center justify-end space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
-                <option selected>Food</option>
-                <option>Health</option>
-                </select>
+                <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
+                    <option selected>Food</option>
+                    <option>Health</option>
+                    </select>
 
-                <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
-                <option>Western B.</option>
-                <option>East B.</option>
-                </select>
-            </div>
+                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
+                    <option>Western B.</option>
+                    <option>East B.</option>
+                    </select>
+                </div>
             </div>
 
             <div class="pt-6 px-2 pb-0">
@@ -31,10 +31,10 @@
             </div>
         </div>
 
-        <div class="w-[20%] p-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+        <div class="lg:w-[20%] w-full p-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <h2 class="text-[24px] font-600 text-[#93C3E6] flex items-center">
             <span class="text-shadow">Branches</span>
-            <i class="fa-solid fa-chevron-right text-[20px] ms-4"></i>
+            <i class="fa-solid fa-chevron-right {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }} text-[20px] ms-4"></i>
             </h2>
 
             <div class="mt-4">
@@ -49,7 +49,7 @@
                     <div class="border-l-[6px] h-full border-[#246DA5]"></div>
                     </div>
                     
-                    <div class="ml-2 pb-10">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}  pb-10">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Sultana</h3>
                         <p class="text-gray-400 text-[16px]">Medina</p>
                     </div>
@@ -65,7 +65,7 @@
                         <div class="border-l-[6px] h-full border-[#246DA5]"></div>
                     </div>
                     
-                    <div class="ml-2 pb-10">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">K . Saud Rd</h3>
                         <p class="text-gray-400 text-[16px]">Riyadh</p>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="border-l-[6px] h-full border-[#246DA5]"></div>
                     </div>
                     
-                    <div class="ml-2 pb-10">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Sari . St</h3>
                         <p class="text-gray-400 text-[16px]">Jaddah</p>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="border-l-[6px] h-full border-[#246DA5]"></div>
                     </div>
                     
-                    <div class="ml-2 pb-10">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Sec . Ring Rd</h3>
                         <p class="text-gray-400 text-[16px]">Medina</p>
                     </div>
@@ -113,7 +113,7 @@
                         <!-- <div class="border-l-[6px] h-full border-[#246DA5]"></div> -->
                     </div>
                     
-                    <div class="ml-2 pb-0">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-0">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Hilton . Rd</h3>
                         <p class="text-gray-400 text-[16px]">Asir</p>
                     </div>
@@ -126,34 +126,34 @@
         </div>
     </div>
 
-    <div class="flex space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-        <div class="relative flex flex-col w-[80%] rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div class="flex justify-between px-6 pt-4">
-            <div class="">
-                <h2 class="text-[30px] font-600 text-[#93C3E6] flex items-center">
-                <span class="text-shadow">Reports</span>
-                <i class="fa-solid fa-chevron-right text-[20px] ms-4"></i>
-                </h2>
-            </div>
+    <div class="flex lg:flex-row flex-col lg:space-x-4 lg:space-y-0 space-y-4 {{ app()->getLocale() == 'ar' ? 'lg:space-x-reverse' : '' }}">
+        <div class="relative flex flex-col lg:w-[80%] w-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+            <div class="flex md:flex-row flex-col justify-between px-6 pt-4">
+                <div class="flex justify-center items-center lg:mb-0 mb-2">
+                    <h2 class="md:text-[30px] text-[24px] font-600 text-[#93C3E6] flex items-center">
+                    <span class="text-shadow">Reports</span>
+                    <i class="fa-solid fa-chevron-right {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }} text-[20px] ms-4"></i>
+                    </h2>
+                </div>
 
-            <div class="flex items-center justify-end space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
-                <option>Food</option>
-                <option selected>Health</option>
-                </select>
+                <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
+                    <option>Food</option>
+                    <option selected>Health</option>
+                    </select>
 
-                <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
-                <option>Western B.</option>
-                <option>East B.</option>
-                </select>
-            </div>
+                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
+                    <option>Western B.</option>
+                    <option>East B.</option>
+                    </select>
+                </div>
             </div>
 
             <div class="pt-6 px-2 pb-0">
                 <ul id="lightSlider">
                     <li>
                         <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute right-[-25px] top-[-18px] z-10 h-[140px]">
+                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
 
                             <div class="px-4 relative z-50">
                                 <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
@@ -184,7 +184,7 @@
                     
                     <li>
                         <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute right-[-25px] top-[-18px] z-10 h-[140px]">
+                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
 
                             <div class="px-4 relative z-50">
                                 <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
@@ -215,7 +215,7 @@
 
                     <li>
                         <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute right-[-25px] top-[-18px] z-10 h-[140px]">
+                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
 
                             <div class="px-4 relative z-50">
                                 <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
@@ -246,7 +246,7 @@
 
                     <li>
                         <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute right-[-25px] top-[-18px] z-10 h-[140px]">
+                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
 
                             <div class="px-4 relative z-50">
                                 <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
@@ -278,10 +278,10 @@
             </div>
         </div>
 
-        <div class="w-[20%] p-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+        <div class="lg:w-[20%] w-full p-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <h2 class="text-[24px] font-600 text-[#93C3E6] flex items-center">
-            <span class="text-shadow">Memebers</span>
-            <i class="fa-solid fa-chevron-right text-[20px] ms-4"></i>
+            <span class="text-shadow">Members</span>
+            <i class="fa-solid fa-chevron-right {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }} text-[20px] ms-4"></i>
             </h2>
 
             <div class="mt-4">
@@ -295,7 +295,7 @@
                             </div>
                         </div>
                         
-                        <div class="ml-2">
+                        <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
                             <h3 class="text-[#246DA5] text-[18px] font-semibold">Sultana</h3>
                             <p class="text-gray-400 text-[16px]">Medina</p>
                         </div>
@@ -310,7 +310,7 @@
                         </div>
                     </div>
                     
-                    <div class="ml-2">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">K . Saud Rd</h3>
                         <p class="text-gray-400 text-[16px]">Riyadh</p>
                     </div>
@@ -325,7 +325,7 @@
                         </div>
                     </div>
                     
-                    <div class="ml-2">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Sari . St</h3>
                         <p class="text-gray-400 text-[16px]">Jaddah</p>
                     </div>
@@ -340,7 +340,7 @@
                         </div>
                     </div>
                     
-                    <div class="ml-2">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Sec . Ring Rd</h3>
                         <p class="text-gray-400 text-[16px]">Medina</p>
                     </div>
@@ -355,7 +355,7 @@
                         </div>
                     </div>
                     
-                    <div class="ml-2 pb-0">
+                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-0">
                         <h3 class="text-[#246DA5] text-[18px] font-semibold">Hilton . Rd</h3>
                         <p class="text-gray-400 text-[16px]">Asir</p>
                     </div>
@@ -473,7 +473,7 @@ $(document).ready(function() {
             {
                 breakpoint:800,
                 settings: {
-                    item:3,
+                    item:2,
                     slideMove:1,
                     slideMargin:6,
                   }
@@ -481,7 +481,7 @@ $(document).ready(function() {
             {
                 breakpoint:480,
                 settings: {
-                    item:2,
+                    item:1,
                     slideMove:1
                   }
             }
@@ -490,8 +490,4 @@ $(document).ready(function() {
   });
 </script>
 
-
-
 @endsection
-
-
