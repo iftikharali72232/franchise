@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // public routes
+
+Route::post('/register', [AuthController::class, 'register']); // Create a new user
+Route::post('/login', [AuthController::class, 'login']);
 
 // protected routes
 Route::group(["middleware"=> "auth:sanctum"], function () {
