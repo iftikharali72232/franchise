@@ -65,3 +65,7 @@ Route::get('/letters', function () {
 Route::get('/reports', function () {
     return view('/reports');
 });
+
+Route::get('/profile', function () {
+    return view('/profile');
+});

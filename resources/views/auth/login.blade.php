@@ -98,7 +98,7 @@ use App\Helpers\CommonHelper;
                                         />
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
-                                            <button type="button" id="togglePassword" class="focus:outline-none">
+                                            <button type="button" class="togglePassword focus:outline-none">
                                             <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
                                             <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
