@@ -6,9 +6,9 @@
 <div class="w-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md p-6">
     <form>
         <div class="w-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md p-8">
-            <h4 class="text-[#1D3F5D] font-semibold text-2xl">Basic Details</h4>
+            <h4 class="text-[#1D3F5D] font-semibold text-2xl md:text-start text-center">Basic Details</h4>
 
-            <div class="flex flex-col justify-center my-4">
+            <div class="flex flex-col md:items-start items-center justify-center my-4">
                 <!-- Image Preview Container -->
                 <div class="relative px-6">
                     <img
@@ -26,7 +26,7 @@
                     />
                 </div>
 
-                <div class="flex items-center w-auto">
+                <div class="flex items-center w-auto md:mt-0 mt-1">
                     <button
                         type="button"
                         onclick="document.getElementById('imageInput').click()"
@@ -38,7 +38,7 @@
             </div>
 
             <div class="">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
                     <div class="flex flex-col justify-center w-full">
                         <label class="text-[#1D3F5D] font-semibold ps-2 pb-2">Name <span class="text-red-500">*</span></label>
                         <input type="text" class="px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:outline-none rounded-full" placeholder="Grgir Person">

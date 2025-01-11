@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  // Toggle sidebar
   $('.toggleSidebar').on('click', function() {
     const sidebar = $('#sidebar');
     if (sidebar.hasClass('md:flex')) {
@@ -9,12 +10,12 @@ $(document).ready(function() {
     }
   });
 
+  // Toggle password visibility
   $('.togglePassword').on('click', function () {
     const passwordInput = $('#password');
     const eyeOpen = $('#eyeOpen');
     const eyeClosed = $('#eyeClosed');
 
-    // Toggle password visibility
     if (passwordInput.attr('type') === 'password') {
       passwordInput.attr('type', 'text');
       eyeOpen.addClass('hidden');
@@ -26,12 +27,12 @@ $(document).ready(function() {
     }
   });
 
+  // Toggle password visibility
   $('.toggleConfirmPassword').on('click', function () {
     const passwordInput = $('#confirm-password');
     const eyeOpen = $('#eyeOpen2');
     const eyeClosed = $('#eyeClosed2');
 
-    // Toggle password visibility
     if (passwordInput.attr('type') === 'password') {
       passwordInput.attr('type', 'text');
       eyeOpen.addClass('hidden');
@@ -41,6 +42,19 @@ $(document).ready(function() {
       eyeOpen.removeClass('hidden');
       eyeClosed.addClass('hidden');
     }
+  });
+
+  // notification dropdown code
+  const $notificationDropdown = $('#notificationDropdown');
+
+  // Toggle dropdown visibility on button click
+  $('#notificationButton, #notificationClose').on('click', function () {
+      $notificationDropdown.toggleClass('hidden');
+  });
+
+  // modal close btn
+  $(".modal").on("click", ".close-modal", function () {
+    $(this).closest(".modal").addClass("hidden");
   });
 });
 
@@ -56,4 +70,8 @@ function previewImage(event) {
   } else {
     preview.src = "/images/profile-placeholder.jpg"; // Placeholder image if no image selected
   }
+}
+
+function openModal(id) {
+  $(`#${id}`).removeClass("hidden");
 }
