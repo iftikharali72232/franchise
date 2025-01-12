@@ -212,7 +212,7 @@ class AuthController extends Controller
         }
     
         // Check if user is approved by admin
-        if ($user->status === 0) {
+        if ($user->status == 0) {
             return response()->json([
                 'message' => 'Your account is not approved by the admin yet.',
             ], 403); // 403 Forbidden
