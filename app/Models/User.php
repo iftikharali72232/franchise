@@ -29,12 +29,9 @@ class User extends Authenticatable
         'address',
         'country',
         'otp',
-        'category_id',
-        'driving_license',
-        'bank_id',
-        'bank_account',
-        'device_token',
-        'is_available'
+        'otp_expiry',
+        'is_verify',
+        'device_token'
     ];
 
     /**

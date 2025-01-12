@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 function removeImages($imageArray, $multi_images = 0) {
     // print_r($imageArray); exit;
     if($multi_images == 1)
@@ -188,3 +189,29 @@ function getFivePercent($amount) {
     return $percentage;
 }
 
+
+if (!function_exists('sendEmail')) {
+    function sendEmail($to, $subject, $messageBody, $from = null, $attachments = [])
+    {
+        $fromAddress = $from['address'] ?? config('mail.from.address');
+        $fromName = $from['name'] ?? config('mail.from.name');
+
+        try {
+            Mail::send([], [], function ($message) use ($to, $subject, $messageBody, $fromAddress, $fromName, $attachments) {
+                $message->to($to)
+                    ->subject($subject)
+                    ->from($fromAddress, $fromName)
+                    ->setBody($messageBody, 'text/html');
+
+                // Attach files if any
+                foreach ($attachments as $filePath => $fileName) {
+                    $message->attach($filePath, ['as' => $fileName]);
+                }
+            });
+
+            return response()->json(['status' => true, 'message' => 'Email sent successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+}
