@@ -3,10 +3,10 @@ $(document).ready(function() {
   // Toggle sidebar
   $('.toggleSidebar').on('click', function() {
     const sidebar = $('#sidebar');
-    if (sidebar.hasClass('md:flex')) {
-        sidebar.removeClass('md:flex').addClass('hidden');
+    if (sidebar.hasClass('lg:flex')) {
+        sidebar.removeClass('lg:flex').addClass('hidden');
     } else {
-        sidebar.addClass('md:flex').removeClass('hidden');
+        sidebar.addClass('lg:flex').removeClass('hidden');
     }
   });
 
@@ -57,6 +57,14 @@ $(document).ready(function() {
     $(this).closest(".modal").addClass("hidden");
   });
 });
+
+function changeLanguage(id='color_mode') {
+  const isArabic = document.getElementById(id).checked;
+
+  // Redirect to the appropriate language URL
+  const newLang = isArabic ? 'ar' : 'en';
+  window.location.href = `/lang/${newLang}`;
+}
 
 function previewImage(event) {
   const file = event.target.files[0];

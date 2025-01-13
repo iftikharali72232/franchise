@@ -73,3 +73,11 @@ Route::get('/profile', function () {
 Route::get('/sections', function () {
     return view('/sections');
 });
+
+Route::get('/reports_all', function () {
+    return view('/reports_all');
+});
+
+Route::get('/reports_detail', function () {
+    return view('/reports_detail');
+});
