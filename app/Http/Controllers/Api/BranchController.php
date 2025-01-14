@@ -5,14 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Branch;
+use App\Models\City;
 
 class BranchController extends Controller
 {
     // List all branches
     public function index()
     {
-        return response()->json(Branch::all());
+        $branches = Branch::with('city')->get(); // Eager load city data
+    
+        // Include image base URL in the response
+        $response = [
+            'data' => $branches,
+            'image_base_url' => public_path('uploads')
+        ];
+    
+        return response()->json($response);
     }
+    
 
     // Add a new branch
     public function store(Request $request)
@@ -67,5 +77,12 @@ class BranchController extends Controller
         $branch->delete();
 
         return response()->json(['message' => 'Branch deleted successfully']);
+    }
+    // Delete a branch
+    public function show($id)
+    {
+        $branch = Branch::with('city')->where('id', $id)->first();
+        $branch->image_base_url = public_path('uploads');
+        return response()->json($branch);
     }
 }

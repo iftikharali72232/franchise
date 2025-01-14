@@ -37,6 +37,7 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
 
 Route::prefix('branches')->group(function () {
     Route::get('/', [BranchController::class, 'index']); // List all branches
+    Route::get('/{id}', [BranchController::class, 'show']); // List all branches
     Route::post('/', [BranchController::class, 'store']); // Add a branch
     Route::put('/{id}', [BranchController::class, 'update']); // Update a branch
     Route::delete('/{id}', [BranchController::class, 'destroy']); // Delete a branch

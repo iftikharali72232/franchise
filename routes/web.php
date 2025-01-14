@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LangController;
@@ -27,6 +28,12 @@ Route::get('/outh', function () {
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/branches/store', [BranchController::class, 'store'])->name('branches.store');
+    Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
+    Route::get('/branches/list', [BranchController::class, 'list'])->name('branches.list');
+    Route::get('/branches/{id}', [BranchController::class, 'show'])->name('branches.show');
+
+
 });
 
 Route::get('/login2', function () {
@@ -50,9 +57,9 @@ Route::get('/reset_password', function () {
     return view('/auth/reset_password');
 });
 
-Route::get('/branches', function () {
-    return view('/branches');
-});
+// Route::get('/branches', function () {
+//     return view('/branches');
+// });
 
 Route::get('/members', function () {
     return view('/members');

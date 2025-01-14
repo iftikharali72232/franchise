@@ -24,4 +24,8 @@ class Branch extends Model
     // {
     //     return $this->belongsTo(Organization::class);
     // }
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city', 'sno'); // 'city' is the foreign key, and 'sno' is the primary key on the City model
+    }
 }
