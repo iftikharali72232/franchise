@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BranchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,14 @@ Route::post('/send-email', [EmailController::class, 'sendOTP']);
 Route::group(["middleware"=> "auth:sanctum"], function () {
     // Requests
 
+// routes/api.php
+
+
+Route::prefix('branches')->group(function () {
+    Route::get('/', [BranchController::class, 'index']); // List all branches
+    Route::post('/', [BranchController::class, 'store']); // Add a branch
+    Route::put('/{id}', [BranchController::class, 'update']); // Update a branch
+    Route::delete('/{id}', [BranchController::class, 'destroy']); // Delete a branch
+});
 
 });
