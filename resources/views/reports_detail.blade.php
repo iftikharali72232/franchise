@@ -26,9 +26,9 @@
         </div>
     </div>
 
-    <div class="flex justify-between bg-[#F1FAFE] rounded-[20px] shadow-sm p-3 my-4">
-        <div class="w-1/2">
-            <div class="flex mb-3">
+    <div class="flex md:flex-row flex-col md:justify-between bg-[#F1FAFE] rounded-[20px] shadow-sm p-3 my-4">
+        <div class="md:w-1/2 w-full md:order-1 order-2">
+            <div class="flex md:mb-3 mb-2">
                 <div class="w-1/2">
                     <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
                 </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             
-            <div class="flex">
+            <div class="flex md:mb-0 mb-2">
                 <div class="w-1/2">
                     <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
                 </div>
@@ -47,8 +47,8 @@
             </div>
         </div>
 
-        <div class="w-1/2">
-            <div class="flex mb-3">
+        <div class="md:w-1/2 w-full md:order-2 order-3">
+            <div class="flex md:mb-3 mb-2">
                 <div class="w-1/2">
                     <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             
-            <div class="flex">
+            <div class="flex md:mb-0 mb-2">
                 <div class="w-1/2">
                     <p class="text-sm font-semibold text-[#1D3F5D]">Created By:</p>
                 </div>
@@ -67,8 +67,8 @@
             </div>
         </div>
 
-        <div class="w-auto">
-            <div class="w-[70px] h-[70px] overflow-hidden">
+        <div class="md:w-auto w-full flex md:justify-normal justify-center md:order-3 order-1 md:mb-0 mb-3">
+            <div class="md:w-[70px] md:h-[70px] w-[100px] h-[100px] overflow-hidden">
                 <img src="{{ asset('images/branch_detail_img.png') }}" class="object-fit w-full h-full" />
             </div>
         </div>
@@ -99,12 +99,12 @@
                 </div>
 
                 <!-- Answered Section -->
-                <div class="flex items-center mb-4 ml-16">
-                    <div class="w-[150px]">
+                <div class="flex lg:flex-row flex-col lg:items-center mb-4 md:ml-16">
+                    <div class="lg:w-[150px]">
                         <p class="font-semibold text-gray-600">Answered:</p>
                     </div>
 
-                    <div class="flex w-full gap-2 p-2">
+                    <div class="flex md:flex-row flex-col w-full gap-2 py-2">
                         <!-- Excellent Rating -->
                         <div>
                             <input class="peer sr-only" value="excellent" name="rating" id="excellent" type="radio" />
@@ -139,11 +139,11 @@
                 </div>
 
                 <!-- Attachments Section -->
-                <div class="flex ml-16">
-                    <div class="w-[150px]">
+                <div class="flex lg:flex-row flex-col md:ml-16">
+                    <div class="lg:w-[150px] lg:mb-0 mb-3">
                         <p class="font-semibold text-gray-600 mt-2">Attachments:</p>
                     </div>
-                    <div class="flex w-full space-x-2">
+                    <div class="grid md:grid-cols-6 grid-cols-3 w-full md:gap-4 gap-2">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 1">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 2">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 3">

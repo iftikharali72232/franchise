@@ -88,3 +88,7 @@ Route::get('/reports_all', function () {
 Route::get('/reports_detail', function () {
     return view('/reports_detail');
 });
+
+Route::get('/compare_single', function () {
+    return view('/compare_single');
+});
