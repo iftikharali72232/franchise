@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Automatically generates routes for index, create, store, edit, update, and destroy
     Route::resource('sections', SectionController::class);
+
+    Route::resource('members', MemberController::class);
+
 });
 
 // Remove conflicting sections route
@@ -54,9 +58,9 @@ Route::get('/reset_password', function () {
     return view('/auth/reset_password');
 });
 
-Route::get('/members', function () {
-    return view('/members');
-});
+// Route::get('/members', function () {
+//     return view('/members');
+// });
 
 Route::get('/letters', function () {
     return view('/letters');

@@ -32,7 +32,7 @@
                     <span class="ps-4">Reports</span>
                 </a>
 
-                <a href="#" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
+                <a href="{{route('members.index')}}" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
                     <img src="{{asset('images/users.png')}}" alt="members" class="w-5 h-5 filter group-hover:invert group-hover:brightness-100">
                     <span class="ps-4">Members</span>
                 </a>

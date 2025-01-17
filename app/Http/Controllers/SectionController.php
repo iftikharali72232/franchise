@@ -31,8 +31,14 @@ class SectionController extends Controller
             'questions.*.answer3' => 'nullable|string',
         ]);
 
+        $imagePath = "";
         // Handle image upload
-        $imagePath = $request->file('image') ? $request->file('image')->store('sections', 'public') : null;
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('sections'), $imageName);
+            $imagePath = public_path('sections')."/".$imageName;
+        }
 
         // Create section
         $section = Section::create([
