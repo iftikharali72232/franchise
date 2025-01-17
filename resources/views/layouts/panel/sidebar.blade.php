@@ -42,6 +42,11 @@
                     <span class="ps-4">Letters</span>
                 </a>
 
+                <a href="{{route('sections.index')}}" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
+                    <img src="{{asset('images/clipboard-check.png')}}" alt="letters" class="w-5 h-5 filter group-hover:invert group-hover:brightness-100">
+                    <span class="ps-4">Sections</span>
+                </a>
+
                 <a href="#" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
                     <img src="{{asset('images/gear.png')}}" alt="settings" class="w-5 h-5 filter group-hover:invert group-hover:brightness-100">
                     <span class="ps-4">Settings</span>

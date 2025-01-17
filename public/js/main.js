@@ -1,3 +1,4 @@
+const { resolveBaseUrl } = require("vite");
 
 $(document).ready(function() {
   // Toggle sidebar
