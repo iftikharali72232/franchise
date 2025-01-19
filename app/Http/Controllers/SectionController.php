@@ -11,6 +11,7 @@ class SectionController extends Controller
     public function index()
     {
         $sections = Section::with('questions')->get(); // Fetch sections with their questions
+        print_r($sections); exit;
         return view('sections.index', compact('sections'));
     }
     public function create()
