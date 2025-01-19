@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/branches/{id}', [BranchController::class, 'show'])->name('branches.show');
 
     // Automatically generates routes for index, create, store, edit, update, and destroy
-    Route::resource('sections', SectionController::class);
+    Route::resource('sectionList', SectionController::class);
 
     Route::resource('members', MemberController::class);
 

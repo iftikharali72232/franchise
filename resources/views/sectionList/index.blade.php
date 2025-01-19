@@ -9,7 +9,7 @@
         </div>
 
         <div class="flex items-center justify-end w-auto">
-            <a href="{{route('sections.create')}}" type="button" class="bg-[#1D3F5D] rounded-full text-white flex justify-between items-center">
+            <a href="{{route('sectionList.create')}}" type="button" class="bg-[#1D3F5D] rounded-full text-white flex justify-between items-center">
                 <span class="px-6">Add</span>
                 <div type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white flex justify-center items-center">
                 <i class="fa-solid fa-plus"></i>
@@ -37,15 +37,15 @@
                     <td class="whitespace-nowrap">
                         <div class="flex items-center space-x-3">
                             <!-- View Button -->
-                            <a href="{{ route('sections.show', $section->id) }}" class="text-[#1D3F5D]">
+                            <a href="{{ route('sectionList.show', $section->id) }}" class="text-[#1D3F5D]">
                                 <i class="fa-regular fa-eye"></i>
                             </a>
                             <!-- Edit Button -->
-                            <a href="{{ route('sections.edit', $section->id) }}" class="text-blue-500">
+                            <a href="{{ route('sectionList.edit', $section->id) }}" class="text-blue-500">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <!-- Delete Button -->
-                            <form action="{{ route('sections.destroy', $section->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this section?');">
+                            <form action="{{ route('sectionList.destroy', $section->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this section?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500">

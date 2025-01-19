@@ -28,7 +28,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="{{ route('sections.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Back to List</a>
+        <a href="{{ route('sectionList.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Back to List</a>
     </div>
 </div>
 @endsection

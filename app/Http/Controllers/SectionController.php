@@ -12,11 +12,11 @@ class SectionController extends Controller
     {
         $sections = Section::with('questions')->get(); // Fetch sections with their questions
         // print_r($sections); exit;
-        return view('sections.index', compact('sections'));
+        return view('sectionList.index', compact('sections'));
     }
     public function create()
     {
-        return view('sections.create');
+        return view('sectionList.create');
     }
 
     public function store(Request $request)
@@ -53,13 +53,13 @@ class SectionController extends Controller
             $section->questions()->create($questionData);
         }
 
-        return redirect()->route('sections.index')->with('success', 'Section created successfully!');
+        return redirect()->route('sectionList.index')->with('success', 'Section created successfully!');
     }
 
     public function edit($id)
     {
         $section = Section::findOrFail($id);
-        return view('sections.edit', compact('section'));
+        return view('sectionList.edit', compact('section'));
     }
 
     public function destroy($id)
@@ -71,12 +71,12 @@ class SectionController extends Controller
 
         $section->delete();
 
-        return redirect()->route('sections.index')->with('success', 'Section deleted successfully.');
+        return redirect()->route('sectionList.index')->with('success', 'Section deleted successfully.');
     }
     public function show($id)
     {
         $section = Section::with('questions')->findOrFail($id);
-        return view('sections.show', compact('section'));
+        return view('sectionList.show', compact('section'));
     }
 
     public function update(Request $request, Section $section)
@@ -115,6 +115,6 @@ class SectionController extends Controller
             $section->questions()->create($questionData);
         }
 
-        return redirect()->route('sections.index')->with('success', 'Section updated successfully!');
+        return redirect()->route('sectionList.index')->with('success', 'Section updated successfully!');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="text-2xl font-semibold mb-4">Edit Section</h2>
-    <form action="{{ route('sections.update', $section->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('sectionList.update', $section->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
