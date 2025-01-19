@@ -16,8 +16,8 @@
                         <input type="text" name="name" id="name" class="form-control" value="{{ $member->name }}" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="phone_number" class="form-label">Phone Number*</label>
-                        <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ $member->phone_number }}" required>
+                        <label for="mobile" class="form-label">Phone Number*</label>
+                        <input type="text" name="mobile" id="mobile" class="form-control" value="{{ $member->mobile }}" required>
                     </div>
                 </div>
 

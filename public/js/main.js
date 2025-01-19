@@ -1,4 +1,3 @@
-const { resolveBaseUrl } = require("vite");
 
 $(document).ready(function() {
   // Toggle sidebar
@@ -79,8 +78,4 @@ function previewImage(event) {
   } else {
     preview.src = "/images/profile-placeholder.jpg"; // Placeholder image if no image selected
   }
-}
-
-function openModal(id) {
-  $(`#${id}`).removeClass("hidden");
 }

@@ -31,6 +31,10 @@ class User extends Authenticatable
         'otp',
         'otp_expiry',
         'is_verify',
+        'function',
+        'job_number',
+        'description',
+        'face_id',
         'device_token'
     ];
 

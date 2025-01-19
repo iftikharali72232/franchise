@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('sections', SectionController::class);
 
     Route::resource('members', MemberController::class);
+
+    Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
+
+    Route::post('/requests/store', [RequestController::class, 'store'])->name('requests.store');
+
 
 });
 

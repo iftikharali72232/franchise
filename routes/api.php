@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BranchController;
+use App\Http\Controllers\Api\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::prefix('branches')->group(function () {
     Route::post('/', [BranchController::class, 'store']); // Add a branch
     Route::put('/{id}', [BranchController::class, 'update']); // Update a branch
     Route::delete('/{id}', [BranchController::class, 'destroy']); // Delete a branch
+
+    Route::post('/getCodeApproval', [RequestController::class, 'getCodeApproval']);
 });
 
 });

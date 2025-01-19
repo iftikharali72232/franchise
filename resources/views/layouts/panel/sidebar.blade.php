@@ -79,89 +79,27 @@
         </button>
       </div>
       
-      <div class="modal-body p-6 overflow-y-auto scrollbar-hidden h-full">
-        <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option class="text-sm">Branch No.</option>
-                    <option>Branch No1</option>
-                    <option>Branch No3</option>
-                    <option>Branch No4</option>
-                </select>
-            </div>
-
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Auditor Name</option>
-                    <option>Name 1</option>
-                    <option>Name 3</option>
-                    <option>Name 4</option>
-                </select>
-            </div>
-
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Auditor Email</option>
-                    <option>Email 1</option>
-                    <option>Email 3</option>
-                    <option>Email 4</option>
-                </select>
-            </div>
-
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Date</option>
-                    <option>Date 1</option>
-                    <option>Date 3</option>
-                    <option>Date 4</option>
-                </select>
-            </div>
-
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Time</option>
-                    <option>Time 1</option>
-                    <option>Time 3</option>
-                    <option>Time 4</option>
-                </select>
-            </div>
-
-            <div class="">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Code</option>
-                    <option>Code 1</option>
-                    <option>Code 3</option>
-                    <option>Code 4</option>
-                </select>
-            </div>
-
-            <div class="md:col-span-3">
-                <select class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                    <option>Sections</option>
-                    <option>Section 1</option>
-                    <option>Section 3</option>
-                    <option>Section 4</option>
-                </select>
-            </div>
-
-            <div class="md:col-span-3">
-                <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.243308577344!2d39.61017141514183!3d24.470901966181095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15bdbf3b8aa52c03%3A0x2ef4c1aaf0c8d57a!2sAl%20Masjid%20an%20Nabawi%20(Mosque%20of%20the%20Prophet%20Muhammad)!5e0!3m2!1sen!2s!4v1699020000000!5m2!1sen!2s"
-                width="100%"
-                height="250"
-                style="border:0; border-radius: 10px;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-            </div>
-
-            <div class="md:col-span-3 flex justify-end items-center">
-                <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
-                    Send
-                </button>
-            </div>
-        </div>
+      <div class="modal-body p-6 overflow-y-auto scrollbar-hidden h-full create_request">
+        
       </div>
     </div>
 </div>
+
+<script>
+    function openModal(id) {
+      $(`#${id}`).removeClass("hidden");
+
+      $.ajax({
+        url: '{{ route('requests.create') }}',  // Replace with your Laravel route
+        type: 'GET',  // Prefer GET for retrieving modal content
+        data: { action: "create_request_modal" },
+        success: function(response) {
+            $(".create_request").html(response); // Populate the modal with response HTML
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error); // Log the error for debugging
+            alert('There was an error: ' + error); // Display an error message
+        }
+      });
+    }
+  </script>

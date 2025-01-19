@@ -51,6 +51,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lightslider@1.1.6/dist/js/lightslider.min.js"></script>
 
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  
 <body>
 
     <div class="flex h-screen bg-gray-100">
