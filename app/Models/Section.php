@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     use HasFactory;
+
     protected $table = "sections";
     protected $fillable = ['name', 'shows_to', 'image_path'];
 
+    /**
+     * Define a one-to-many relationship with SectionQuestion.
+     */
     public function questions()
     {
-        return $this->hasMany(SectionQuestion::class, 'id');
+        return $this->hasMany(SectionQuestion::class, 'section_id');
     }
 }
