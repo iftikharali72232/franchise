@@ -85,7 +85,7 @@
     </div>
 </div>
 
-<script>
+<script>    
     function openModal(id) {
       $(`#${id}`).removeClass("hidden");
 

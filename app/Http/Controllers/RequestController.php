@@ -57,8 +57,8 @@ class RequestController extends Controller
                 </div>
 
                 <div class="md:col-span-3">
-                    <select name="section_id[]" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                        <option value="" selected disabled>Select Section</option>
+                    <select name="section_id[]" multiple class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-lg select2 ">
+                        <option value="" disabled>Select Section</option>
                         <?php foreach($sections as $section) { ?>
                             <option value="<?= $section->id ?>"><?= $section->name ?></option>
                         <?php } ?>
@@ -74,6 +74,12 @@ class RequestController extends Controller
         </form>
         <script>
             $(document).ready(function () {
+                $('.select2').select2({
+                    placeholder: "Select Section",
+                    allowClear: true, // Adds a clear button
+                    width: '100%' // Ensures the dropdown matches the width of the container
+                });
+                
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

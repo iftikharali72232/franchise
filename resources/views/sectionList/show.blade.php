@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="text-2xl font-semibold mb-4">{{ $section->name }}</h2>
-    <p class="text-gray-700">Visible to: <strong>{{ $section->shows_to }}</strong></p>
+<div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
+    <div class="p-4 border-b border-gray-200">
+        <h2 class="text-2xl font-semibold mb-4">{{ $section->name }}</h2>
+        <p class="text-gray-700">Visible to: <strong>{{ $section->shows_to }}</strong></p>
+    </div>
 
     @if($section->image)
     <div class="mt-4">
@@ -11,24 +13,25 @@
     </div>
     @endif
 
-    <div class="mt-6">
+    <div class="p-4">
         <h3 class="text-lg font-semibold">Questions</h3>
         <ul class="list-disc ml-6">
             @foreach($section->questions as $question)
             <li class="mt-2">
-                <strong>{{ $question->question }}</strong>
+                <strong class="py-2">{{ $question->question }}</strong>
                 <ul class="list-decimal ml-6">
-                    <li>{{ $question->answer1 }}</li>
-                    <li>{{ $question->answer2 }}</li>
-                    <li>{{ $question->answer3 }}</li>
+                    <li class="py-1">{{ $question->answer1 }}</li>
+                    <li class="py-1">{{ $question->answer2 }}</li>
+                    <li class="py-1">{{ $question->answer3 }}</li>
                 </ul>
             </li>
             @endforeach
         </ul>
+
+        <div class="mt-6">
+            <a href="{{ route('sectionList.index') }}" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">Back to List</a>
+        </div>
     </div>
 
-    <div class="mt-6">
-        <a href="{{ route('sectionList.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Back to List</a>
-    </div>
 </div>
 @endsection
