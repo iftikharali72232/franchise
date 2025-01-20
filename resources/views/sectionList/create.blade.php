@@ -1,69 +1,79 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="mb-4">Create Section</h2>
-    <form action="{{ route('sectionList.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+<div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
+    <div class="p-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold">Create Section</h2>
+    </div>
 
-        <!-- Section Information -->
-        <div class="card p-4 mb-4">
-            <h4 class="mb-3">Section Information</h4>
-            <div class="mb-3">
-                <label for="name" class="form-label">Section Name*</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Example" required>
-            </div>
+    <div class="p-4">
+        <form action="{{ route('sectionList.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-            <div class="mb-3">
-                <label for="shows_to" class="form-label">Shows to*</label>
-                <select name="shows_to" id="shows_to" class="form-select" required>
-                    <option value="All Members">All Members</option>
-                    <option value="Admins">Admins</option>
-                </select>
-            </div>
+            <!-- Section Information -->
+            <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+                <div class="md:col-span-3">
+                    <h4 class="text-lg font-semibold">Section Information</h4>
+                </div>
 
-            <div class="mb-3">
-                <label for="image" class="form-label">Section Image</label>
-                <div class="border p-3 text-center" style="border-radius: 8px;">
-                    <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                <div class="">
+                    <label for="name" class="form-label">Section Name*</label>
+                    <input type="text" name="name" id="name" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" required>
+                </div>
+
+                <div class="">
+                    <label for="shows_to" class="form-label">Shows to*</label>
+                    <select name="shows_to" id="shows_to" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                        <option value="All Members">All Members</option>
+                        <option value="Admins">Admins</option>
+                    </select>
+                </div>
+
+                <div class="">
+                    <label for="image" class="form-label">Section Image</label>
+                    <input type="file" name="image" id="image" class="w-full px-6 py-2 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" accept="image/*">
                     <small class="text-muted">Maximum image size 100MB</small>
                 </div>
             </div>
-        </div>
 
-        <!-- Section Questions -->
-        <div class="card p-4">
-            <h4 class="mb-3">Section Questions</h4>
-            <div id="questions-container">
-                <!-- Initial Question 1 -->
-                <div class="mb-4 question-item">
-                    <h5>Question 1</h5>
-                    <div class="mb-3">
-                        <label for="questions[0][question]" class="form-label">Question</label>
-                        <input type="text" name="questions[0][question]" class="form-control" placeholder="Example">
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="questions[0][answer1]" class="form-label">Answer 1</label>
-                            <input type="text" name="questions[0][answer1]" class="form-control" placeholder="Example">
+            <!-- Section Questions -->
+            <div class="">
+                <h4 class="mb-3">Section Questions</h4>
+
+                <div id="questions-container">
+                    <!-- Initial Question 1 -->
+                    <div class="mb-4 question-item">
+                        <h5>Question 1</h5>
+                        <div class="bg-gray-100 p-3 flex items-center ">
+                            <label for="questions[0][question]" class="form-label w-auto me-3">Question</label>
+                            <input type="text" name="questions[0][question]" class="bg-transparent w-full focus:outline-none" placeholder="Example">
                         </div>
-                        <div class="col">
-                            <label for="questions[0][answer2]" class="form-label">Answer 2</label>
-                            <input type="text" name="questions[0][answer2]" class="form-control" placeholder="Example">
-                        </div>
-                        <div class="col">
-                            <label for="questions[0][answer3]" class="form-label">Answer 3</label>
-                            <input type="text" name="questions[0][answer3]" class="form-control" placeholder="Example">
+                        
+                        <div class="grid md:grid-cols-3 gap-4 p-4">
+                            <div class="">
+                                <label for="questions[0][answer1]" class="form-label w-auto me-3">Answer 1</label>
+                                <input type="text" name="questions[0][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                            </div>
+                            <div class="">
+                                <label for="questions[0][answer2]" class="form-label w-auto me-3">Answer 2</label>
+                                <input type="text" name="questions[0][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                            </div>
+                            <div class="">
+                                <label for="questions[0][answer3]" class="form-label w-auto me-3">Answer 3</label>
+                                <input type="text" name="questions[0][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <button type="button" class="px-6 py-2 text-sm rounded-full bg-gray-200 hover:bg-gray-700 hover:text-white" id="add-question-btn">Add Question</button>
             </div>
 
-            <button type="button" class="btn btn-primary" id="add-question-btn">Add Question</button>
-        </div>
-
-        <button type="submit" class="btn btn-success mt-4">Submit</button>
-    </form>
+            <div class="flex justify-end">
+                <button type="submit" class="px-[40px] py-[20px] bg-[#1F5077] text-white font-semibold rounded-full">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -75,22 +85,23 @@
         const questionHtml = `
             <div class="mb-4 question-item">
                 <h5>Question ${questionIndex + 1}</h5>
-                <div class="mb-3">
-                    <label for="questions[${questionIndex}][question]" class="form-label">Question</label>
-                    <input type="text" name="questions[${questionIndex}][question]" class="form-control" placeholder="Example">
+                <div class="bg-gray-100 p-3 flex items-center">
+                    <label for="questions[${questionIndex}][question]" class="w-auto me-3">Question</label>
+                    <input type="text" name="questions[${questionIndex}][question]" class="bg-transparent w-full focus:outline-none" placeholder="Example">
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="questions[${questionIndex}][answer1]" class="form-label">Answer 1</label>
-                        <input type="text" name="questions[${questionIndex}][answer1]" class="form-control" placeholder="Example">
+
+                <div class="grid grid-cols-3 gap-4 p-4">
+                    <div class="">
+                        <label for="questions[${questionIndex}][answer1]" class="form-label w-auto me-3">Answer 1</label>
+                        <input type="text" name="questions[${questionIndex}][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
                     </div>
-                    <div class="col">
-                        <label for="questions[${questionIndex}][answer2]" class="form-label">Answer 2</label>
-                        <input type="text" name="questions[${questionIndex}][answer2]" class="form-control" placeholder="Example">
+                    <div class="">
+                        <label for="questions[${questionIndex}][answer2]" class="form-label w-auto me-3">Answer 2</label>
+                        <input type="text" name="questions[${questionIndex}][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
                     </div>
-                    <div class="col">
-                        <label for="questions[${questionIndex}][answer3]" class="form-label">Answer 3</label>
-                        <input type="text" name="questions[${questionIndex}][answer3]" class="form-control" placeholder="Example">
+                    <div class="">
+                        <label for="questions[${questionIndex}][answer3]" class="form-label w-auto me-3">Answer 3</label>
+                        <input type="text" name="questions[${questionIndex}][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
                     </div>
                 </div>
             </div>

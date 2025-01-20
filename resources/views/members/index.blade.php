@@ -13,8 +13,10 @@
                 Prev. Rounds
             </button>
 
-            <a href="{{route('members.create')}}" type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
-                <i class="fa-solid fa-plus"></i>
+            <a href="{{route('members.create')}}">
+                <button type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </a>
 
             <button type="button" class="bg-[#19B2E7] w-[40px] h-[40px] p-1 rounded-full text-white">
