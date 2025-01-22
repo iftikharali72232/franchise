@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BranchController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\RequestController;
 
 /*
@@ -35,6 +36,10 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
 
 // routes/api.php
 
+
+Route::post('/reports', [ReportController::class, 'storeReport']);
+Route::post('/reports/result', [ReportController::class, 'storeReportResult']);
+Route::post('/reports/exit', [ReportController::class, 'exitReport']);
 
 Route::prefix('branches')->group(function () {
     Route::get('/', [BranchController::class, 'index']); // List all branches
