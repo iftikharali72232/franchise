@@ -3,12 +3,14 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{locale}', [LangController::class, 'setLocale'])->name('setLocale');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
 
 Route::get('/', function () {
     return redirect()->route('home');
