@@ -37,18 +37,24 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
 // routes/api.php
 
 
-Route::post('/reports', [ReportController::class, 'storeReport']);
-Route::post('/reports/result', [ReportController::class, 'storeReportResult']);
-Route::post('/reports/exit', [ReportController::class, 'exitReport']);
+    Route::post('/reports', [ReportController::class, 'storeReport']);
+    Route::post('/reports/result', [ReportController::class, 'storeReportResult']);
+    Route::post('/reports/exit', [ReportController::class, 'exitReport']);
+    Route::get('/reports/list', [ReportController::class, 'reportList']);
+    Route::post('/reports/get', [ReportController::class, 'reportDetail']);
 
-Route::prefix('branches')->group(function () {
-    Route::get('/', [BranchController::class, 'index']); // List all branches
-    Route::get('/{id}', [BranchController::class, 'show']); // List all branches
-    Route::post('/', [BranchController::class, 'store']); // Add a branch
-    Route::put('/{id}', [BranchController::class, 'update']); // Update a branch
-    Route::delete('/{id}', [BranchController::class, 'destroy']); // Delete a branch
+    Route::post('/user/update', [AuthController::class, 'updateUser']);
+    Route::get("/user/logout", [AuthController::class,"logout"])->name('logout');
+    Route::get('/user/delete', [AuthController::class, 'delete'])->name('deleteUser');
 
-    Route::post('/getCodeApproval', [RequestController::class, 'getCodeApproval']);
-});
+    Route::prefix('branches')->group(function () {
+        Route::get('/', [BranchController::class, 'index']); // List all branches
+        Route::get('/{id}', [BranchController::class, 'show']); // List all branches
+        Route::post('/', [BranchController::class, 'store']); // Add a branch
+        Route::put('/{id}', [BranchController::class, 'update']); // Update a branch
+        Route::delete('/{id}', [BranchController::class, 'destroy']); // Delete a branch
+
+        Route::post('/getCodeApproval', [RequestController::class, 'getCodeApproval']);
+    });
 
 });

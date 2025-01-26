@@ -2,9 +2,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Models\ReportResult;
+use App\Models\Request as ModelsRequest;
+use App\Models\Section;
+use App\Models\SectionQuestion;
 
 class ReportController extends Controller
 {
@@ -17,12 +22,17 @@ class ReportController extends Controller
             'request_id' => 'required|integer',
         ]);
 
-        // Find or create the report
-        $report = Report::firstOrCreate([
-            'branch_id' => $validated['branch_id'],
-            'request_id' => $validated['request_id'],
-            'user_id' => auth()->user()->id
-        ]);
+        $report = Report::where('branch_id', $validated['branch_id'])->where('request_id', $validated['request_id'])->where('user_id', auth()->user()->id)->first();
+        if(!$report)
+        {
+            // Find or create the report
+            $report = Report::firstOrCreate([
+                'branch_id' => $validated['branch_id'],
+                'request_id' => $validated['request_id'],
+                'user_id' => auth()->user()->id
+            ]);
+
+        } 
 
         return response()->json([
             'message' => 'Report retrieved or created successfully.',
@@ -84,6 +94,55 @@ class ReportController extends Controller
        
         return response()->json([
             'status' => 'success',            'msg' => 'Report submited successfully'
+        ]);
+    }
+
+    public function reportlist()
+    {
+        $reports = Report::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+        foreach($reports as $key => $report)
+        {
+            $branch = Branch::find($report->branch_id);
+            $city = City::find($branch->city);
+            $request = ModelsRequest::find($report->request_id);
+            $reports[$key]['branch'] = $branch;
+            $reports[$key]['city'] = $city;
+            $reports[$key]['request'] = $request;
+        }
+
+        return response()->json([
+            'data' => $reports
+        ]);
+    }
+
+    public function reportDetail(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|int'
+        ]);
+
+        $report = Report::find($request->id);
+        $branch = Branch::find($report->branch_id);
+        $city = City::find($branch->city);
+        $request = ModelsRequest::find($report->request_id);
+
+        $report['branch'] = $branch;
+        $report['city'] = $city;
+        $report['request'] = $request;
+        $sections = Section::whereIn('id', json_decode($request->section_id, true))->get();
+        foreach($sections as $sKey => $section)
+        {
+            $questions = SectionQuestion::where('section_id', $section->id)->get();
+            foreach($questions as $qKey => $question)
+            {
+                $questions[$qKey]['result'] = ReportResult::where('question_id', $question->id)->where('report_id', $report->id)->where('section_id', $section->id)->first();
+            }
+            $sections[$sKey]['questions'] = $questions;
+        }
+        $report['sections'] = $sections;
+
+        return response()->json([
+            'data' => $report
         ]);
     }
 }

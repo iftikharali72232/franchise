@@ -158,9 +158,9 @@ class AuthController extends Controller
         return response()->json(['message' => 'Password reset successfully'], 200);
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
@@ -168,10 +168,11 @@ class AuthController extends Controller
 
         $validated = $request->validate([
             'name' => 'string|max:255',
-            'email' => 'email|unique:users,email,' . $id,
-            'mobile' => 'numeric|unique:users,mobile,' . $id,
-            'password' => 'nullable|string|min:6|confirmed',
-            'user_type' => 'string',
+            'email' => 'email|unique:users,email,' . $user->id,
+            'mobile' => 'numeric|unique:users,mobile,' . $user->id,
+            'password' => 'nullable|string|min:6',
+            'function' => 'nullable|string',
+            // 'user_type' => 'string',
         ]);
 
         if (isset($validated['password'])) {
@@ -233,6 +234,35 @@ class AuthController extends Controller
             ],
         ], 200);
     }
-    
+    //logout user
+    public function logout(){
+        auth()->user()->tokens()->delete();
+        return response([
+            'message'=> 'Logout success.',
+            ],200);
+    }
 
+    public function delete()
+    {
+        $user = User::find(auth()->user()->id);
+        if($user){
+            if(User::where('id', $user->id)->update(['status' => 0]))
+            {
+                return response([
+                    'status'=> 'success',
+                    'message' => "User Delete successfully"
+                ], 200);
+            }else if($user) {
+                return response([
+                    "status"=> "success",
+                    "message"=> "You cannot delete this user, This is use in category, shops and products."
+                ],200);
+            }
+        } else {
+            return response([
+                "status"=> "success",
+                "message"=> "User not found"
+            ],200);
+        }
+    }
 }
