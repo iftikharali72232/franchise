@@ -114,6 +114,23 @@ class ReportController extends Controller
             'data' => $reports
         ]);
     }
+    public function previousReportApi()
+    {
+        $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->get();
+        foreach($reports as $key => $report)
+        {
+            $branch = Branch::find($report->branch_id);
+            $city = City::find($branch->city);
+            $request = ModelsRequest::find($report->request_id);
+            $reports[$key]['branch'] = $branch;
+            $reports[$key]['city'] = $city;
+            $reports[$key]['request'] = $request;
+        }
+
+        return response()->json([
+            'data' => $reports
+        ]);
+    }
 
     public function reportDetail(Request $request)
     {

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OTPMail;
+use App\Models\City;
 use App\Models\Request as ModelsRequest;
 use App\Models\Section;
 use App\Models\User;
@@ -25,7 +26,7 @@ class RequestController extends Controller
             
             foreach($sections as $sectionID)
             {
-                $res['sections'] = Section::with('questions')->where('id', $sectionID)->first();
+                $res['sections'][] = Section::with('questions')->where('id', $sectionID)->first();
             }
             return response()->json([
                 'status' => 1,
@@ -37,5 +38,10 @@ class RequestController extends Controller
                 'msg' => 'Invalid user or code'
             ]);
         }
+    }
+    public function cityList()
+    {
+        $cities = City::all();
+        return response()->json($cities);
     }
 }

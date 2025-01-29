@@ -85,4 +85,5 @@ class BranchController extends Controller
         $branch->image_base_url = public_path('uploads');
         return response()->json($branch);
     }
+
 }

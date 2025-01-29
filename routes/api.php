@@ -42,6 +42,7 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
     Route::post('/reports/exit', [ReportController::class, 'exitReport']);
     Route::get('/reports/list', [ReportController::class, 'reportList']);
     Route::post('/reports/get', [ReportController::class, 'reportDetail']);
+    Route::get('/reports/previousReportslist', [ReportController::class, 'previousReportApi']);
 
     Route::post('/user/update', [AuthController::class, 'updateUser']);
     Route::get("/user/logout", [AuthController::class,"logout"])->name('logout');
@@ -56,5 +57,6 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
 
         Route::post('/getCodeApproval', [RequestController::class, 'getCodeApproval']);
     });
+    Route::get('/cityList', [RequestController::class, 'cityList']);
 
 });
