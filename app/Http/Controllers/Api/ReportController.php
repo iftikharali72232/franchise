@@ -99,7 +99,7 @@ class ReportController extends Controller
 
     public function reportlist()
     {
-        $reports = Report::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+        $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->get();
         foreach($reports as $key => $report)
         {
             $branch = Branch::find($report->branch_id);
@@ -116,7 +116,7 @@ class ReportController extends Controller
     }
     public function previousReportApi()
     {
-        $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->get();
+        $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->limit(10);
         foreach($reports as $key => $report)
         {
             $branch = Branch::find($report->branch_id);
