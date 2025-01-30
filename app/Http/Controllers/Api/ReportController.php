@@ -100,11 +100,18 @@ class ReportController extends Controller
     public function reportlist()
     {
         $reports = Report::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
-        foreach($reports as $key => $report)
-        {
+
+        if ($reports->isEmpty()) {
+            return response()->json([
+                'message' => 'No reports found.'
+            ], 404); // Using 404 status for "not found"
+        }
+
+        foreach ($reports as $key => $report) {
             $branch = Branch::find($report->branch_id);
-            $city = City::find($branch->city);
+            $city = City::find($branch->city ?? null);
             $request = ModelsRequest::find($report->request_id);
+            
             $reports[$key]['branch'] = $branch;
             $reports[$key]['city'] = $city;
             $reports[$key]['request'] = $request;
@@ -113,10 +120,16 @@ class ReportController extends Controller
         return response()->json([
             'data' => $reports
         ]);
+
     }
     public function previousReportApi()
     {
         $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->get();
+        if ($reports->isEmpty()) {
+            return response()->json([
+                'message' => 'No reports found.'
+            ], 404); // Using 404 status for "not found"
+        }
         foreach($reports as $key => $report)
         {
             $branch = Branch::find($report->branch_id);
