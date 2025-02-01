@@ -54,7 +54,7 @@ use App\Helpers\CommonHelper;
                         <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14">{{trans('lang.enter_username_password')}}</p>
                     </div>
 
-                    <form class="needs-validation" method="POST" action="{{ route('login') }}">
+                    <form class="needs-validation" method="POST" action="{{ route('register') }}">
                         <div class="flex flex-col items-center mt-10">
                             <div class="grid md:grid-cols-2 bg-[#D6E7F5] rounded-[40px] md:w-[90%] w-[95%] md:p-10 p-6 md:gap-6">
                                 @csrf

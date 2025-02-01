@@ -100,7 +100,22 @@
 
                     <div class="">
                         <label class="text-[#1F5077 pb-1">Region <span class="text-red-500">*</span></label>
-                        <input type="text" name="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" />
+                        <select name="region" id="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                            <option value="">Select Region</option>
+                            <option value="Riyadh">Riyadh (الرياض)</option>
+                            <option value="Makkah">Makkah (مكة المكرمة)</option>
+                            <option value="Madinah">Madinah (المدينة المنورة)</option>
+                            <option value="Eastern Province">Eastern Province (المنطقة الشرقية)</option>
+                            <option value="Qassim">Qassim (القصيم)</option>
+                            <option value="Asir">Asir (عسير)</option>
+                            <option value="Tabuk">Tabuk (تبوك)</option>
+                            <option value="Hail">Hail (حائل)</option>
+                            <option value="Northern Borders">Northern Borders (الحدود الشمالية)</option>
+                            <option value="Jazan">Jazan (جازان)</option>
+                            <option value="Najran">Najran (نجران)</option>
+                            <option value="Al-Baha">Al-Baha (الباحة)</option>
+                            <option value="Al-Jawf">Al-Jawf (الجوف)</option>
+                        </select>
                     </div>
 
                     <div class="">
@@ -179,7 +194,22 @@
 
                 <div class="">
                     <label class="text-[#1F5077 pb-1">Region <span class="text-red-500">*</span></label>
-                    <input type="text" id="edit_region" name="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" />
+                    <select name="region" id="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                        <option value="">Select Region</option>
+                        <option value="Riyadh">Riyadh (الرياض)</option>
+                        <option value="Makkah">Makkah (مكة المكرمة)</option>
+                        <option value="Madinah">Madinah (المدينة المنورة)</option>
+                        <option value="Eastern Province">Eastern Province (المنطقة الشرقية)</option>
+                        <option value="Qassim">Qassim (القصيم)</option>
+                        <option value="Asir">Asir (عسير)</option>
+                        <option value="Tabuk">Tabuk (تبوك)</option>
+                        <option value="Hail">Hail (حائل)</option>
+                        <option value="Northern Borders">Northern Borders (الحدود الشمالية)</option>
+                        <option value="Jazan">Jazan (جازان)</option>
+                        <option value="Najran">Najran (نجران)</option>
+                        <option value="Al-Baha">Al-Baha (الباحة)</option>
+                        <option value="Al-Jawf">Al-Jawf (الجوف)</option>
+                    </select>
                 </div>
 
                 <div class="">

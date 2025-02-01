@@ -131,6 +131,7 @@ class ReportController extends Controller
             'data' => $reports
         ]);
     }
+   
 
     public function reportDetail(Request $request)
     {

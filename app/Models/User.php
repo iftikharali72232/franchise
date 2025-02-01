@@ -35,7 +35,8 @@ class User extends Authenticatable
         'job_number',
         'description',
         'face_id',
-        'device_token'
+        'device_token',
+        'notification_status'
     ];
 
     /**

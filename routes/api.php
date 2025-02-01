@@ -37,6 +37,8 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
 // routes/api.php
 
 
+    Route::post('/user/notification_status', [AuthController::class, 'notification_status']);
+
     Route::post('/reports', [ReportController::class, 'storeReport']);
     Route::post('/reports/result', [ReportController::class, 'storeReportResult']);
     Route::post('/reports/exit', [ReportController::class, 'exitReport']);
@@ -58,5 +60,7 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
         Route::post('/getCodeApproval', [RequestController::class, 'getCodeApproval']);
     });
     Route::get('/cityList', [RequestController::class, 'cityList']);
+    Route::get('/notifications', [RequestController::class, 'notifications']);
+    Route::post('/notifications/read', [RequestController::class, 'readNotification']);
 
 });

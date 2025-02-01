@@ -265,4 +265,18 @@ class AuthController extends Controller
             ],200);
         }
     }
+    function notification_status(Request $request)
+    {
+        $request->validate([
+            'status' => 'required|int'
+        ]);
+
+        $user = User::where('id', auth()->user()->id)->update([
+            'notification_status' => $request->status
+        ]);
+
+        return response()->json([
+            'msg' => 'Update successfully'
+        ]);
+    }
 }

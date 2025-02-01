@@ -422,7 +422,7 @@ const chartConfig = {
   yaxis: {
   labels: {
     formatter: function (value, index) {
-      const labels = ["Abha", "Asir", "Taif", "Mec", "Jed", "Med"];
+      const labels = ["0", "20", "40", "60", "80", "100"];
       return labels[index] || ""; // Map the label index to your desired values
     },
     style: {
@@ -489,5 +489,22 @@ $(document).ready(function() {
     });  
   });
 </script>
+<script>    
+    function reportsGraph(id) {
+      $(`#${id}`).removeClass("hidden");
 
+      $.ajax({
+        url: '{{ route('requests.create') }}',  // Replace with your Laravel route
+        type: 'GET',  // Prefer GET for retrieving modal content
+        data: { action: "create_request_modal" },
+        success: function(response) {
+            $(".create_request").html(response); // Populate the modal with response HTML
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error); // Log the error for debugging
+            alert('There was an error: ' + error); // Display an error message
+        }
+      });
+    }
+  </script>
 @endsection

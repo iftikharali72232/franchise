@@ -17,7 +17,7 @@
 
         <div class="flex flex-col justify-between w-full h-full scrollbar-hidden overflow-y-auto">
             <nav class="flex-1">
-                <a href="#" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
+                <a href="{{route('home')}}" class="w-full flex text-white hover:text-gray-700 items-center hover:bg-white rounded-xl px-4 py-3 focus:outline-none group">
                     <img src="{{asset('images/dashboard.png')}}" alt="dashboard" class="w-5 h-5 filter invert brightness-0 group-hover:invert group-hover:brightness-100">
                     <span class="ps-4">Dashboard</span>
                 </a>
