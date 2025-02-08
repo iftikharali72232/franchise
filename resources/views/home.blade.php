@@ -15,13 +15,26 @@
 
                 <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
-                    <option selected>Food</option>
-                    <option>Health</option>
+                        @foreach($sections as $section)
+                            <option value="{{ $section->id }}" {{ $section->defaul_section == 1 ? "selected" : "" }}>{{ $section->name }}</option>
+                        @endforeach
                     </select>
 
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
-                    <option>Western B.</option>
-                    <option>East B.</option>
+                            <option value="">Select Region</option>
+                            <option value="Riyadh">Riyadh (الرياض)</option>
+                            <option value="Makkah">Makkah (مكة المكرمة)</option>
+                            <option value="Madinah" selected>Madinah (المدينة المنورة)</option>
+                            <option value="Eastern Province">Eastern Province (المنطقة الشرقية)</option>
+                            <option value="Qassim">Qassim (القصيم)</option>
+                            <option value="Asir">Asir (عسير)</option>
+                            <option value="Tabuk">Tabuk (تبوك)</option>
+                            <option value="Hail">Hail (حائل)</option>
+                            <option value="Northern Borders">Northern Borders (الحدود الشمالية)</option>
+                            <option value="Jazan">Jazan (جازان)</option>
+                            <option value="Najran">Najran (نجران)</option>
+                            <option value="Al-Baha">Al-Baha (الباحة)</option>
+                            <option value="Al-Jawf">Al-Jawf (الجوف)</option>
                     </select>
                 </div>
             </div>
@@ -40,6 +53,18 @@
             <div class="mt-4">
 
             <ul class="list-none">
+                <?php
+
+use App\Models\User;
+
+                    foreach($sidebranches as $sBranch)
+                    {
+                        $location = explode(',', $sBranch->location);
+                        $lat = $location[0];
+                        $long = $location[1];
+                        $city = getCityFromCoordinates($lat, $long);
+                        ?>
+                    
                 <li class="">
                 <div class="flex flex-row">
                     <div class="items-center flex flex-col justify-around">
@@ -50,75 +75,13 @@
                     </div>
                     
                     <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}  pb-10">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Sultana</h3>
-                        <p class="text-gray-400 text-[16px]">Medina</p>
+                        <h3 class="text-[#246DA5] text-[18px] font-semibold"><?= $sBranch->branch_name ?></h3>
+                        <p class="text-gray-400 text-[16px]"><?= $city ?></p>
                     </div>
                 </div>
                 </li>
-                
-                <li class="">
-                <div class="flex flex-row">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/map.png')}}" alt="branch" class="">
-                        </div>
-                        <div class="border-l-[6px] h-full border-[#246DA5]"></div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">K . Saud Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Riyadh</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/map.png')}}" alt="branch" class="">
-                        </div>
-                        <div class="border-l-[6px] h-full border-[#246DA5]"></div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Sari . St</h3>
-                        <p class="text-gray-400 text-[16px]">Jaddah</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/map.png')}}" alt="branch" class="">
-                        </div>
-                        <div class="border-l-[6px] h-full border-[#246DA5]"></div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Sec . Ring Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Medina</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/map.png')}}" alt="branch" class="">
-                        </div>
-                        <!-- <div class="border-l-[6px] h-full border-[#246DA5]"></div> -->
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-0">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Hilton . Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Asir</p>
-                    </div>
-                </div>
-                </li>
+                <?php }
+                 ?>
                 
             </ul>
 
@@ -143,14 +106,29 @@
                     </select>
 
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
-                    <option>Western B.</option>
-                    <option>East B.</option>
+                            <option value="">Select Region</option>
+                            <option value="Riyadh">Riyadh (الرياض)</option>
+                            <option value="Makkah">Makkah (مكة المكرمة)</option>
+                            <option value="Madinah" selected>Madinah (المدينة المنورة)</option>
+                            <option value="Eastern Province">Eastern Province (المنطقة الشرقية)</option>
+                            <option value="Qassim">Qassim (القصيم)</option>
+                            <option value="Asir">Asir (عسير)</option>
+                            <option value="Tabuk">Tabuk (تبوك)</option>
+                            <option value="Hail">Hail (حائل)</option>
+                            <option value="Northern Borders">Northern Borders (الحدود الشمالية)</option>
+                            <option value="Jazan">Jazan (جازان)</option>
+                            <option value="Najran">Najran (نجران)</option>
+                            <option value="Al-Baha">Al-Baha (الباحة)</option>
+                            <option value="Al-Jawf">Al-Jawf (الجوف)</option>
                     </select>
                 </div>
             </div>
 
             <div class="pt-6 px-2 pb-0">
                 <ul id="lightSlider">
+                    <?php foreach($branches as $branch){ 
+                        $user = User::find($branch->created_by);
+                        ?>
                     <li>
                         <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
                             <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
@@ -158,16 +136,16 @@
                             <div class="px-4 relative z-50">
                                 <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
                                     <div class="bg-white p-2 rounded-lg">
-                                        <img src="{{asset('images/shop.png')}}" alt="img" class="filter invert"> 
+                                        <img src="{{asset(!empty($branch->header_image) ? 'uploads/'.$branch->header_image :'images/shop.png')}}" style="height:30px; width:40px;" alt="img" class="filter invert"> 
                                     </div>
 
-                                    <h4 class="text-white font-semibold"> Sultana, Med </h4>
+                                    <h4 class="text-white font-semibold"> <?= $branch->branch_name ?> </h4>
                                 </div>
                                 
                                 <div class="my-2">
-                                    <h4 class="text-white text-[20px] font-[500]"> Ahamed Fadil </h4>
-                                    <p class="text-white/50 text-[16px] font-[400]">Admin.. Supervisor</p>
-                                    <p class="text-white/50 text-[12px] font-[400]">10 / 05 / 2023</p>
+                                    <h4 class="text-white text-[20px] font-[500]"> <?= $user->name ?> </h4>
+                                    <p class="text-white/50 text-[16px] font-[400]"><?= ($user->user_type == 0 ? 'Admin' : 'Auditor') ?></p>
+                                    <p class="text-white/50 text-[12px] font-[400]"><?= $branch->created_at ?></p>
                                 </div>
                             </div>
                             
@@ -181,99 +159,7 @@
                             </div>
                         </div>
                     </li>
-                    
-                    <li>
-                        <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
-
-                            <div class="px-4 relative z-50">
-                                <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                                    <div class="bg-white p-2 rounded-lg">
-                                        <img src="{{asset('images/shop.png')}}" alt="img" class="filter invert"> 
-                                    </div>
-
-                                    <h4 class="text-white font-semibold"> Sultana, Med </h4>
-                                </div>
-                                
-                                <div class="my-2">
-                                    <h4 class="text-white text-[20px] font-[500]"> Ahamed Fadil </h4>
-                                    <p class="text-white/50 text-[16px] font-[400]">Admin.. Supervisor</p>
-                                    <p class="text-white/50 text-[12px] font-[400]">10 / 05 / 2023</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-2 relative z-50">
-                                <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
-                                    <span class="text-[#2E76B0] font-[600] text-sm">View Report</span>
-                                    <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center ">
-                                        <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
-
-                            <div class="px-4 relative z-50">
-                                <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                                    <div class="bg-white p-2 rounded-lg">
-                                        <img src="{{asset('images/shop.png')}}" alt="img" class="filter invert"> 
-                                    </div>
-
-                                    <h4 class="text-white font-semibold"> Sultana, Med </h4>
-                                </div>
-                                
-                                <div class="my-2">
-                                    <h4 class="text-white text-[20px] font-[500]"> Ahamed Fadil </h4>
-                                    <p class="text-white/50 text-[16px] font-[400]">Admin.. Supervisor</p>
-                                    <p class="text-white/50 text-[12px] font-[400]">10 / 05 / 2023</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-2 relative z-50">
-                                <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
-                                    <span class="text-[#2E76B0] font-[600] text-sm">View Report</span>
-                                    <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center ">
-                                        <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{asset('images/report.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
-
-                            <div class="px-4 relative z-50">
-                                <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                                    <div class="bg-white p-2 rounded-lg">
-                                        <img src="{{asset('images/shop.png')}}" alt="img" class="filter invert"> 
-                                    </div>
-
-                                    <h4 class="text-white font-semibold"> Sultana, Med </h4>
-                                </div>
-                                
-                                <div class="my-2">
-                                    <h4 class="text-white text-[20px] font-[500]"> Ahamed Fadil </h4>
-                                    <p class="text-white/50 text-[16px] font-[400]">Admin.. Supervisor</p>
-                                    <p class="text-white/50 text-[12px] font-[400]">10 / 05 / 2023</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-2 relative z-50">
-                                <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
-                                    <span class="text-[#2E76B0] font-[600] text-sm">View Report</span>
-                                    <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center ">
-                                        <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
+                    <?php  } ?>
                 </ul>
             </div>
         </div>
@@ -287,81 +173,23 @@
             <div class="mt-4">
 
             <ul class="list-none">
+                <?php foreach($members as $member) {
+                    ?>
                 <li class="">
                     <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
                         <div class="items-center flex flex-col justify-around">
                             <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                                <img src="{{asset('images/user.png')}}" alt="branch" class="">
+                                <img src="{{asset(!empty($member->image) ? 'images/'.$member->image : 'images/user.png')}}" alt="branch" class="">
                             </div>
                         </div>
                         
                         <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
-                            <h3 class="text-[#246DA5] text-[18px] font-semibold">Sultana</h3>
-                            <p class="text-gray-400 text-[16px]">Medina</p>
+                            <h3 class="text-[#246DA5] text-[18px] font-semibold"><?= $member->name ?></h3>
+                            <p class="text-gray-400 text-[16px]"><?= $member->function ?></p>
                         </div>
                     </div>
                 </li>
-                
-                <li class="">
-                <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/user.png')}}" alt="branch" class="">
-                        </div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">K . Saud Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Riyadh</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/user.png')}}" alt="branch" class="">
-                        </div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Sari . St</h3>
-                        <p class="text-gray-400 text-[16px]">Jaddah</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/user.png')}}" alt="branch" class="">
-                        </div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Sec . Ring Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Medina</p>
-                    </div>
-                </div>
-                </li>
-                
-                <li class="">
-                <div class="flex flex-row">
-                    <div class="items-center flex flex-col justify-around">
-                        <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                            <img src="{{asset('images/user.png')}}" alt="branch" class="">
-                        </div>
-                    </div>
-                    
-                    <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-0">
-                        <h3 class="text-[#246DA5] text-[18px] font-semibold">Hilton . Rd</h3>
-                        <p class="text-gray-400 text-[16px]">Asir</p>
-                    </div>
-                </div>
-                </li>
-                
+                <?php } ?>
             </ul>
 
             </div>
@@ -373,16 +201,25 @@
 <script>
 
 const chartConfig = {
-  series: [
-    {
-      name: "Excellent",
-      data: [10, 22, 16, 43, 63, 47, 43, 63, 47, 10, 22, 16],
-    },
-    {
-      name: "Good",
-      data: [93, 100, 59, 100, 63, 100, 43, 63, 47, 10, 22, 56],
-    },
-  ],
+//   series: [
+//     {
+//       name: "Excellent",
+//       data: [10, 22, 16, 43, 63, 47],
+//     },
+//     {
+//       name: "Excellent",
+//       data: [10, 22, 16, 43, 63, 47, 43, 63, 47, 10, 22, 16],
+//     },
+//     {
+//       name: "Good",
+//       data: [93, 100, 59, 100, 63, 100, 43, 63, 47, 10, 22, 56],
+//     },
+//     {
+//       name: "Poor",
+//       data: [93, 100, 59, 100, 63, 100],
+//     },
+//   ],
+series : <?= json_encode($series) ?>,
   chart: {
     type: "bar",
     height: 320,
@@ -391,7 +228,7 @@ const chartConfig = {
       show: false,
     },
   },
-  colors: ["#1D3F5D", "#93C3E6"],
+  colors: ["#1D3F5D", "#93C3E6", "red", "green"],
   plotOptions: {
     bar: {
       horizontal: false,

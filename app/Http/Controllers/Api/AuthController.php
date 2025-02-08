@@ -39,7 +39,8 @@ class AuthController extends Controller
     
         return response()->json([
             'message' => 'User registered successfully. Please verify your email using the OTP.',
-            'user' => $user
+            'user' => $user,
+            'token' => $user->createToken('auth_token')->plainTextToken
         ], 200);
     }
 
@@ -72,7 +73,7 @@ class AuthController extends Controller
             'otp_expiry' => null,
         ]);
 
-        return response()->json(['message' => 'OTP verified successfully'], 200);
+        return response()->json(['message' => 'OTP verified successfully', 'token' => $user->createToken('auth_token')->plainTextToken], 200);
     }
 
     public function resendOTP(Request $request)

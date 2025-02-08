@@ -1,9 +1,11 @@
 <?php
 
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 function removeImages($imageArray, $multi_images = 0) {
     // print_r($imageArray); exit;
@@ -189,6 +191,39 @@ function getFivePercent($amount) {
     return $percentage;
 }
 
+function getCityFromCoordinates($latitude, $longitude)
+{
+    $client = new Client();
+    
+    // Use the correct Google Maps Geocoding API endpoint
+    $url = 'https://maps.googleapis.com/maps/api/geocode/json';
+
+    try {
+        $response = $client->get($url, [
+            'query' => [
+                'latlng' => "$latitude,$longitude",
+                'key' => "AIzaSyDdwlGhZKKQqYyw9f9iME40MzMgC9RL4ko", // Your actual API key here
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        // Adjust based on the API's response structure
+        if (isset($data['results']) && count($data['results']) > 0) {
+            // Extract the city name from the response
+            foreach ($data['results'][0]['address_components'] as $component) {
+                if (in_array('locality', $component['types'])) {
+                    return $component['long_name']; // Return the city name
+                }
+            }
+        }
+
+        return null; // Return null if no city is found
+    } catch (\Exception $e) {
+        // Handle the exception as required (log it, return an error response, etc.)
+        return null; // Or rethrow, or return some error message
+    }
+}
 
 if (!function_exists('sendEmail')) {
     function sendEmail($to, $subject, $messageBody, $from = null, $attachments = [])

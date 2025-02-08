@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +14,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentMethod;
+use App\Models\Report;
+use App\Models\ReportResult;
+use App\Models\Section;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -33,89 +38,87 @@ class HomeController extends Controller
      */
 
      
-    public function index()
+     public function index(Request $request)
     {
         if (Auth::check()) {
-            // Get the current user
             $user = Auth::user();
 
-            // Check the user type condition (user type not equal to 0)
             if ($user->user_type != 0) {
-                // Log out the user
                 Auth::logout();
-
-                // Redirect to the login page or any other page
                 return redirect()->route('login')->with('error', trans('lang.not_valid_user'));
             }
         }
-    
-        // print_r($today_total); exit;
-        return view('home');
-    }
-    private function topSellingProducts()
-    {
-        $topProducts = OrderItem::select('product_id', DB::raw('SUM(item_quantity) as total_qty, SUM(item_total) as item_total'))
-            ->groupBy('product_id')
-            ->orderByDesc('item_total')
-            ->limit(10)
-            ->get();
 
-        // Extract product IDs from the result
-        $productIds = $topProducts->pluck('product_id');
+        // Fetch data correctly
+        $sections = Section::select("id", "name", "default_section")->get();
+        $sectionID = Section::where('default_section', 1)->pluck('id');
+        $branches = Branch::where("region", "Madinah")->get();
+        $members = User::where('user_type', 1)->take(5)->get();
+        $sidebranches = Branch::where('status', 1)->take(5)->get();
 
-        // Retrieve product details for the top products
-        $products = Product::whereIn('id', $productIds)
-            ->get(['id', 'p_name', 'price']);
+        // Initialize an array to store the series data
+        $series = [];
 
-        // Combine product details with total sales and item_total
-        $result = $topProducts->map(function ($item) use ($products) {
-            $product = $products->where('id', $item->product_id)->first();
-            return [
-                'product_id' => $item->product_id,
-                'product_name' => isset($product->p_name) ? $product->p_name : "",
-                'total_qty' => $item->total_qty,
-                'item_price' => isset($product->price) ? $product->price : 0,
-                'item_total' => isset($item->item_total) ? $item->item_total : 0,
-            ];
-        });
-        return $result;
-    }
-    public function getLastFiveOrdersWithNames()
-    {
-        $lastFiveOrders = Order::latest()->where('manual_order', 0)->take(10)->get();
+        // Define the current year
+        $year = date('Y');  // Current year
 
-        $result = [];
+        // Loop through each branch
+        foreach ($branches as $branch) {
+            // Initialize an array to store the branch's monthly percentages
+            $monthlyPercentages = [];
 
-        foreach ($lastFiveOrders as $order) {
-            $user = User::find($order->user_id);
-            $seller = User::find($order->seller_id);
+            // Loop through each month (1 to 12)
+            for ($month = 1; $month <= 12; $month++) {
+                // Fetch reports for the branch for the given month and year
+                $reports = Report::where('branch_id', $branch->id)
+                    ->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year)
+                    ->get();
 
-            $result[] = [
-                'order_id' => $order->id,
-                'total' => $order->total,
-                'status' => $order->order_status,
-                'user_name' => $user->name,
-                'seller_name' => $seller->name,
-                // Add other relevant order details here
+                $totalScore = 0;
+                $totalQuestions = 0;
+
+                // Loop through each report
+                foreach ($reports as $report) {
+                    // Fetch report results for the report
+                    $reportResults = ReportResult::where('report_id', $report->id)
+                        ->where('section_id', $sectionID)
+                        ->get();
+
+                    // Loop through each result and calculate the score
+                    foreach ($reportResults as $result) {
+                        $totalQuestions++;
+                        switch ($result->answer) {
+                            case 'Poor':
+                                $totalScore += 0;
+                                break;
+                            case 'Good':
+                                $totalScore += 10;
+                                break;
+                            case 'Excellent':
+                                $totalScore += 20;
+                                break;
+                        }
+                    }
+                }
+
+                // Calculate the percentage for the branch for the current month
+                $percentage = ($totalQuestions > 0) ? ($totalScore / ($totalQuestions * 20)) * 100 : 0;
+
+                // Add the percentage to the monthly percentages array
+                $monthlyPercentages[] = $percentage;
+            }
+
+            // Add the branch's data to the series array
+            $series[] = [
+                'name' => $branch->branch_name,
+                'data' => $monthlyPercentages,
             ];
         }
-
-        // Return the result
-        return $result;
+        // echo "<pre>"; print_r($series); exit;
+        return view('home', compact('sections', 'branches', 'members', 'sidebranches', 'series'));
     }
-    private function getTopSellers($startDate)
-    {
-        $topSellers = DB::table('orders')
-            ->select('seller_id', DB::raw('SUM(paid) as total_sales'))
-            ->whereDate('created_at', '>=', $startDate)
-            ->groupBy('seller_id')
-            ->orderByDesc('paid')
-            ->limit(10)
-            ->get();
-
-        // Output or further processing
-        return $topSellers;
-    }
+     
 
     public function profile()
     {
