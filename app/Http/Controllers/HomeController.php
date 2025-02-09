@@ -78,28 +78,32 @@ class HomeController extends Controller
                 $totalScore = 0;
                 $totalQuestions = 0;
 
-                // Loop through each report
-                foreach ($reports as $report) {
-                    // Fetch report results for the report
-                    $reportResults = ReportResult::where('report_id', $report->id)
-                        ->where('section_id', $sectionID)
-                        ->get();
-
-                    // Loop through each result and calculate the score
-                    foreach ($reportResults as $result) {
-                        $totalQuestions++;
-                        switch ($result->answer) {
-                            case 'Poor':
-                                $totalScore += 0;
-                                break;
-                            case 'Good':
-                                $totalScore += 10;
-                                break;
-                            case 'Excellent':
-                                $totalScore += 20;
-                                break;
+                if($reports->count() > 0)
+                {
+                    // Loop through each report
+                    foreach ($reports as $report) {
+                        // Fetch report results for the report
+                        $reportResults = ReportResult::where('report_id', $report->id)
+                            ->where('section_id', $sectionID)
+                            ->get();
+    
+                        // Loop through each result and calculate the score
+                        foreach ($reportResults as $result) {
+                            $totalQuestions++;
+                            switch ($result->answer) {
+                                case 'Poor':
+                                    $totalScore += 0;
+                                    break;
+                                case 'Good':
+                                    $totalScore += 10;
+                                    break;
+                                case 'Excellent':
+                                    $totalScore += 20;
+                                    break;
+                            }
                         }
                     }
+
                 }
 
                 // Calculate the percentage for the branch for the current month
