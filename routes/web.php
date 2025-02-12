@@ -38,7 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/requests/store', [RequestController::class, 'store'])->name('requests.store');
     Route::post('/sectionList/{id}/setDefault', [SectionController::class, 'setDefaultSection'])->name('sectionList.setDefault');
-
+    // Routes in web.php
+    Route::post('/members/status/update', [MemberController::class, 'updateStatus'])->name('members.status.update');
 
 
 });

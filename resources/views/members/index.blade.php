@@ -29,21 +29,11 @@
         <table class="table-auto w-full text-[#1F5077]">
             <thead class="bg-[#BDE8FA]">
                 <tr>
-                    <th class="whitespace-nowrap">
-                        Name
-                    </th>
-                    <th class="whitespace-nowrap">
-                        Function
-                    </th>
-                    <th class="whitespace-nowrap">
-                        Phone Number
-                    </th>
-                    <th class="whitespace-nowrap">
-                        Email
-                    </th>
-                    <th class="whitespace-nowrap">
-                        Action
-                    </th>
+                    <th class="whitespace-nowrap">Name</th>
+                    <th class="whitespace-nowrap">Function</th>
+                    <th class="whitespace-nowrap">Phone Number</th>
+                    <th class="whitespace-nowrap">Email</th>
+                    <th class="whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,13 +55,43 @@
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
+                            <button class="px-3 py-1 rounded-full toggle-approval {{ $member->status == 1 ? 'bg-green-500' : 'bg-red-500' }} text-white" data-id="{{ $member->id }}" data-status="{{ $member->status }}">
+                                {{ $member->status == 1 ? 'Approved' : 'Approve' }}
+                            </button>
                         </div>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
-
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".toggle-approval").forEach(button => {
+            button.addEventListener("click", function() {
+                let memberId = this.getAttribute("data-id");
+                let currentStatus = this.getAttribute("data-status");
+                let newStatus = currentStatus == 1 ? 0 : 1;
+                
+                fetch("{{ route('members.status.update') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ id: memberId, status: newStatus })
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        this.setAttribute("data-status", newStatus);
+                        this.textContent = newStatus == 1 ? "Approved" : "Approve";
+                        this.classList.toggle("bg-green-500", newStatus == 1);
+                        this.classList.toggle("bg-red-500", newStatus == 0);
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection

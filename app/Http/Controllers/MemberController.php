@@ -94,5 +94,10 @@ class MemberController extends Controller
     }
 
 
-
+    public function updateStatus(Request $request) {
+        $member = User::findOrFail($request->id);
+        $member->status = $request->status;
+        $member->save();
+        return response()->json(['success' => true]);
+    }
 }
