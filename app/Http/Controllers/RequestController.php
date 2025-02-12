@@ -102,7 +102,7 @@ class RequestController extends Controller
                         success: function (response) {
                             if (response.success) {
                                 alert(response.message);
-                                $("#create_request").addClass("hidden");
+                                $(".modal").addClass("hidden");
                                 $('form')[0].reset(); // Clear form
                             }
                         },
