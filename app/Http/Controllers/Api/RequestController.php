@@ -19,7 +19,11 @@ class RequestController extends Controller
             'branch_id' => 'required|int'
         ]);
         $res = [];
-        $data = ModelsRequest::where('code', $request->code)->where('branch_id', $request->branch_id)->where('auditor_id', auth()->user()->id)->first();
+        $data = ModelsRequest::where('code', $request->code)
+                ->where('branch_id', $request->branch_id)
+                ->where('auditor_id', auth()->user()->id)
+                ->orderBy('created_at', 'desc') // Yahan 'created_at' ko replace kar sakte hain kisi aur column se
+                ->first();
         if($data)
         {
             $res['request'] = $data;
