@@ -94,7 +94,7 @@ class HomeController extends Controller
                                 case 'Poor':
                                     $totalScore += 0;
                                     break;
-                                case 'Good':
+                                case 'Average':
                                     $totalScore += 10;
                                     break;
                                 case 'Excellent':

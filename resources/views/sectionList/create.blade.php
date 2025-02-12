@@ -52,15 +52,15 @@
                         <div class="grid md:grid-cols-3 gap-4 p-4">
                             <div class="">
                                 <label for="questions[0][answer1]" class="form-label w-auto me-3">Answer 1</label>
-                                <input type="text" name="questions[0][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                                <input type="text" name="questions[0][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Poor">
                             </div>
                             <div class="">
                                 <label for="questions[0][answer2]" class="form-label w-auto me-3">Answer 2</label>
-                                <input type="text" name="questions[0][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                                <input type="text" name="questions[0][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Average">
                             </div>
                             <div class="">
                                 <label for="questions[0][answer3]" class="form-label w-auto me-3">Answer 3</label>
-                                <input type="text" name="questions[0][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                                <input type="text" name="questions[0][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Excellent">
                             </div>
                         </div>
                     </div>
@@ -93,15 +93,15 @@
                 <div class="grid grid-cols-3 gap-4 p-4">
                     <div class="">
                         <label for="questions[${questionIndex}][answer1]" class="form-label w-auto me-3">Answer 1</label>
-                        <input type="text" name="questions[${questionIndex}][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                        <input type="text" name="questions[${questionIndex}][answer1]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Poor">
                     </div>
                     <div class="">
                         <label for="questions[${questionIndex}][answer2]" class="form-label w-auto me-3">Answer 2</label>
-                        <input type="text" name="questions[${questionIndex}][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                        <input type="text" name="questions[${questionIndex}][answer2]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Average">
                     </div>
                     <div class="">
                         <label for="questions[${questionIndex}][answer3]" class="form-label w-auto me-3">Answer 3</label>
-                        <input type="text" name="questions[${questionIndex}][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example">
+                        <input type="text" name="questions[${questionIndex}][answer3]" class="bg-transparent focus:outline-none focus:border-b focus:border-gray-200" placeholder="Example" disabled value="Excellent">
                     </div>
                 </div>
             </div>

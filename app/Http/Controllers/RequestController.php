@@ -32,28 +32,28 @@ class RequestController extends Controller
                 </div>
 
                 <div class="">
-                    <select name="auditor_id" id="auditor_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
                         <option value="" selected disabled>Select Auditor</option>
                         <?php foreach($users as $user) { ?>
-                            <option value="<?= $user->id ?>"><?= $user->name ?></option>
+                            <option value="<?= $user->id ?>" data-email="<?= $user->email ?>"><?= $user->name ?></option>
                         <?php } ?>
                     </select>
                 </div>
 
                 <div class="">
-                    <input type="email" id="email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Email">
                 </div>
 
                 <div class="">
-                    <input type="date" name="date" id="date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <input type="date" name="date" id="date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" >
                 </div>
 
                 <div class="">
-                    <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>">
                 </div>
 
                 <div class="">
-                    <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Code">
                 </div>
 
                 <div class="md:col-span-3">
@@ -102,7 +102,7 @@ class RequestController extends Controller
                         success: function (response) {
                             if (response.success) {
                                 alert(response.message);
-                                $("#create_request").modal("hide");
+                                $("#create_request").addClass("hidden");
                                 $('form')[0].reset(); // Clear form
                             }
                         },

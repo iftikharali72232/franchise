@@ -9,10 +9,10 @@
         </div>
 
         <div class="flex items-center justify-end w-auto">
-            <a href="{{route('sectionList.create')}}" type="button" class="bg-[#1D3F5D] rounded-full text-white flex justify-between items-center">
+            <a href="{{ route('sectionList.create') }}" type="button" class="bg-[#1D3F5D] rounded-full text-white flex justify-between items-center">
                 <span class="px-6">Add</span>
-                <div type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white flex justify-center items-center">
-                <i class="fa-solid fa-plus"></i>
+                <div class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white flex justify-center items-center">
+                    <i class="fa-solid fa-plus"></i>
                 </div>
             </a>
         </div>
@@ -25,6 +25,7 @@
                     <th class="whitespace-nowrap">Section Name</th>
                     <th class="whitespace-nowrap">No of Questions</th>
                     <th class="whitespace-nowrap">Created By</th>
+                    <th class="whitespace-nowrap">Default</th>
                     <th class="whitespace-nowrap">Action</th>
                 </tr>
             </thead>
@@ -35,16 +36,25 @@
                     <td class="whitespace-nowrap">{{ $section->questions->count() }}</td>
                     <td class="whitespace-nowrap">{{ $section->created_by->name ?? 'N/A' }}</td>
                     <td class="whitespace-nowrap">
+                        @if($section->default_section)
+                            <span class="text-green-600 font-semibold">Default</span>
+                        @else
+                            <form action="{{ route('sectionList.setDefault', $section->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm">
+                                    Set as Default
+                                </button>
+                            </form>
+                        @endif
+                    </td>
+                    <td class="whitespace-nowrap">
                         <div class="flex items-center space-x-3">
-                            <!-- View Button -->
                             <a href="{{ route('sectionList.show', $section->id) }}" class="text-[#1D3F5D]">
                                 <i class="fa-regular fa-eye"></i>
                             </a>
-                            <!-- Edit Button -->
                             <a href="{{ route('sectionList.edit', $section->id) }}" class="text-blue-500">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <!-- Delete Button -->
                             <form action="{{ route('sectionList.destroy', $section->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this section?');">
                                 @csrf
                                 @method('DELETE')
@@ -57,7 +67,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="text-center text-gray-500">No sections found.</td>
+                    <td colspan="5" class="text-center text-gray-500">No sections found.</td>
                 </tr>
                 @endforelse
             </tbody>

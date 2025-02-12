@@ -343,5 +343,11 @@ $(document).ready(function() {
         }
       });
     }
+    function getEmail() {
+        var select = document.getElementById("auditor_id"); // Get the select element
+        var selectedOption = select.options[select.selectedIndex]; // Get the selected option
+        var email = selectedOption.getAttribute("data-email"); // Get the data-email attribute
+        document.getElementById("user_email").value = email; // Set the email input field value
+    }
   </script>
 @endsection

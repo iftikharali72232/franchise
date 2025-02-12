@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
 
     Route::post('/requests/store', [RequestController::class, 'store'])->name('requests.store');
+    Route::post('/sectionList/{id}/setDefault', [SectionController::class, 'setDefaultSection'])->name('sectionList.setDefault');
+
 
 
 });

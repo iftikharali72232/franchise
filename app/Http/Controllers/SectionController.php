@@ -44,7 +44,6 @@ class SectionController extends Controller
         // Create section
         $section = Section::create([
             'name' => $data['name'],
-            'shows_to' => $data['shows_to'],
             'image_path' => $imagePath,
         ]);
 
@@ -117,4 +116,17 @@ class SectionController extends Controller
 
         return redirect()->route('sectionList.index')->with('success', 'Section updated successfully!');
     }
+    public function setDefaultSection($id)
+    {
+        // Remove default from any existing section
+        Section::where('default_section', 1)->update(['default_section' => 0]);
+
+        // Set the selected section as default
+        $section = Section::findOrFail($id);
+        // print_r($section); exit;
+        $section->update(['default_section' => 1]);
+
+        return redirect()->back()->with('success', 'Default section updated successfully.');
+    }
+
 }

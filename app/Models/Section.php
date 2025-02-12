@@ -9,7 +9,7 @@ class Section extends Model
     use HasFactory;
 
     protected $table = "sections";
-    protected $fillable = ['name', 'shows_to', 'image_path'];
+    protected $fillable = ['name', 'shows_to', 'image_path', 'default_section'];
 
     /**
      * Define a one-to-many relationship with SectionQuestion.
