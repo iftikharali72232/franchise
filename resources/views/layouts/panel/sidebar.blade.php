@@ -88,9 +88,9 @@
 <script>    
     function openModal(id) {
       $(`#${id}`).removeClass("hidden");
-
+      var requestCreateUrl = "{{ route('requests.create') }}";
       $.ajax({
-        url: '{{ route('requests.create') }}',  // Replace with your Laravel route
+        url: requestCreateUrl,  // Replace with your Laravel route
         type: 'GET',  // Prefer GET for retrieving modal content
         data: { action: "create_request_modal" },
         success: function(response) {
