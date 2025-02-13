@@ -117,7 +117,7 @@ class ReportController extends Controller
     public function previousReportApi()
     {
         $reports = Report::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('id', 'desc')->get();
-        print_r($reports); exit;
+        // print_r($reports); exit;
         foreach($reports as $key => $report)
         {
             $branch = Branch::find($report->branch_id);
