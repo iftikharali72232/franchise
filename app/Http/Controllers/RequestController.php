@@ -131,7 +131,7 @@ class RequestController extends Controller
                 function loadQuestions(sectionIds) {
                     let url = new URL(window.location.href);
                     let segments = url.pathname.split('/');
-                    let franchiseUrl = url.origin + '/' + segments[1]; // "http://localhost/franchise"
+                    let franchiseUrl = url.origin; // "http://localhost/franchise"
                     console.log(franchiseUrl);
                     $.ajax({
                         url: franchiseUrl+'/get-questions', // Replace with your route to fetch questions
