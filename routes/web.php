@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Routes in web.php
     Route::post('/members/status/update', [MemberController::class, 'updateStatus'])->name('members.status.update');
     Route::get('/generate-code', [RequestController::class, 'generateCode']);
-    Route::get('/get-questions', [RequestController::class, 'getQuestions']);
+    Route::post('/get-questions', [RequestController::class, 'getQuestions']);
 
 
 });
