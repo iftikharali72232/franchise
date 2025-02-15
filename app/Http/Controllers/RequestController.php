@@ -135,7 +135,7 @@ class RequestController extends Controller
                     console.log(franchiseUrl);
                     $.ajax({
                         url: franchiseUrl+'/get-questions', // Replace with your route to fetch questions
-                        method: 'GET',
+                        method: 'POST',
                         data: { section_ids: sectionIds },
                         success: function (response) {
                             const questionsList = $('#questions-list');
