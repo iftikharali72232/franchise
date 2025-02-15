@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RequestController as ApiRequestController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\MemberController;
@@ -40,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/sectionList/{id}/setDefault', [SectionController::class, 'setDefaultSection'])->name('sectionList.setDefault');
     // Routes in web.php
     Route::post('/members/status/update', [MemberController::class, 'updateStatus'])->name('members.status.update');
+    Route::get('/generate-code', [RequestController::class, 'generateCode']);
+    Route::get('/get-questions', [RequestController::class, 'getQuestions']);
 
 
 });

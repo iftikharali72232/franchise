@@ -17,5 +17,6 @@ class Request extends Model
         'time',
         'code',
         'section_id',
+        'questions'
     ];
 }

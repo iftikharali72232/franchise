@@ -22,6 +22,7 @@ class RequestController extends Controller
         $data = ModelsRequest::where('code', $request->code)
                 ->where('branch_id', $request->branch_id)
                 ->where('auditor_id', auth()->user()->id)
+                ->where('date', date('Y-m-d'))
                 ->orderBy('created_at', 'desc') // Yahan 'created_at' ko replace kar sakte hain kisi aur column se
                 ->first();
         if($data)
@@ -40,7 +41,10 @@ class RequestController extends Controller
         } else {
             return response()->json([
                 'status' => 0,
-                'msg' => 'Invalid user or code'
+                'msg' => 'Reasons behind your request FALSE!
+                        1): User mismatch 
+                        2): Code invalid 
+                        3): Your visite date is not match with the current date'
             ]);
         }
     }
