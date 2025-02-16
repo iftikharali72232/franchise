@@ -308,7 +308,7 @@ class RequestController extends Controller
         ];
 
         // Send the email
-        // Mail::to($validated['email'] ?? $auditor->email)->send(new MyMailable($data));
+        Mail::to($validated['email'] ?? $auditor->email)->send(new MyMailable($data));
 
         \App\Models\Request::create($validated);
 
