@@ -77,6 +77,7 @@ class ReportController extends Controller
             } else {
                 $branch_location = 'Location not available';
             }
+            echo "<pre>";print_r($report); exit;
             $report->request = ModelsRequest::find($report->request_id);
             // Check if request exists and decode sections safely
             if ($report->request && $report->request->section_id) {
@@ -84,9 +85,9 @@ class ReportController extends Controller
                 // print_r($sectionIds); exit;
                 $sections = is_array($sectionIds)
                     ? Section::whereIn('id', $sectionIds)->get()
-                    : collect(['No sections available']);
+                    : collect([]);
             } else {
-                $sections = collect(['No sections available']);
+                $sections = collect([]);
             }
             echo "<pre>";
             print_r($sections);
