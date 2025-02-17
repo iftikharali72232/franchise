@@ -59,72 +59,65 @@ class ReportController extends Controller
     }
     // Show a specific report by ID
     public function show($id)
-    {
-        // Retrieve the report by ID
-        $report = Report::where('status', 1)
-            ->with(['branch', 'request'])
-            ->first();
+{
+    // Retrieve the report by ID
+    $report = Report::where('status', 1)->with(['branch', 'request'])->first();
 
-        if ($report) {
-            // Check if branch and location exist
-            if ($report->branch && $report->branch->location) {
-                $latLong = explode(',', $report->branch->location);
-
-                // Ensure we have valid latitude and longitude
-                $branch_location = (count($latLong) === 2)
-                    ? getCityFromCoordinates($latLong[0], $latLong[1], 1)
-                    : 'Location not available';
-            } else {
-                $branch_location = 'Location not available';
+    if ($report) {
+        // Calculate branch location
+        $branch_location = 'Location not available';
+        if ($report->branch && $report->branch->location) {
+            $latLong = explode(',', $report->branch->location);
+            if (count($latLong) === 2) {
+                $branch_location = getCityFromCoordinates($latLong[0], $latLong[1], 1);
             }
-
-            // Check if request exists and decode sections safely
-            if ($report->request && $report->request->section_id) {
-                $sectionIds = json_decode($report->request->section_id, true);
-                $sections = is_array($sectionIds)
-                    ? Section::whereIn('id', $sectionIds)->get()
-                    : collect(['No sections available']);
-            } else {
-                $sections = collect(['No sections available']);
-            }
-
-            $sectionsArray = [];
-            if ($sections->count() > 0) {
-                foreach ($sections as $sk => $sec) {
-                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'attachments']);
-                    // echo "<pre>";print_r($questionId->count()); exit;
-                    if ($questionId->count() > 0) {
-                        foreach ($questionId as $q) {
-                            $question = SectionQuestion::where('id', $q->question_id)->first();
-                            $question['answer'] = $q->answer;
-                            $question['attachments'] = $q->attachments;
-                            $sec['questions'][] = $question;
-                        }
-                    }
-                    $sectionsArray[] = $sec;
-                }
-            }
-            // echo "<pre>";
-            // print_r($sectionsArray);
-            // exit;
-            // Add additional data using object properties
-            $report->branch_location = $branch_location;
-            $report->sections = $sections;
-
-            $results = ReportResult::where('report_id', $id)->get();
-            $report->results = $results;
-            $report->user = User::find($report->user_id);
-
-            // Debugging output
-            // echo "<pre>";
-            // print_r($report->toArray());
-            // exit;
-
-            // Pass the report to the view
-            return view('reports_detail', compact('report'));
         }
 
-        // Handle case when report not found
-        return redirect()->back()->with('error', 'Report not found.');
+        // Decode section IDs
+        $sectionsArray = [];
+        if ($report->request && $report->request->section_id) {
+            $sectionIds = json_decode($report->request->section_id, true);
+            $sections = is_array($sectionIds)
+                ? Section::whereIn('id', $sectionIds)->get()
+                : collect();
+
+            foreach ($sections as $section) {
+                $questions = ReportResult::where('section_id', $section->id)
+                    ->where('report_id', $id)
+                    ->get(['question_id', 'answer', 'attachments']);
+
+                $questionDetails = [];
+                foreach ($questions as $q) {
+                    $question = SectionQuestion::find($q->question_id);
+                    if ($question) {
+                        $questionDetails[] = [
+                            'question'    => $question->question ?? 'Unknown',
+                            'answer'      => $q->answer,
+                            'attachments' => $q->attachments
+                        ];
+                    }
+                }
+
+                $sectionsArray[] = [
+                    'section_name' => $section->name,
+                    'questions'    => $questionDetails,
+                ];
+            }
+        }
+
+        // Prepare report details
+        $reportDetails = [
+            'branch_location' => $branch_location,
+            'sections'        => $sectionsArray,
+            'results'         => ReportResult::where('report_id', $id)->get(),
+            'user'            => User::find($report->user_id),
+        ];
+
+        return view('reports_detail', compact('reportDetails'));
     }
+
+    // Handle case when report not found
+    return redirect()->back()->with('error', 'Report not found.');
+}
+
 }
