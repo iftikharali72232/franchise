@@ -81,6 +81,7 @@ class ReportController extends Controller
             // Check if request exists and decode sections safely
             if ($report->request && $report->request->section_id) {
                 $sectionIds = json_decode($report->request->section_id, true);
+                print_r($sectionIds); exit;
                 $sections = is_array($sectionIds)
                     ? Section::whereIn('id', $sectionIds)->get()
                     : collect(['No sections available']);
