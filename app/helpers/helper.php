@@ -191,11 +191,9 @@ function getFivePercent($amount) {
     return $percentage;
 }
 
-function getCityFromCoordinates($latitude, $longitude)
+function getCityFromCoordinates($latitude, $longitude, $complete = 0)
 {
     $client = new Client();
-    
-    // Use the correct Google Maps Geocoding API endpoint
     $url = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     try {
@@ -208,22 +206,26 @@ function getCityFromCoordinates($latitude, $longitude)
 
         $data = json_decode($response->getBody(), true);
 
-        // Adjust based on the API's response structure
         if (isset($data['results']) && count($data['results']) > 0) {
-            // Extract the city name from the response
+            // Return full address if $complete = 1
+            if ($complete == 1) {
+                return $data['results'][0]['formatted_address'];
+            }
+
+            // Extract the city name
             foreach ($data['results'][0]['address_components'] as $component) {
                 if (in_array('locality', $component['types'])) {
-                    return $component['long_name']; // Return the city name
+                    return $component['long_name'];
                 }
             }
         }
 
-        return null; // Return null if no city is found
+        return null;
     } catch (\Exception $e) {
-        // Handle the exception as required (log it, return an error response, etc.)
-        return null; // Or rethrow, or return some error message
+        return null;
     }
 }
+
 
 if (!function_exists('sendEmail')) {
     function sendEmail($to, $subject, $messageBody, $from = null, $attachments = [])

@@ -13,7 +13,7 @@
             </div>
             
             <h2 class="text-4xl font-semibold bg-gradient-to-b from-[#1F5077] to-[#3A95DD] bg-clip-text text-transparent">
-                MESHRAQ Sultana
+                <?= $report->branch->branch_name ?>
             </h2>
         </div>
 
@@ -33,7 +33,7 @@
                     <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
                 </div>
                 <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Second Ring Rd Medina</p>
+                    <p class="text-sm text-[#3A95DD]"><?= $report->branch_location ?></p>
                 </div>
             </div>
             
@@ -42,7 +42,7 @@
                     <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
                 </div>
                 <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
+                    <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?></p>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                     <p class="text-sm font-semibold text-[#1D3F5D]">Created By:</p>
                 </div>
                 <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
+                    <p class="text-sm text-[#3A95DD]"><?= $report->user->name ?></p>
                 </div>
             </div>
         </div>
@@ -73,14 +73,15 @@
             </div>
         </div>
     </div>
-
+<?php foreach($report->sections as $section) { ?>
     <div class="">
-        <h4 class="text-xl font-semibold text-[#1D3F5D]">A - Food Section</h4>
-
+        <h4 class="text-xl font-semibold text-[#1D3F5D]"><?= $section->name ?></h4>
+        <?php foreach($section->questions as $question) { 
+            if($question->answer != ""){ ?>
         <div class="ml-10">
             <ol class="list-decimal text-xl text-[#1D3F5D] my-3">
                 <li>
-                    What are the steps for ensuring that fittings are correctly secured during the installation of pipes?
+                    <?php $question->question ?>
                 </li>
             </ol>
 
@@ -93,8 +94,8 @@
                         </div>
                     </div>
                     <div class="ml-3">
-                        <p class="font-semibold text-[#1D3F5D]">Turki Hisham</p>
-                        <p class="text-sm text-gray-500">20:34 PM</p>
+                        <p class="font-semibold text-[#1D3F5D]"><?= $report->user->name ?></p>
+                        <p class="text-sm text-gray-500"><?= $report->created_at ?></p>
                     </div>
                 </div>
 
@@ -106,8 +107,8 @@
 
                     <div class="flex md:flex-row flex-col w-full gap-2 py-2">
                         <!-- Excellent Rating -->
-                        <div>
-                            <input class="peer sr-only" value="excellent" name="rating" id="excellent" type="radio" />
+                        <div <?= $question->answer == "Excellent" ? '' : "hidden" ?>>
+                            <input class="peer sr-only" value="excellent" name="rating" id="<?= $question->id ?>excellent" type="radio" readonly/>
                             <label
                                 for="excellent"
                                 class="flex shadow-sm px-4 py-1.5 cursor-pointer flex-col items-center justify-center rounded-lg bg-white transition-transform duration-150 peer-checked:bg-gray-600 peer-checked:text-white text-sm uppercase text-gray-500">
@@ -116,8 +117,8 @@
                         </div>
 
                         <!-- Good Rating -->
-                        <div>
-                            <input class="peer sr-only" value="good" name="rating" id="good" type="radio" />
+                        <div <?= $question->answer == "Good" ? '' : "hidden" ?> >
+                            <input class="peer sr-only" value="good" name="rating" id="<?= $question->id ?>good" type="radio" readonly/>
                             <label
                                 for="good"
                                 class="flex shadow-sm px-4 py-1.5 cursor-pointer flex-col items-center justify-center rounded-lg bg-white transition-transform duration-150 peer-checked:bg-gray-600 peer-checked:text-white text-sm uppercase text-gray-500">
@@ -126,8 +127,8 @@
                         </div>
 
                         <!-- Unacceptable Rating -->
-                        <div>
-                            <input class="peer sr-only" value="unacceptable" name="rating" id="unacceptable" type="radio" />
+                        <div <?= $question->answer == "Unacceptable" ? '' : "hidden" ?>>
+                            <input class="peer sr-only" value="unacceptable" name="rating" id="<?= $question->id ?>unacceptable" type="radio"  readonly/>
                             <label
                                 for="unacceptable"
                                 class="flex shadow-sm px-4 py-1.5 cursor-pointer flex-col items-center justify-center rounded-lg bg-white transition-transform duration-150 peer-checked:bg-gray-600 peer-checked:text-white text-sm uppercase text-gray-500">
@@ -137,24 +138,32 @@
                     </div>
 
                 </div>
-
+                <?php $attachments = json_decode($question->attachments, true); ?>
                 <!-- Attachments Section -->
                 <div class="flex lg:flex-row flex-col md:ml-16">
                     <div class="lg:w-[150px] lg:mb-0 mb-3">
                         <p class="font-semibold text-gray-600 mt-2">Attachments:</p>
                     </div>
                     <div class="grid md:grid-cols-6 grid-cols-3 w-full md:gap-4 gap-2">
-                        <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 1">
+                        <?php if(count($attachments) > 0) {
+                            foreach($attachments as $imgKey => $img)
+                            {
+                                echo '<img class="h-20 w-20 rounded-md object-cover" src="'.(base_path("/".$img)).'" alt="Attachment '.($imgKey+1).'" />';
+                            }
+                        } ?>
+                        <!-- <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 1">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 2">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 3">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 4">
                         <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 5">
-                        <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 6">
+                        <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 6"> -->
                     </div>
                 </div>
             </div>
         </div>
+        <?php }} ?>
     </div>
+<?php } ?>
 </div>
 
 @endsection

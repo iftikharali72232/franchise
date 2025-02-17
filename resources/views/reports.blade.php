@@ -12,12 +12,12 @@
             </div>
             
             <div class="mt-2 relative z-50">
-                <button class="bg-[#2E76B0] flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
+                <a type="button" href="{{route('reports_all')}}" class="bg-[#2E76B0] flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
                     <span class="text-white font-[600]">View</span>
                     <div class="bg-white rounded-full text-[#2E76B0] p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center ">
                         <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
                     </div>
-                </button>
+                </a>
             </div>
         </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/members/status/update', [MemberController::class, 'updateStatus'])->name('members.status.update');
     Route::get('/generate-code', [RequestController::class, 'generateCode']);
     Route::post('/get-questions', [RequestController::class, 'getQuestions']);
+    Route::get('/reports/all', [ReportController::class, 'index'])->name('reports_all');
+    Route::get('/report_detail/{id}', [ReportController::class, 'show'])->name('report_detail');
 
 
 });

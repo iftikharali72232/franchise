@@ -19,4 +19,13 @@ class Report extends Model
     {
         return $this->hasMany(ReportResult::class);
     }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
+
+    public function request()
+    {
+        return $this->belongsTo(Request::class, 'request_id');
+    }
 }

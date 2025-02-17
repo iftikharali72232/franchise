@@ -51,328 +51,60 @@
 
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
         <!-- card 1 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
+         <?php foreach($res as $report){ ?>
+                <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
+                    <div class="flex mb-3">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Branch:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <a href="{{ route('report_detail', $report->id) }}"><p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?></p></a>
+                        </div>
+                    </div>
 
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
+                    <div class="flex mb-3">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm text-[#3A95DD]"><?= $report->branch_location ?></p>
+                        </div>
+                    </div>
 
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
+                    <div class="flex mb-3">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm text-[#3A95DD]"><?= $report->section ?></p>
+                        </div>
+                    </div>
 
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
+                    <div class="flex mb-3">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm text-[#3A95DD]">Admin</p>
+                        </div>
+                    </div>
 
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
+                    <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
+                        <div class="relative bg-[#93C3E6] w-[0%] py-[1px]">
+                            <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">0%</p>
+                        </div>
+                    </div>
 
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
+                    <div class="flex">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- card 2 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
-
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
-
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- card 3 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
-
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
-
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- card 4 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
-
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
-
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- card 5 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
-
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
-
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- card 6 -->
-        <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Name:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">MESHRAQ Ring.Rd</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Sec. Ring Road, Medina</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Food</p>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">Turki Hisham</p>
-                </div>
-            </div>
-
-            <div class="w-full bg-[#1D3F5D] mt-10 mb-3">
-                <div class="relative bg-[#93C3E6] w-[58%] py-[1px]">
-                    <p class="absolute text-[#93C3E6] top-[-25px] right-[-25px]">58%</p>
-                </div>
-            </div>
-
-            <div class="flex">
-                <div class="w-1/2">
-                    <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
-                </div>
-                <div class="w-1/2">
-                    <p class="text-sm text-[#3A95DD]">06/11/2022</p>
-                </div>
-            </div>
-        </div>
+            <?php } ?>
     </div>
 
 </div>

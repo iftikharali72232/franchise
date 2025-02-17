@@ -28,4 +28,8 @@ class Branch extends Model
     {
         return $this->belongsTo(City::class, 'city', 'sno'); // 'city' is the foreign key, and 'sno' is the primary key on the City model
     }
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'branch_id');
+    }
 }

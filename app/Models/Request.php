@@ -19,4 +19,8 @@ class Request extends Model
         'section_id',
         'questions'
     ];
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'request_id');
+    }
 }

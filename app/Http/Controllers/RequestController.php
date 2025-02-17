@@ -144,7 +144,7 @@ class RequestController extends Controller
                                 response.questions.forEach(question => {
                                     questionsList.append(`
                                         <div class="flex items-center mb-2">
-                                            <input type="checkbox" name="questions[]" value="${question.id}" id="question-${question.id}" class="mr-2">
+                                            <input type="checkbox" name="questions[]" value="${question.id}" id="question-${question.id}" class="mr-2" checked>
                                             <label for="question-${question.id}" class="text-[#1F5077]">${question.question}</label>
                                         </div>
                                     `);
@@ -293,7 +293,7 @@ class RequestController extends Controller
             'questions' => 'nullable|array',
         ]);
 
-    //    print_r($_POST); exit;
+        //    print_r($_POST); exit;
         $auditor = User::find($request->auditor_id);
         $branch = Branch::find($request->branch_id);
 
