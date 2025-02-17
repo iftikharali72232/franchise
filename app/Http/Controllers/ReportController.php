@@ -61,7 +61,7 @@ class ReportController extends Controller
     public function show($id)
     {
         // Retrieve the report by ID
-        $report = Report::where('status', 1)
+        $report = Report::where('status', 1)->where('id', $id)
             ->with(['branch', 'request'])
             ->first();
 
@@ -77,7 +77,7 @@ class ReportController extends Controller
             } else {
                 $branch_location = 'Location not available';
             }
-            echo "<pre>";print_r(ModelsRequest::find($report->request_id)); exit;
+            // echo "<pre>";print_r(ModelsRequest::find($report->request_id)); exit;
             $report->request = ModelsRequest::find($report->request_id);
             // Check if request exists and decode sections safely
             if ($report->request && $report->request->section_id) {
@@ -89,9 +89,9 @@ class ReportController extends Controller
             } else {
                 $sections = collect([]);
             }
-            echo "<pre>";
-            print_r($sections);
-            exit;
+            // echo "<pre>";
+            // print_r($sections);
+            // exit;
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
