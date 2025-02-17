@@ -58,7 +58,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">Branch:</p>
                         </div>
                         <div class="w-1/2">
-                            <a href="{{ route('report_detail', $report->id) }}"><p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?></p></a>
+                            <a href="{{ route('report_detail', $report->id) }}"><p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?? "" ?></p></a>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">Branch Location:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->branch_location ?></p>
+                            <p class="text-sm text-[#3A95DD]"><?= $report->branch_location ?? "" ?></p>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">Section:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->section ?></p>
+                            <p class="text-sm text-[#3A95DD]"><?= $report->section ?? "" ?></p>
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">Created Date:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?></p>
+                            <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?? "" ?></p>
                         </div>
                     </div>
                 </div>
