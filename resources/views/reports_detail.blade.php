@@ -81,7 +81,7 @@
         <div class="ml-10">
             <ol class="list-decimal text-xl text-[#1D3F5D] my-3">
                 <li>
-                    <?php $question->question ?>
+                    <?= $question->question ?>
                 </li>
             </ol>
 
