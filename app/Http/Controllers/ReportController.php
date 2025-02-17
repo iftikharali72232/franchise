@@ -87,14 +87,14 @@ class ReportController extends Controller
             } else {
                 $sections = collect(['No sections available']);
             }
-            echo "<pre>";
-            print_r($sections);
-            exit;
+            // echo "<pre>";
+            // print_r($sections);
+            // exit;
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
                     $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'attachments']);
-                    // echo "<pre>";print_r($questionId->count()); exit;
+                    echo "<pre>";print_r($questionId); exit;
                     if ($questionId->count() > 0) {
                         foreach ($questionId as $q) {
                             $question = SectionQuestion::where('id', $q->question_id)->first();
