@@ -77,7 +77,7 @@ class ReportController extends Controller
             } else {
                 $branch_location = 'Location not available';
             }
-            echo "<pre>";print_r($report); exit;
+            echo "<pre>";print_r(ModelsRequest::find($report->request_id)); exit;
             $report->request = ModelsRequest::find($report->request_id);
             // Check if request exists and decode sections safely
             if ($report->request && $report->request->section_id) {
