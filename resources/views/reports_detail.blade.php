@@ -148,7 +148,7 @@
                         <?php if(count($attachments) > 0) {
                             foreach($attachments as $imgKey => $img)
                             {
-                                echo '<img class="h-20 w-20 rounded-md object-cover" src="'.(public_path("/".$img)).'" alt="Attachment '.($imgKey+1).'" />';
+                                echo '<img class="h-20 w-20 rounded-md object-cover" src="'.(url("/".$img)).'" alt="Attachment '.($imgKey+1).'" />';
                             }
                         } ?>
                         <!-- <img class="h-20 w-20 rounded-md object-cover" src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="Attachment 1">
