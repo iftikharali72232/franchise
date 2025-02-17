@@ -120,9 +120,9 @@ class ReportController extends Controller
             $report->user = User::find($report->user_id);
 
             // Debugging output
-            // echo "<pre>";
-            // print_r($report->toArray());
-            // exit;
+            echo "<pre>";
+            print_r($report->toArray());
+            exit;
 
             // Pass the report to the view
             return view('reports_detail', compact('report'));
