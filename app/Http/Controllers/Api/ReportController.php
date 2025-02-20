@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
 use App\Models\Branch;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Models\ReportResult;
 use App\Models\Request as ModelsRequest;
 use App\Models\Section;
 use App\Models\SectionQuestion;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -163,5 +165,18 @@ class ReportController extends Controller
         return response()->json([
             'data' => $report
         ]);
+    }
+    public function send_report(Request $request)
+    {
+        $request->validate([
+            "id" => "required",
+            "email"  => "required"        
+        ]);
+        $email = $request->email; // Replace with actual recipient email
+        $url = url("/report_view/".base64_encode($request->id)); // The link you want to send
+
+        Mail::to($email)->send(new SendEmail($url));
+
+        return "Email sent successfully!";
     }
 }

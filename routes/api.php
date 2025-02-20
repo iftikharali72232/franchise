@@ -62,5 +62,6 @@ Route::group(["middleware"=> "auth:sanctum"], function () {
     Route::get('/cityList', [RequestController::class, 'cityList']);
     Route::get('/notifications', [RequestController::class, 'notifications']);
     Route::post('/notifications/read', [RequestController::class, 'readNotification']);
-
+    Route::post('/send-report', [ReportController::class, 'send_report']);
+    
 });

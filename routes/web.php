@@ -17,6 +17,7 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/', function () {
     return redirect()->route('home');
 });
+Route::get('/report_view/{id}', [ReportController::class, 'report_view'])->name('report_view');
 
 Route::get('/outh', function () {
     return view('outh');
