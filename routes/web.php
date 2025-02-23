@@ -5,6 +5,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SectionController;
@@ -22,15 +23,17 @@ Route::get('/report_view/{id}', [ReportController::class, 'report_view'])->name(
 Route::get('/outh', function () {
     return view('outh');
 });
-
+Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
+Route::post('/generate-current-page-pdf', [PdfController::class, 'generateCurrentPagePdf'])->name('generate.current.page.pdf');
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/branches/create', [BranchController::class, 'create'])->name('branches.create'); // Move this above {id} route
     Route::post('/branches/store', [BranchController::class, 'store'])->name('branches.store');
     Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
     Route::get('/branches/list', [BranchController::class, 'list'])->name('branches.list');
-    Route::get('/branches/{id}', [BranchController::class, 'show'])->name('branches.show');
+    Route::get('/branches/{id}', [BranchController::class, 'show'])->name('branches.show'); // Keep this last
 
     // Automatically generates routes for index, create, store, edit, update, and destroy
     Route::resource('sectionList', SectionController::class);

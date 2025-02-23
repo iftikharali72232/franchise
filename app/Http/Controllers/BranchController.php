@@ -19,6 +19,11 @@ class BranchController extends Controller
         return response()->json($branches);
     }
 
+    public function create()
+    {
+        $cities = City::where('status', 1)->pluck('city_name', 'sno'); // Fetch active cities
+        return view('branches.create', compact('cities'));
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -27,6 +32,7 @@ class BranchController extends Controller
             'region' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+            'owner_email' => 'required|email',
             'header_image' => 'nullable|image|max:102400', // 100MB max size
         ]);
     
@@ -46,13 +52,10 @@ class BranchController extends Controller
             'city' => $request->input('city'),
             'location' => $request->input('location'),
             'header_image' => $headerImage,
+            'owner_email' => $request->input('owner_email')
         ]);
     
-        return response()->json([
-            'success' => true,
-            'message' => 'Branch added successfully!',
-            'branch' => $branch,
-        ]);
+       return redirect()->route('branches.index');
     }
     public function show($id)
     {

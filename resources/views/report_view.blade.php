@@ -19,7 +19,7 @@
 
 
         <div class="flex items-center md:justify-end md:w-auto w-full space-x-3">
-            <button type="button" class="bg-[#2E76B0] px-6 py-3 rounded-full text-white">
+            <button id="download-pdf" type="button" class="bg-[#2E76B0] px-6 py-3 rounded-full text-white">
                 <span>Save PDF</span>
                 <i class="fa-solid fa-download ps-2"></i>
             </button>
@@ -166,4 +166,54 @@
 <?php } ?>
 </div>
 
-@endsection
+
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="{{asset('vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <!-- <script src="{{asset('js/query.js')}}"></script> -->
+  <!-- <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> -->
+  <script src="{{asset('vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{asset('vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{asset('vendor/quill/quill.min.js')}}"></script>
+  <script src="{{asset('vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{asset('vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
+  
+
+  <!-- Template Main JS File -->
+  <script>
+    document.getElementById('download-pdf').addEventListener('click', function() {
+    // Current page ka HTML content capture karein
+    const htmlContent = document.documentElement.outerHTML;
+
+    // CSRF token meta tag se lekar
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Server par HTML content bhejein
+    fetch("http://127.0.0.1:8000/generate-current-page-pdf", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken // CSRF token ko headers mein include karein
+        },
+        body: JSON.stringify({ html: htmlContent })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob(); // Response ko blob mein convert karein
+    })
+    .then(blob => {
+        // PDF download karein
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'current-page.pdf';
+        link.click();
+    })
+    .catch(error => {
+        console.error('PDF generation failed:', error);
+    });
+});
+</script>
+  <script src="{{asset('js/main.js')}}"></script>

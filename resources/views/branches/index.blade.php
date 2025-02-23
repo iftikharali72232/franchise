@@ -24,9 +24,9 @@
                 Previous Visits
             </button>
 
-            <button type="button" onclick="openBranchModal('create_branch')" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
+            <a href="{{route('branches.create')}}" type="button" onclick="" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
                 <i class="fa-solid fa-plus"></i>
-            </button>
+            </a>
 
             <button type="button" class="bg-[#19B2E7] w-[40px] h-[40px] p-1 rounded-full text-white">
                 <i class="fa-solid fa-download"></i>
@@ -71,100 +71,7 @@
     </div>
 </div>
 
-<!-- Create Branch Modal -->
-<div id="create_branch" class="modal md:p-4 p-0 fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-xl shadow-lg lg:w-[70%] md:w-[80%] w-[100%] overflow-hidden md:h-full h-screen">
-        <div class="px-6 py-4 bg-[#2E76B0] flex justify-between items-center rounded-t-xl">
-            <h2 class="text-xl font-semibold text-white">Add a New Branch</h2>
-            <button type="button" class="close-modal text-white">
-            <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        
-        <div class="modal-body p-6 h-full overflow-y-auto overflow-x-hidden scrollbar-hidden">
-            <div class="pb-4">
-                <h4 class="text-xl text-[#1F5077] font-semibold text-uppercase">Branch Information</h4>
-            </div>
-            <form id="create_branch" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="grid md:grid-cols-4 grid-cols-1 gap-4">
-                    <div class="">
-                        <label class="text-[#1F5077 pb-1">Branch Name <span class="text-red-500">*</span></label>
-                        <input type="text" name="branch_name" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" />
-                    </div>
 
-                    <div class="">
-                        <label class="text-[#1F5077 pb-1">Branch No <span class="text-red-500">*</span></label>
-                        <input type="text" name="branch_no" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" />
-                    </div>
-
-                    <div class="">
-                        <label class="text-[#1F5077 pb-1">Region <span class="text-red-500">*</span></label>
-                        <select name="region" id="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                            <option value="">Select Region</option>
-                            <option value="Riyadh">Riyadh (الرياض)</option>
-                            <option value="Makkah">Makkah (مكة المكرمة)</option>
-                            <option value="Madinah">Madinah (المدينة المنورة)</option>
-                            <option value="Eastern Province">Eastern Province (المنطقة الشرقية)</option>
-                            <option value="Qassim">Qassim (القصيم)</option>
-                            <option value="Asir">Asir (عسير)</option>
-                            <option value="Tabuk">Tabuk (تبوك)</option>
-                            <option value="Hail">Hail (حائل)</option>
-                            <option value="Northern Borders">Northern Borders (الحدود الشمالية)</option>
-                            <option value="Jazan">Jazan (جازان)</option>
-                            <option value="Najran">Najran (نجران)</option>
-                            <option value="Al-Baha">Al-Baha (الباحة)</option>
-                            <option value="Al-Jawf">Al-Jawf (الجوف)</option>
-                        </select>
-                    </div>
-
-                    <div class="">
-                        <label class="text-[#1F5077 pb-1">City <span class="text-red-500">*</span></label>
-                        <select name="city" id="city" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                            <option value="">All Cities</option>
-                            @foreach ($cities as $sno => $city_name)
-                                <option value="{{ $sno }}">
-                                    {{ $city_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="md:col-span-4">
-                        <label class="text-[#1F5077 pb-1">Location <span class="text-red-500">*</span></label>
-                        <input type="text" name="location" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Example" />
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="text-[#1F5077 pb-1">Location on the map</label>
-                        <div id="map" style="width: 100%; height: 270px; border-radius: 10px;"></div>
-                    </div>
- 
-                    <div class="md:col-span-2">
-                        <label class="text-[#1F5077 pb-1">Header Image</label>
-                        <label for="file-input">
-                            <div id="drop-zone" class="flex flex-col items-center justify-center bg-[#F2F8FD] border border-[#1D3F5D] rounded-[35px] py-20 cursor-pointer">
-                                <input id="file-input" name="header_image" type="file" accept="image/*" class="hidden">
-                                <svg id="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-400 mb-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                <img id="image-preview" src="" alt="Image Preview" class="hidden max-h-48 rounded-lg">
-                                <p id="upload-text" class="text-[#1D3F5D] text-lg ">Add or drag an image here</p>
-                                <p class="text-gray-400 text-sm font-light mt-1">Maximum image size 100MB</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="md:col-span-4 flex justify-end items-center mb-20">
-                        <button type="submit" class="px-[40px] py-[20px] bg-[#1F5077] text-white font-semibold rounded-full">
-                            Send
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Edit Branch Modal -->
 <div id="edit_branch" class="modal md:p-4 p-0 fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">

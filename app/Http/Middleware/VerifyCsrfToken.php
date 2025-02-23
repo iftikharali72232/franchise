@@ -14,5 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         '/requests/store',
+        '/generate-current-page-pdf',
+        '/branches/store'
     ];
 }
