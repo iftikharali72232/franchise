@@ -4,17 +4,17 @@
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="p-4 border-b border-gray-200">
         <h2 class="text-2xl font-semibold mb-4">{{ $section->name }}</h2>
-        <p class="text-gray-700">Visible to: <strong>{{ $section->shows_to }}</strong></p>
+        <p class="text-gray-700">{{ trans('lang.visible_to') }}: <strong>{{ $section->shows_to }}</strong></p>
     </div>
 
     @if($section->image)
     <div class="mt-4">
-        <img src="{{ asset('storage/' . $section->image) }}" alt="Section Image" class="w-48 h-48 rounded-md shadow-md">
+        <img src="{{ asset('storage/' . $section->image) }}" alt="{{ trans('lang.section_image') }}" class="w-48 h-48 rounded-md shadow-md">
     </div>
     @endif
 
     <div class="p-4">
-        <h3 class="text-lg font-semibold">Questions</h3>
+        <h3 class="text-lg font-semibold">{{ trans('lang.questions') }}</h3>
         <ul class="list-disc ml-6">
             @foreach($section->questions as $question)
             <li class="mt-2">
@@ -29,7 +29,7 @@
         </ul>
 
         <div class="mt-6">
-            <a href="{{ route('sectionList.index') }}" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">Back to List</a>
+            <a href="{{ route('sectionList.index') }}" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">{{ trans('lang.back_to_list') }}</a>
         </div>
     </div>
 

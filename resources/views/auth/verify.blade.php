@@ -18,7 +18,9 @@
                     {{ trans('lang.if_you_not_received_email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('lang.click_here_to_another_request') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                            {{ trans('lang.click_here_to_another_request') }}
+                        </button>.
                     </form>
                 </div>
             </div>

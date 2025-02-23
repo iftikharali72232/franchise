@@ -8,36 +8,35 @@
 
         <div class="hidden md:flex items-center">
             <div class="bg-[#1D3F5D] rounded-full p-2 w-[50px] h-[50px]">
-                <img src="{{asset('images/main-user.png')}}" alt="user" class="">
+                <img src="{{ asset('images/main-user.png') }}" alt="{{ trans('lang.user') }}">
             </div>
             <div class="ps-3">
-                <h4 class="text-start text-[#1D3F5D] font-semibold text-xl">Grgir Person</h4>
-                <p class="text-start text-gray-400">info@grgirperson.sa</p>
+                <h4 class="text-start text-[#1D3F5D] font-semibold text-xl">{{ trans('lang.user_name') }}</h4>
+                <p class="text-start text-gray-400">{{ trans('lang.user_email') }}</p>
             </div>
         </div>
 
         <div class="relative w-auto">
             <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
-                <img src="{{ asset('images/search.png') }}" class="h-[20px]" />
+                <img src="{{ asset('images/search.png') }}" class="h-[20px]" alt="{{ trans('lang.search') }}">
             </div>
             
             <input 
                 id="search"
                 type="text" 
-                placeholder="Quick Search" 
-                class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pr-3 pl-12' }} py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('email') is-invalid @enderror"
+                placeholder="{{ trans('lang.quick_search') }}" 
+                class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pr-3 pl-12' }} py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                 name="search" 
                 required 
             />
         </div>
     </div>
 
-    <div class="flex items-center justify-end w-auto {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-3' : 'lg:space-x-6 md:space-x-4 space-x-2' }} " >
-
+    <div class="flex items-center justify-end w-auto {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-3' : 'lg:space-x-6 md:space-x-4 space-x-2' }}">
         <div class="relative flex items-center">
             <!-- Notification Button -->
             <button type="button" id="notificationButton" class="bg-[#1D3F5D] rounded-full p-3 w-[50px] h-[50px] relative focus:outline-none">
-                <img src="{{asset('images/bell.png')}}" alt="notification">
+                <img src="{{ asset('images/bell.png') }}" alt="{{ trans('lang.notifications') }}">
             </button>
 
             <!-- Dropdown Menu -->
@@ -47,7 +46,7 @@
                 <div class="bg-[#F7FCFE] border border-gray-300 rounded-lg relative z-50 px-4 py-4">
                     <div class="md:block hidden absolute z-10 top-[-7px] right-[16px] w-4 h-4 bg-white rotate-45"></div>
                     <div class="flex justify-between pb-3">
-                        <h3 class="text-md font-semibold text-[#1D3F5D]">Notifications</h3>
+                        <h3 class="text-md font-semibold text-[#1D3F5D]">{{ trans('lang.notifications') }}</h3>
                         
                         <button type="button" id="notificationClose" class="text-black/50 focus:outline-none">
                             <i class="fa-solid fa-xmark"></i>
@@ -60,181 +59,39 @@
                                 <div class="flex items-center gap-3 py-3 border-b border-gray-300">
                                     <div class="">
                                         <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
+                                            <img src="{{ asset('images/main-user.png') }}" alt="{{ trans('lang.user') }}" class="filter invert" />
                                         </div>
                                     </div>
                                     <div class="relative">
                                         <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
+                                            {{ trans('lang.notification_text1') }}
                                         </p>
                                         <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
+                                            {{ trans('lang.click_to_open_report') }}
                                         </a>
-
                                         <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
                                     </div>
                                 </div>
                             </li>
-
                             <li>
                                 <div class="flex gap-3 py-3 border-b border-gray-300">
                                     <div class="">
                                         <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
+                                            <img src="{{ asset('images/main-user.png') }}" alt="{{ trans('lang.user') }}" class="filter invert" />
                                         </div>
                                     </div>
                                     <div class="relative">
                                         <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Example@hotmail.com account has been created and is presently being reviewed,
+                                            {{ trans('lang.notification_text2') }}
                                         </p>
                                         <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to confirm.
+                                            {{ trans('lang.click_to_confirm') }}
                                         </a>
-
                                         <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
                                     </div>
                                 </div>
                             </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="flex items-center gap-3 py-3 border-b border-gray-300">
-                                    <div class="">
-                                        <div class="w-[50px] h-[50px] p-2 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                                            <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <p class="text-md font-semibold text-[#1D3F5D]">
-                                            Turki Hisham uploaded a new report file,
-                                        </p>
-                                        <a href="#" class="text-sm text-[#93C3E6]">
-                                            Click to open the report.
-                                        </a>
-
-                                        <p class="absolute bottom-0 right-0 text-gray-400 text-xs">20:58</p>
-                                    </div>
-                                </div>
-                            </li>
+                            <!-- Additional notifications can be added similarly -->
                         </ul>
                     </div>
                 </div>

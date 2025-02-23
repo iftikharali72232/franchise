@@ -5,15 +5,15 @@
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="flex md:flex-row flex-col items-center md:justify-between w-full">
         <div class="flex items-center md:w-auto w-full md:mb-0 mb-3">
-            <input type="text" class="px-6 py-2 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:outline-none rounded-full" placeholder="Search a Name">
+            <input type="text" class="px-6 py-2 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:outline-none rounded-full" placeholder="{{ trans('lang.search_name') }}">
         </div>
 
         <div class="flex items-center md:justify-end md:w-auto w-full space-x-3">
             <button type="button" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white">
-                Prev. Rounds
+                {{ trans('lang.prev_rounds') }}
             </button>
 
-            <a href="{{route('members.create')}}">
+            <a href="{{ route('members.create') }}">
                 <button type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
                     <i class="fa-solid fa-plus"></i>
                 </button>
@@ -29,11 +29,11 @@
         <table class="table-auto w-full text-[#1F5077]">
             <thead class="bg-[#BDE8FA]">
                 <tr>
-                    <th class="whitespace-nowrap">Name</th>
-                    <th class="whitespace-nowrap">Function</th>
-                    <th class="whitespace-nowrap">Phone Number</th>
-                    <th class="whitespace-nowrap">Email</th>
-                    <th class="whitespace-nowrap">Action</th>
+                    <th class="whitespace-nowrap">{{ trans('lang.name') }}</th>
+                    <th class="whitespace-nowrap">{{ trans('lang.function') }}</th>
+                    <th class="whitespace-nowrap">{{ trans('lang.phone_number') }}</th>
+                    <th class="whitespace-nowrap">{{ trans('lang.email') }}</th>
+                    <th class="whitespace-nowrap">{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +48,7 @@
                             <a href="{{ route('members.edit', $member->id) }}" class="text-red-500">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <form action="{{ route('members.destroy', $member->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                            <form action="{{ route('members.destroy', $member->id) }}" method="POST" onsubmit="return confirm('{{ trans('lang.are_you_sure') }}');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500">
@@ -56,7 +56,7 @@
                                 </button>
                             </form>
                             <button class="px-3 py-1 rounded-full toggle-approval {{ $member->status == 1 ? 'bg-green-500' : 'bg-red-500' }} text-white" data-id="{{ $member->id }}" data-status="{{ $member->status }}">
-                                {{ $member->status == 1 ? 'Approved' : 'Approve' }}
+                                {{ $member->status == 1 ? trans('lang.approved') : trans('lang.approve') }}
                             </button>
                         </div>
                     </td>
@@ -85,7 +85,7 @@
                 }).then(response => response.json()).then(data => {
                     if (data.success) {
                         this.setAttribute("data-status", newStatus);
-                        this.textContent = newStatus == 1 ? "Approved" : "Approve";
+                        this.textContent = newStatus == 1 ? "{{ trans('lang.approved') }}" : "{{ trans('lang.approve') }}";
                         this.classList.toggle("bg-green-500", newStatus == 1);
                         this.classList.toggle("bg-red-500", newStatus == 0);
                     }

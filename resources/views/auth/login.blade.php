@@ -19,8 +19,10 @@ use App\Helpers\CommonHelper;
             <div class="bg-white rounded-2xl">
                 <div class="flex md:flex-row flex-col md:justify-between">
                     <div class="md:w-[40%]">
-                        <div class="bg-[#F3F7FC] p-10 w-full {{ app()->getLocale() == 'ar' ? 'rounded-bl-[100px]' : 'rounded-br-[100px]' }} ">
-                            <h2 class="text-4xl font-bold bg-gradient-to-b from-[#1F5077] to-[#3A95DD] bg-clip-text text-transparent">Welcome</h2>
+                        <div class="bg-[#F3F7FC] p-10 w-full {{ app()->getLocale() == 'ar' ? 'rounded-bl-[100px]' : 'rounded-br-[100px]' }}">
+                            <h2 class="text-4xl font-bold bg-gradient-to-b from-[#1F5077] to-[#3A95DD] bg-clip-text text-transparent">
+                                {{ trans('lang.welcome') }}
+                            </h2>
                         </div>
                     </div>
                     <div class="md:px-10 pt-4 flex md:justify-start justify-center">
@@ -43,17 +45,23 @@ use App\Helpers\CommonHelper;
                 </div>
 
                 <div class="md:p-10 p-6">
-                    <div class="">
-                        <h5 class="md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">{{trans('lang.login_to_account')}}</h5>
-                        <p class="text-[#1F507799] md:text-start text-center mt-2">{{trans('lang.enter_username_password')}}</p>
+                    <div>
+                        <h5 class="md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
+                            {{ trans('lang.login_to_account') }}
+                        </h5>
+                        <p class="text-[#1F507799] md:text-start text-center mt-2">
+                            {{ trans('lang.enter_username_password') }}
+                        </p>
                     </div>
 
                     <form class="needs-validation" method="POST" action="{{ route('login') }}">
                         <div class="flex flex-col items-center mt-10">
                             <div class="bg-[#D6E7F5] rounded-[40px] md:w-[70%] w-[95%] md:p-10 p-6">
                                 @csrf
-                                <div class="">
-                                    <label for="yourUsername" class="text-[#1F507780]">{{trans('lang.username')}}</label>
+                                <div>
+                                    <label for="yourUsername" class="text-[#1F507780]">
+                                        {{ trans('lang.username') }}
+                                    </label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -63,7 +71,7 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="email"
                                             type="email" 
-                                            placeholder="{{trans('lang.username')}}" 
+                                            placeholder="{{ trans('lang.username') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pr-3 pl-12' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('email') is-invalid @enderror"
                                             name="email" 
                                             value="{{ old('email') }}" 
@@ -80,7 +88,9 @@ use App\Helpers\CommonHelper;
                                 </div>
 
                                 <div class="mt-3">
-                                    <label for="yourPassword" class="text-[#1F507780]">{{trans('lang.password')}}</label>
+                                    <label for="yourPassword" class="text-[#1F507780]">
+                                        {{ trans('lang.password') }}
+                                    </label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -90,7 +100,7 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="password" 
                                             type="password" 
-                                            placeholder="Password" 
+                                            placeholder="{{ trans('lang.password') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pr-10 pl-12' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password') is-invalid @enderror"
                                             name="password" 
                                             required 
@@ -99,8 +109,8 @@ use App\Helpers\CommonHelper;
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" class="togglePassword focus:outline-none">
-                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
-                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
                                         </div>
                                     </div>
@@ -112,36 +122,27 @@ use App\Helpers\CommonHelper;
                                 </div>
 
                                 <div class="mt-2">
-                                    <!-- <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                            <label class="form-check-label" for="remember">
-                                                {{trans('lang.remember_me') }}
-                                            </label>
-                                        </div>
-                                    </div> -->
-
                                     @if (Route::has('password.request'))
                                         <a class="text-[#19B2E7]" href="{{ route('password.request') }}">
                                             {{ trans('lang.forgot_password') }}
                                         </a>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
-                                
-                                <div class="flex items-center flex-col justify-center mt-4">
-                                    <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
-                                        {{ trans('lang.login') }}
-                                    </button>
+                            </div>
+                            
+                            <div class="flex items-center flex-col justify-center mt-4">
+                                <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
+                                    {{ trans('lang.login') }}
+                                </button>
 
-                                    <p class="text-[#1F507799] mt-3 md:text-start text-center md:px-0 px-4">
-                                        If you do not have an account,
-                                        <span> 
-                                            <a class="text-[#1F5077]" href="{{ route('register') }}">
-                                                Register Now
-                                            </a>
-                                        </span>
-                                    </p>
+                                <p class="text-[#1F507799] mt-3 md:text-start text-center md:px-0 px-4">
+                                    {{ trans('lang.dont_have_account') ?? "If you do not have an account," }}
+                                    <span> 
+                                        <a class="text-[#1F5077]" href="{{ route('register') }}">
+                                            {{ trans('lang.register') }}
+                                        </a>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </form>

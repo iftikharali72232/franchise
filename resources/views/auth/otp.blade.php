@@ -19,7 +19,7 @@ use App\Helpers\CommonHelper;
             <div class="bg-white rounded-2xl">
                 <div class="flex md:flex-row flex-col md:justify-between">
                     <div class="">
-
+                        <!-- Agar koi additional content ho to yahan add karein -->
                     </div>
                     <div class="md:px-10 pt-4 flex md:justify-start justify-center">
                         <label class="switch btn-color-mode-switch">
@@ -48,11 +48,11 @@ use App\Helpers\CommonHelper;
                                 <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="Arrow Left" />
                             </a>
                             <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
-                                OTP Verification
+                                {{ trans('lang.otp_verification') }}
                             </h5>
                         </div>
                         <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14 md:pe-20">
-                        To confirm your account & complete the registration process, an activation code has been sent to your email
+                            {{ trans('lang.otp_description') }}
                         </p>
                     </div>
 
@@ -96,7 +96,7 @@ use App\Helpers\CommonHelper;
                                     type="submit"
                                     class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full"
                                 >
-                                    Verify
+                                    {{ trans('lang.verify') }}
                                 </button>
                             </div>
                         </form>

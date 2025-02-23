@@ -19,7 +19,7 @@ use App\Helpers\CommonHelper;
             <div class="bg-white rounded-2xl">
                 <div class="flex md:flex-row flex-col md:justify-between">
                     <div class="">
-
+                        <!-- Additional content if needed -->
                     </div>
                     <div class="md:px-10 pt-4 flex md:justify-start justify-center">
                         <label class="switch btn-color-mode-switch">
@@ -48,11 +48,11 @@ use App\Helpers\CommonHelper;
                                 <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="Arrow Left" />
                             </a>
                             <h5 class="ps-4 md:text-3xl text-2xl md:text-start text-center font-bold text-[#1F5077]">
-                                Reset Password
+                                {{ trans('lang.reset_password') }}
                             </h5>
                         </div>
                         <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14">
-                            Enter your new password
+                            {{ trans('lang.enter_new_password') }}
                         </p>
                     </div>
 
@@ -70,7 +70,7 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="new-password" 
                                             type="password" 
-                                            placeholder="New Password" 
+                                            placeholder="{{ trans('lang.new_password') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                                             name="new-password" 
                                             required 
@@ -79,8 +79,8 @@ use App\Helpers\CommonHelper;
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" id="togglePassword" class="focus:outline-none">
-                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
-                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="confirm-new-password" 
                                             type="password" 
-                                            placeholder="Confirm New Password" 
+                                            placeholder="{{ trans('lang.confirm_new_password') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"
                                             name="confirm-new-password" 
                                             required 
@@ -105,8 +105,8 @@ use App\Helpers\CommonHelper;
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" id="togglePassword" class="focus:outline-none">
-                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
-                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@ use App\Helpers\CommonHelper;
                             
                             <div class="flex items-center flex-col justify-center mt-4">
                                 <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
-                                    Submit
+                                    {{ trans('lang.submit') }}
                                 </button>
                             </div>
                         </div>

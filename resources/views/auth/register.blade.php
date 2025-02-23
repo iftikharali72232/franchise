@@ -19,7 +19,7 @@ use App\Helpers\CommonHelper;
             <div class="bg-white rounded-2xl">
                 <div class="flex md:flex-row flex-col md:justify-between">
                     <div class="">
-
+                        <!-- Agar koi additional content ho to yahan add karein -->
                     </div>
                     <div class="md:px-10 pt-4 flex md:justify-start justify-center">
                         <label class="switch btn-color-mode-switch">
@@ -51,7 +51,9 @@ use App\Helpers\CommonHelper;
                                 {{ trans('lang.register') }}
                             </h5>
                         </div>
-                        <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14">{{trans('lang.enter_username_password')}}</p>
+                        <p class="text-[#1F507799] md:text-start text-center mt-2 md:ps-14">
+                            {{ trans('lang.enter_details') }}
+                        </p>
                     </div>
 
                     <form class="needs-validation" method="POST" action="{{ route('register') }}">
@@ -59,7 +61,7 @@ use App\Helpers\CommonHelper;
                             <div class="grid md:grid-cols-2 bg-[#D6E7F5] rounded-[40px] md:w-[90%] w-[95%] md:p-10 p-6 md:gap-6">
                                 @csrf
                                 <div class="">
-                                    <label for="yourUsername" class="text-[#1F507780]">{{ trans('lang.name') }}</label>
+                                    <label for="name" class="text-[#1F507780]">{{ trans('lang.name') }}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -86,7 +88,7 @@ use App\Helpers\CommonHelper;
                                 </div>
 
                                 <div class="">
-                                    <label for="yourUsername" class="text-[#1F507780]">{{ trans('lang.email_address') }}</label>
+                                    <label for="email" class="text-[#1F507780]">{{ trans('lang.email_address') }}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -96,13 +98,12 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="email"
                                             type="email" 
-                                            placeholder="{{trans('lang.username')}}" 
+                                            placeholder="{{ trans('lang.email_address') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pl-12 pr-3' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('email') is-invalid @enderror"
                                             name="email" 
                                             value="{{ old('email') }}" 
                                             required 
-                                            autocomplete="email" 
-                                            autofocus
+                                            autocomplete="email"
                                         />
                                     </div>
                                     @error('email')
@@ -113,7 +114,7 @@ use App\Helpers\CommonHelper;
                                 </div>
 
                                 <div class="">
-                                    <label for="yourPassword" class="text-[#1F507780]">{{trans('lang.password')}}</label>
+                                    <label for="password" class="text-[#1F507780]">{{ trans('lang.password') }}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -123,7 +124,7 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="password" 
                                             type="password" 
-                                            placeholder="Password" 
+                                            placeholder="{{ trans('lang.password') }}" 
                                             class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password') is-invalid @enderror"
                                             name="password" 
                                             required 
@@ -132,8 +133,8 @@ use App\Helpers\CommonHelper;
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
                                             <button type="button" id="togglePassword" class="focus:outline-none">
-                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
-                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
                                         </div>
                                     </div>
@@ -145,7 +146,7 @@ use App\Helpers\CommonHelper;
                                 </div>
 
                                 <div class="">
-                                    <label for="yourPassword" class="text-[#1F507780]">{{ trans('lang.confirm_password') }}</label>
+                                    <label for="password-confirm" class="text-[#1F507780]">{{ trans('lang.confirm_password') }}</label>
                                     <div class="relative w-full mt-2">
                                         <!-- Overlapping Icon -->
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'right-0 pr-4' : 'left-0 pl-4' }} flex items-center">
@@ -155,39 +156,38 @@ use App\Helpers\CommonHelper;
                                         <input 
                                             id="password-confirm" 
                                             type="password" 
-                                            placeholder="Password" 
-                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password-confirm') is-invalid @enderror"
+                                            placeholder="{{ trans('lang.confirm_password') }}" 
+                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pl-10 pr-12' : 'pl-12 pr-10' }} py-4 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900 @error('password_confirmation') is-invalid @enderror"
                                             name="password_confirmation" 
                                             required 
                                             autocomplete="new-password"
                                         />
                                         
                                         <div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left-0 pl-3' : 'right-0 pr-3' }} flex items-center">
-                                            <button type="button" id="togglePassword" class="focus:outline-none">
-                                            <img src="{{ asset('images/showeye.svg') }}" id="eyeOpen" class="h-5 w-5 opacity-[0.3]" />
-                                            <img src="{{ asset('images/hideye.svg') }}" id="eyeClosed" class="hidden h-5 w-5 opacity-[0.3]" />
+                                            <button type="button" id="togglePasswordConfirm" class="focus:outline-none">
+                                                <img src="{{ asset('images/showeye.svg') }}" id="eyeOpenConfirm" class="h-5 w-5 opacity-[0.3]" />
+                                                <img src="{{ asset('images/hideye.svg') }}" id="eyeClosedConfirm" class="hidden h-5 w-5 opacity-[0.3]" />
                                             </button>
                                         </div>
                                     </div>
-                                    @error('password-confirm')
+                                    @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-
                             </div>
                             
                             <div class="flex items-center flex-col justify-center mt-4">
                                 <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">
-                                    {{ trans('lang.login') }}
+                                    {{ trans('lang.register') }}
                                 </button>
 
                                 <p class="text-[#1F507799] mt-3 md:text-start text-center md:px-0 px-4">
-                                    Already have an account, 
+                                    {{ trans('lang.already_have_account') ?? "Already have an account," }}
                                     <span> 
                                         <a class="text-[#1F5077]" href="{{ route('login') }}">
-                                        Login
+                                            {{ trans('lang.login') }}
                                         </a>
                                     </span>
                                 </p>
