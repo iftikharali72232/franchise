@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmail;
 use App\Models\Branch;
 use App\Models\Report;
 use App\Models\ReportResult;
@@ -9,7 +10,9 @@ use App\Models\Request as ModelsRequest;
 use App\Models\Section;
 use App\Models\SectionQuestion;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -61,7 +64,7 @@ class ReportController extends Controller
     public function show($id)
     {
         // Retrieve the report by ID
-        $report = Report::where('status', 1)->where('id', $id)
+        $report = Report::with('user')->where('status', 1)->where('id', $id)
             ->with(['branch', 'request'])
             ->first();
 
@@ -117,7 +120,6 @@ class ReportController extends Controller
 
             $results = ReportResult::where('report_id', $id)->get();
             $report->results = $results;
-            $report->user = User::find($report->user_id);
 
             // Debugging output
             // echo "<pre>";
@@ -205,5 +207,26 @@ class ReportController extends Controller
 
         // Handle case when report not found
         return redirect()->back()->with('error', 'Report not found.');
+    }
+    public function generatePdf(Request $request)
+    {
+        $html = $request->html;
+        $pdf = PDF::loadHTML($html);
+        return $pdf->stream('report.pdf');
+    }
+
+    public function sendReport(Request $request)
+    {
+        $request->validate([
+            "id" => "required",
+            "email" => "required"
+        ]);
+
+        $email = $request->email;
+        $url = url("/report_view/" . base64_encode($request->id));
+
+        Mail::to($email)->send(new SendEmail($url));
+
+        return response()->json(['message' => 'Email sent successfully!']);
     }
 }

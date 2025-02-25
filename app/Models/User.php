@@ -276,4 +276,5 @@ class User extends Authenticatable
 
     //     return json_decode($result, true);
     // }
+
 }

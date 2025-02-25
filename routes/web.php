@@ -51,7 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/reports/all', [ReportController::class, 'index'])->name('reports_all');
     Route::get('/report_detail/{id}', [ReportController::class, 'show'])->name('report_detail');
 
-
+    Route::post('/generate-pdf', [ReportController::class, 'generatePdf'])->name('generate-pdf');
+    Route::post('/send-report', [ReportController::class, 'sendReport'])->name('send-report');
 });
 
 // Remove conflicting sections route
