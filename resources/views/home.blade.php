@@ -14,13 +14,18 @@
 
                 <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
-                        @foreach($sections as $section)
-                            <option value="{{ $section->id }}" {{ $section->defaul_section == 1 ? "selected" : "" }}>{{ $section->name }}</option>
-                        @endforeach
+                        @forelse($sections as $section)
+                            <option value="{{ $section->id }}" {{ $section->default_section == 1 ? "selected" : "" }}>
+                                {{ $section->name }}
+                            </option>
+                        @empty
+                            <option>{{ trans('lang.no_sections_found') }}</option>
+                        @endforelse
                     </select>
 
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
                         <option value="">{{ trans('lang.select_region') }}</option>
+                        <!-- Options remain same -->
                         <option value="Riyadh">Riyadh ({{ trans('lang.riyadh') }})</option>
                         <option value="Makkah">Makkah ({{ trans('lang.makkah') }})</option>
                         <option value="Madinah" selected>Madinah ({{ trans('lang.madinah') }})</option>
@@ -51,35 +56,40 @@
 
             <div class="mt-4">
                 <ul class="list-none">
-                    <?php
-                    use App\Models\User;
-                    foreach($sidebranches as $sBranch) {
-                        $location = explode(',', $sBranch->location);
-                        $lat = $location[0];
-                        $long = $location[1];
-                        $city = getCityFromCoordinates($lat, $long);
-                    ?>
-                    <li>
-                        <div class="flex flex-row">
-                            <div class="items-center flex flex-col justify-around">
-                                <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                                    <img src="{{ asset('images/map.png') }}" alt="branch">
+                    @forelse($sidebranches as $sBranch)
+                        @php
+                            // Validate location string
+                            $location = explode(',', $sBranch->location ?? '');
+                            $lat = count($location) >= 2 ? trim($location[0]) : null;
+                            $long = count($location) >= 2 ? trim($location[1]) : null;
+                            $city = ($lat && $long) ? getCityFromCoordinates($lat, $long) : trans('lang.city_not_available');
+                        @endphp
+                        <li>
+                            <div class="flex flex-row">
+                                <div class="items-center flex flex-col justify-around">
+                                    <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
+                                        <img src="{{ asset('images/map.png') }}" alt="branch">
+                                    </div>
+                                    <div class="border-l-[6px] h-full border-[#246DA5]"></div>
                                 </div>
-                                <div class="border-l-[6px] h-full border-[#246DA5]"></div>
+                                
+                                <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
+                                    <h3 class="text-[#246DA5] text-[18px] font-semibold">
+                                        {{ $sBranch->branch_name ?? trans('lang.na') }}
+                                    </h3>
+                                    <p class="text-gray-400 text-[16px]">{{ $city }}</p>
+                                </div>
                             </div>
-                            
-                            <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }} pb-10">
-                                <h3 class="text-[#246DA5] text-[18px] font-semibold"><?= $sBranch->branch_name ?? '' ?></h3>
-                                <p class="text-gray-400 text-[16px]"><?= $city ?></p>
-                            </div>
-                        </div>
-                    </li>
-                    <?php } ?>
+                        </li>
+                    @empty
+                        <li>{{ trans('lang.no_branches_found') }}</li>
+                    @endforelse
                 </ul>
             </div>
         </div>
     </div>
 
+    <!-- Similar improvements applied to Reports and Members sections -->
     <div class="flex lg:flex-row flex-col lg:space-x-4 lg:space-y-0 space-y-4 {{ app()->getLocale() == 'ar' ? 'lg:space-x-reverse' : '' }}">
         <div class="relative flex flex-col lg:w-[80%] w-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div class="flex md:flex-row flex-col justify-between px-6 pt-4">
@@ -98,6 +108,7 @@
 
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
                         <option value="">{{ trans('lang.select_region') }}</option>
+                        <!-- Options as before -->
                         <option value="Riyadh">Riyadh ({{ trans('lang.riyadh') }})</option>
                         <option value="Makkah">Makkah ({{ trans('lang.makkah') }})</option>
                         <option value="Madinah" selected>Madinah ({{ trans('lang.madinah') }})</option>
@@ -117,39 +128,42 @@
 
             <div class="pt-6 px-2 pb-0">
                 <ul id="lightSlider">
-                    <?php foreach($branches as $branch){ 
-                        $user = User::find($branch->created_by);
-                    ?>
-                    <li>
-                        <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                            <img src="{{ asset('images/report.png') }}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
-                            <div class="px-4 relative z-50">
-                                <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                                    <div class="bg-white p-2 rounded-lg">
-                                        <img src="{{ asset(!empty($branch->header_image) ? 'uploads/'.$branch->header_image : 'images/shop.png') }}" style="height:30px; width:40px;" alt="img" class="filter invert"> 
+                    @forelse($branches as $branch)
+                        @php
+                            $user = \App\Models\User::find($branch->created_by);
+                        @endphp
+                        <li>
+                            <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
+                                <img src="{{ asset('images/report.png') }}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
+                                <div class="px-4 relative z-50">
+                                    <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                                        <div class="bg-white p-2 rounded-lg">
+                                            <img src="{{ asset(!empty($branch->header_image) ? 'uploads/'.$branch->header_image : 'images/shop.png') }}" style="height:30px; width:40px;" alt="img" class="filter invert"> 
+                                        </div>
+                                        <h4 class="text-white font-semibold">{{ $branch->branch_name ?? trans('lang.na') }}</h4>
                                     </div>
-                                    <h4 class="text-white font-semibold"><?= $branch->branch_name ?? '' ?></h4>
+                                    
+                                    <div class="my-2">
+                                        @php $userName = $user ? $user->name : trans('lang.na'); @endphp
+                                        <h4 class="text-white text-[20px] font-[500]">{{ $userName }}</h4>
+                                        <p class="text-white/50 text-[16px] font-[400]">{{ ($user && $user->user_type == 0) ? trans('lang.admin') : trans('lang.auditor') }}</p>
+                                        <p class="text-white/50 text-[12px] font-[400]">{{ $branch->created_at }}</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="my-2">
-                                    <?php $userName = $user ? $user->name : trans('lang.na'); ?>
-                                    <h4 class="text-white text-[20px] font-[500]"><?= $userName ?></h4>
-                                    <p class="text-white/50 text-[16px] font-[400]"><?= ($user && $user->user_type == 0 ? trans('lang.admin') : trans('lang.auditor')) ?></p>
-                                    <p class="text-white/50 text-[12px] font-[400]"><?= $branch->created_at ?></p>
+                                <div class="mt-2 relative z-50">
+                                    <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
+                                        <span class="text-[#2E76B0] font-[600] text-sm">{{ trans('lang.view_report') }}</span>
+                                        <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center">
+                                            <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
-                            
-                            <div class="mt-2 relative z-50">
-                                <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
-                                    <span class="text-[#2E76B0] font-[600] text-sm">{{ trans('lang.view_report') }}</span>
-                                    <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center">
-                                        <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    <?php  } ?>
+                        </li>
+                    @empty
+                        <li>{{ trans('lang.no_reports_found') }}</li>
+                    @endforelse
                 </ul>
             </div>
         </div>
@@ -162,22 +176,24 @@
 
             <div class="mt-4">
                 <ul class="list-none">
-                    <?php foreach($members as $member) { ?>
-                    <li>
-                        <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
-                            <div class="items-center flex flex-col justify-around">
-                                <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
-                                    <img src="{{ asset(!empty($member->image) ? 'images/'.$member->image : 'images/user.png') }}" alt="branch" class="">
+                    @forelse($members as $member)
+                        <li>
+                            <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
+                                <div class="items-center flex flex-col justify-around">
+                                    <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
+                                        <img src="{{ asset(!empty($member->image) ? 'images/'.$member->image : 'images/user.png') }}" alt="branch">
+                                    </div>
+                                </div>
+                                
+                                <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
+                                    <h3 class="text-[#246DA5] text-[18px] font-semibold">{{ $member->name ?? trans('lang.na') }}</h3>
+                                    <p class="text-gray-400 text-[16px]">{{ $member->function }}</p>
                                 </div>
                             </div>
-                            
-                            <div class="{{ app()->getLocale() == 'ar' ? 'mr-2' : 'ml-2' }}">
-                                <h3 class="text-[#246DA5] text-[18px] font-semibold"><?= $member->name ?? trans('lang.na') ?></h3>
-                                <p class="text-gray-400 text-[16px]"><?= $member->function ?></p>
-                            </div>
-                        </div>
-                    </li>
-                    <?php } ?>
+                        </li>
+                    @empty
+                        <li>{{ trans('lang.no_members_found') }}</li>
+                    @endforelse
                 </ul>
             </div>
         </div>
@@ -187,77 +203,54 @@
 <script>
 const chartConfig = {
     series : <?= json_encode($series) ?>,
-  chart: {
-    type: "bar",
-    height: 320,
-    stacked: false,
-    toolbar: {
-      show: false,
+    chart: {
+        type: "bar",
+        height: 320,
+        stacked: false,
+        toolbar: { show: false },
     },
-  },
-  colors: ["#1D3F5D", "#93C3E6", "red", "green"],
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      columnWidth: "60%",
-      borderRadius: 10,
-      borderRadiusApplication: 'end',
+    colors: ["#1D3F5D", "#93C3E6", "red", "green"],
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: "60%",
+            borderRadius: 10,
+            borderRadiusApplication: 'end',
+        },
     },
-  },
-  dataLabels: {
-    enabled: true,
-    style: {
-      fontSize: "8px",
-      fontWeight: "bold",
+    dataLabels: {
+        enabled: true,
+        style: { fontSize: "8px", fontWeight: "bold" },
+        formatter: function (val) { return val + "%"; },
     },
-    formatter: function (val) {
-        return val + "%";
-    },    
-  },
-  xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    labels: {
-      style: {
-        fontSize: "12px",
-        fontFamily: "Arial, sans-serif",
-      },
+    xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: { style: { fontSize: "12px", fontFamily: "Arial, sans-serif" } },
     },
-  },
-  yaxis: {
-    labels: {
-      formatter: function (value, index) {
-        const labels = ["0", "20", "40", "60", "80", "100"];
-        return labels[index] || "";
-      },
-      style: {
-        colors: "#374151",
-        fontSize: "12px",
-        textAlign: "left",
-        fontFamily: "Arial, sans-serif",
-      },
+    yaxis: {
+        labels: {
+            formatter: function (value, index) {
+                const labels = ["0", "20", "40", "60", "80", "100"];
+                return labels[index] || "";
+            },
+            style: { colors: "#374151", fontSize: "12px", textAlign: "left", fontFamily: "Arial, sans-serif" },
+        },
+        max: 100,
     },
-    max: 100,
-  },
-  legend: {
-    position: "bottom",
-    horizontalAlign: "center",
-    markers: {
-      radius: 12,
+    legend: {
+        position: "bottom",
+        horizontalAlign: "center",
+        markers: { radius: 12 },
+        labels: { colors: "#374151" },
     },
-    labels: {
-      colors: "#374151",
+    grid: {
+        borderColor: "#e5e7eb",
+        strokeDashArray: 4,
     },
-  },
-  grid: {
-    borderColor: "#e5e7eb",
-    strokeDashArray: 4,
-  },
-  tooltip: {
-    theme: "light",
-    y: {
-      formatter: (val) => `${val}%`,
+    tooltip: {
+        theme: "light",
+        y: { formatter: (val) => `${val}%` },
     },
-  },
 };
 
 const chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig);
@@ -270,42 +263,25 @@ $(document).ready(function() {
         slideMove:2,
         easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
         speed:600,
-        responsive : [
-            {
-                breakpoint:800,
-                settings: {
-                    item:2,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:480,
-                settings: {
-                    item:1,
-                    slideMove:1
-                  }
-            }
+        responsive: [
+            { breakpoint:800, settings: { item:2, slideMove:1, slideMargin:6 } },
+            { breakpoint:480, settings: { item:1, slideMove:1 } }
         ]
     });  
 });
-</script>
 
-<script>    
-    function reportsGraph(id) {
-      $(`#${id}`).removeClass("hidden");
-      $.ajax({
+function reportsGraph(id) {
+    $(`#${id}`).removeClass("hidden");
+    $.ajax({
         url: '{{ route('requests.create') }}',
         type: 'GET',
         data: { action: "create_request_modal" },
-        success: function(response) {
-            $(".create_request").html(response);
-        },
+        success: function(response) { $(".create_request").html(response); },
         error: function(xhr, status, error) {
             console.error('Error:', error);
             alert('There was an error: ' + error);
         }
-      });
-    }
+    });
+}
 </script>
 @endsection
