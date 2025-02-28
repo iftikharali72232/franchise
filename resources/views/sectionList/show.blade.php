@@ -3,35 +3,65 @@
 @section('content')
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="p-4 border-b border-gray-200">
-        <h2 class="text-2xl font-semibold mb-4">{{ $section->name }}</h2>
-        <p class="text-gray-700">{{ trans('lang.visible_to') }}: <strong>{{ $section->shows_to }}</strong></p>
+        <h2 class="text-xl font-semibold">{{ trans('lang.view_section') }}</h2>
     </div>
-
-    @if($section->image)
-    <div class="mt-4">
-        <img src="{{ asset('storage/' . $section->image) }}" alt="{{ trans('lang.section_image') }}" class="w-48 h-48 rounded-md shadow-md">
-    </div>
-    @endif
 
     <div class="p-4">
-        <h3 class="text-lg font-semibold">{{ trans('lang.questions') }}</h3>
-        <ul class="list-disc ml-6">
-            @foreach($section->questions as $question)
-            <li class="mt-2">
-                <strong class="py-2">{{ $question->question }}</strong>
-                <ul class="list-decimal ml-6">
-                    <li class="py-1">{{ $question->answer1 }}</li>
-                    <li class="py-1">{{ $question->answer2 }}</li>
-                    <li class="py-1">{{ $question->answer3 }}</li>
-                </ul>
-            </li>
-            @endforeach
-        </ul>
+        <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+            <div class="md:col-span-3">
+                <h4 class="text-lg font-semibold">{{ trans('lang.section_information') }}</h4>
+            </div>
 
-        <div class="mt-6">
-            <a href="{{ route('sectionList.index') }}" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full">{{ trans('lang.back_to_list') }}</a>
+            <div>
+                <label class="">{{ trans('lang.section_name') }}*</label>
+                <input type="text" value="{{ $section->name }}" readonly class="w-full px-6 py-3 border border-gray-300 bg-gray-100 text-gray-700 rounded-full">
+            </div>
+
+            <!-- Image Display -->
+            <div class="mb-4">
+                <label class="">{{ trans('lang.section_image') }}</label>
+                @if($section->image_path)
+                <div class="relative w-24 h-24">
+                    <img src="{{ asset($section->image_path) }}" alt="Section Image" class="w-24 h-24 mb-2 rounded">
+                </div>
+                @else
+                <p class="text-gray-500">{{ trans('lang.no_image_available') }}</p>
+                @endif
+            </div>
+        </div>
+
+        <!-- Questions Section -->
+        <div class="mt-4">
+            <h4 class="text-lg font-semibold mb-2">{{ trans('lang.questions') }}</h4>
+
+            <div id="questions-container">
+                @foreach($section->questions as $index => $question)
+                <div class="mb-4 pb-4 border-b border-gray-200">
+                    <div class="bg-gray-100 p-3 flex items-center">
+                        <label class="w-auto me-3 whitespace-nowrap">{{ trans('lang.question') }} {{ $index + 1 }}</label>
+                        <input type="text" value="{{ $question->question }}" readonly class="bg-transparent w-full focus:outline-none">
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4 p-4">
+                        <div>
+                            <label class="w-auto me-3">{{ trans('lang.answer1') }}</label>
+                            <input type="text" value="{{ $question->answer1 }}" readonly class="bg-transparent focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="w-auto me-3">{{ trans('lang.answer2') }}</label>
+                            <input type="text" value="{{ $question->answer2 }}" readonly class="bg-transparent focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="w-auto me-3">{{ trans('lang.answer3') }}</label>
+                            <input type="text" value="{{ $question->answer3 }}" readonly class="bg-transparent focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
-
 </div>
 @endsection

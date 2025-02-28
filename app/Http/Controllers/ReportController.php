@@ -20,7 +20,7 @@ class ReportController extends Controller
     public function index()
     {
         // Retrieve all reports with their related branch and request to reduce queries
-        $reports = Report::where('status', 1)
+        $reports = Report::with('user')->where('status', 1)
             ->with(['branch', 'request'])
             ->get();
         $res = [];

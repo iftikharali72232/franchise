@@ -91,7 +91,7 @@ class HomeController extends Controller
                         foreach ($reportResults as $result) {
                             $totalQuestions++;
                             switch ($result->answer) {
-                                case 'Poor':
+                                case 'Unacceptable':
                                     $totalScore += 0;
                                     break;
                                 case 'Average':

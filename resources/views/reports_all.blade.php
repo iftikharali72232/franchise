@@ -53,12 +53,22 @@
         <!-- card 1 -->
          <?php foreach($res as $report){ ?>
                 <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
+                <a href="{{ route('report_detail', $report->id) }}">
                     <div class="flex mb-3">
                         <div class="w-1/2">
                             <p class="text-sm font-semibold text-[#1D3F5D]">Branch:</p>
                         </div>
                         <div class="w-1/2">
-                            <a href="{{ route('report_detail', $report->id) }}"><p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?? "" ?></p></a>
+                            <p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?? "" ?></p>
+                        </div>
+                    </div>
+
+                    <div class="flex mb-3">
+                        <div class="w-1/2">
+                            <p class="text-sm font-semibold text-[#1D3F5D]">Auditor Name:</p>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm text-[#3A95DD]"><?= $report->user->name ?? "" ?></p>
                         </div>
                     </div>
 
@@ -103,6 +113,7 @@
                             <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?? "" ?></p>
                         </div>
                     </div>
+                </a>
                 </div>
             <?php } ?>
     </div>

@@ -5,6 +5,7 @@
 <div class="md:p-10 p-4">
     <div class="grid md:grid-cols-2 grid-cols-1 gap-6">
         <div class="bg-[#D6E7F5] shadow-sm rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
+        <a type="button" href="{{route('reports_all')}}">
             <img src="{{asset('images/report-blue.png')}}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-6' : 'right-6' }} top-6 z-10 lg:h-[120px] h-[80px]">
 
             <div class="px-4 lg:py-16 py-10 relative z-50">              
@@ -19,6 +20,7 @@
                     </div>
                 </a>
             </div>
+            </a>
         </div>
 
         <div class="bg-[#D6E7F5] shadow-sm rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">

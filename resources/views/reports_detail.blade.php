@@ -133,7 +133,7 @@
                                             </div>
 
                                             <!-- Good Rating -->
-                                            <div @if($question->answer != "Good") hidden @endif>
+                                            <div @if($question->answer != "Average") hidden @endif>
                                                 <input class="peer sr-only" value="good" name="rating" id="{{ $question->id }}good" type="radio" readonly/>
                                                 <label for="good" class="flex shadow-sm px-4 py-1.5 cursor-pointer flex-col items-center justify-center rounded-lg bg-white transition-transform duration-150 peer-checked:bg-gray-600 peer-checked:text-white text-sm uppercase text-gray-500">
                                                     Good

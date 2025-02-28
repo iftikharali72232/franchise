@@ -24,7 +24,7 @@ class RequestController extends Controller
         <form action="#" method="POST">
             <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
                 <div class="">
-                    <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                         <option value="" selected disabled>Select Branch</option>
                         <?php foreach($branches as $branch) { ?>
                             <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
@@ -33,7 +33,7 @@ class RequestController extends Controller
                 </div>
 
                 <div class="">
-                    <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                         <option value="" selected disabled>Select Auditor</option>
                         <?php foreach($users as $user) { ?>
                             <option value="<?= $user->id ?>" data-email="<?= $user->email ?>"><?= $user->name ?></option>
@@ -42,19 +42,19 @@ class RequestController extends Controller
                 </div>
 
                 <div class="">
-                    <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Email">
+                    <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Email" required>
                 </div>
 
                 <div class="">
-                    <input type="date" name="date" id="request_date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" >
+                    <input type="date" name="date" id="request_date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                 </div>
 
                 <div class="">
-                    <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>">
+                    <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>" required>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Code" readonly>
+                    <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Code" readonly required>
                     <button id="generate-code" type="button" class="px-6 py-3 bg-[#1F5077] text-white rounded-full hover:bg-[#1F5077]/90 focus:outline-none">+</button>
                 </div>
 
