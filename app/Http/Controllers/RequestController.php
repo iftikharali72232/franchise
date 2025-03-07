@@ -19,82 +19,160 @@ class RequestController extends Controller
         $branches = Branch::all();
         $users = User::where('user_type', 1)->get();
         $sections = Section::all();
+        if(app()->isLocale('ar')){
         ?>
+            <form action="#" method="POST">
+                <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+                    <div class="">
+                        <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                            <option value="" selected disabled>اختر الفرع</option>
+                            <?php foreach($branches as $branch) { ?>
+                                <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
 
-        <form action="#" method="POST">
-            <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
-                <div class="">
-                    <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
-                        <option value="" selected disabled>Select Branch</option>
-                        <?php foreach($branches as $branch) { ?>
-                            <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
-                        <?php } ?>
-                    </select>
+                    <div class="">
+                        <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                            <option value="" selected disabled>اختر المدقق</option>
+                            <?php foreach($users as $user) { ?>
+                                <option value="<?= $user->id ?>" data-email="<?= $user->email ?>"><?= $user->name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="البريد الإلكتروني" required>
+                    </div>
+
+                    <div class="">
+                        <input type="date" name="date" id="request_date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                    </div>
+
+                    <div class="">
+                        <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>" required>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="رمز" readonly required>
+                        <button id="generate-code" type="button" class="px-6 py-3 bg-[#1F5077] text-white rounded-full hover:bg-[#1F5077]/90 focus:outline-none">+</button>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <label for="section_id" class="block text-sm font-medium text-[#1F5077]">اختر القسم</label>
+                        <select name="section_id[]" id="section_id" multiple class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-lg select2">
+                            <option value="" disabled>اختر القسم</option>
+                            <?php foreach ($sections as $section) { ?>
+                                <option value="<?= $section->id ?>"><?= $section->name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <!-- Display selected sections -->
+                    <div id="selected-sections" class="md:col-span-3 mt-4">
+                        <label class="block text-sm font-medium text-[#1F5077]">الأقسام المحددة</label>
+                        <div id="section-labels" class="mt-2"></div>
+                    </div>
+
+                    <!-- Hidden input for selected section IDs -->
+                    <input type="hidden" name="section_ids" id="section_ids">
+
+                    <!-- Display questions for selected sections -->
+                    <div id="questions-container" class="md:col-span-3 mt-4">
+                        <label class="block text-sm font-medium text-[#1F5077]">الأسئلة</label>
+                        <div id="questions-list" class="mt-2"></div>
+                    </div>
+
+                    <div class="md:col-span-3 flex justify-end items-center">
+                        <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full submitbtn">
+                            إرسال
+                        </button>
+                    </div>
                 </div>
-
-                <div class="">
-                    <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
-                        <option value="" selected disabled>Select Auditor</option>
-                        <?php foreach($users as $user) { ?>
-                            <option value="<?= $user->id ?>" data-email="<?= $user->email ?>"><?= $user->name ?></option>
-                        <?php } ?>
-                    </select>
+                <!-- Loader (Hidden by default) -->
+                <div class="loader hidden mt-2">
+                    <img src="https://i.gifer.com/4V0b.gif" alt="تحميل..." width="40">
+                    جاري المعالجة...
                 </div>
+            </form>
+        <?php }else { ?>
+            <form action="#" method="POST">
+                <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+                    <div class="">
+                        <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                            <option value="" selected disabled>Select Branch</option>
+                            <?php foreach($branches as $branch) { ?>
+                                <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
 
-                <div class="">
-                    <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Email" required>
+                    <div class="">
+                        <select name="auditor_id" id="auditor_id" onchange="getEmail()" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                            <option value="" selected disabled>Select Auditor</option>
+                            <?php foreach($users as $user) { ?>
+                                <option value="<?= $user->id ?>" data-email="<?= $user->email ?>"><?= $user->name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <input type="email" id="user_email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Email" required>
+                    </div>
+
+                    <div class="">
+                        <input type="date" name="date" id="request_date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                    </div>
+
+                    <div class="">
+                        <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>" required>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Code" readonly required>
+                        <button id="generate-code" type="button" class="px-6 py-3 bg-[#1F5077] text-white rounded-full hover:bg-[#1F5077]/90 focus:outline-none">+</button>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <label for="section_id" class="block text-sm font-medium text-[#1F5077]">Select Section</label>
+                        <select name="section_id[]" id="section_id" multiple class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-lg select2">
+                            <option value="" disabled>Select Section</option>
+                            <?php foreach ($sections as $section) { ?>
+                                <option value="<?= $section->id ?>"><?= $section->name ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <!-- Display selected sections -->
+                    <div id="selected-sections" class="md:col-span-3 mt-4">
+                        <label class="block text-sm font-medium text-[#1F5077]">Selected Sections</label>
+                        <div id="section-labels" class="mt-2"></div>
+                    </div>
+
+                    <!-- Hidden input for selected section IDs -->
+                    <input type="hidden" name="section_ids" id="section_ids">
+
+                    <!-- Display questions for selected sections -->
+                    <div id="questions-container" class="md:col-span-3 mt-4">
+                        <label class="block text-sm font-medium text-[#1F5077]">Questions</label>
+                        <div id="questions-list" class="mt-2"></div>
+                    </div>
+
+                    <div class="md:col-span-3 flex justify-end items-center">
+                        <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full submitbtn">
+                            Send
+                        </button>
+                    </div>
                 </div>
-
-                <div class="">
-                    <input type="date" name="date" id="request_date" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                <!-- Loader (Hidden by default) -->
+                <div class="loader hidden mt-2">
+                    <img src="https://i.gifer.com/4V0b.gif" alt="Loading..." width="40">
+                    Processing...
                 </div>
+            </form>
 
-                <div class="">
-                    <input type="time" name="time" id="time" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" value="<?= date('H:i') ?>" required>
-                </div>
+        <?php } ?>
 
-                <div class="flex items-center gap-2">
-                    <input type="text" name="code" id="code" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="Code" readonly required>
-                    <button id="generate-code" type="button" class="px-6 py-3 bg-[#1F5077] text-white rounded-full hover:bg-[#1F5077]/90 focus:outline-none">+</button>
-                </div>
-
-                <div class="md:col-span-3">
-                    <label for="section_id" class="block text-sm font-medium text-[#1F5077]">Select Section</label>
-                    <select name="section_id[]" id="section_id" multiple class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-lg select2">
-                        <option value="" disabled>Select Section</option>
-                        <?php foreach ($sections as $section) { ?>
-                            <option value="<?= $section->id ?>"><?= $section->name ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-
-                <!-- Display selected sections -->
-                <div id="selected-sections" class="md:col-span-3 mt-4">
-                    <label class="block text-sm font-medium text-[#1F5077]">Selected Sections</label>
-                    <div id="section-labels" class="mt-2"></div>
-                </div>
-
-                <!-- Hidden input for selected section IDs -->
-                <input type="hidden" name="section_ids" id="section_ids">
-
-                <!-- Display questions for selected sections -->
-                <div id="questions-container" class="md:col-span-3 mt-4">
-                    <label class="block text-sm font-medium text-[#1F5077]">Questions</label>
-                    <div id="questions-list" class="mt-2"></div>
-                </div>
-
-                <div class="md:col-span-3 flex justify-end items-center">
-                    <button type="submit" class="px-[30px] py-[10px] bg-[#1F5077] text-white font-semibold rounded-full submitbtn">
-                        Send
-                    </button>
-                </div>
-            </div>
-             <!-- Loader (Hidden by default) -->
-            <div class="loader hidden mt-2">
-                <img src="https://i.gifer.com/4V0b.gif" alt="Loading..." width="40">
-                Processing...
-            </div>
-        </form>
         <script>
             $(document).ready(function () {
                 // Initialize Select2

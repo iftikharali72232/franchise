@@ -168,6 +168,7 @@ return [
     'no_reports_found' => 'No Report Found',
     'no_branches_found' => 'No Branch Found',
     'auditor' => 'Auditor',
+    'welcome' => 'Welcome',
     
     "city"=> "City",
     "branch"=> "Branch",
@@ -206,6 +207,18 @@ return [
     'attachment' => 'Attachment',
     'no_attachments' => 'No attachments found.',
     'no_questions_found' => 'No questions found for this section.',
-    'no_sections_found' => 'No sections found for this report.'
+    'no_sections_found' => 'No sections found for this report.',
+
+    'city_not_available' => 'City not available',
+    'select_branch' => 'Select Branch',
+    'select_auditor' => 'Select Auditor',
+    'email' => 'Email',
+    'code' => 'Code',
+    'select_section' => 'Select Section',
+    'selected_sections' => 'Selected Sections',
+    'questions' => 'Questions',
+    'send' => 'Send',
+    'loading' => 'Loading...',
+    'processing' => 'Processing...',
 
 ];
