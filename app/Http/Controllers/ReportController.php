@@ -67,7 +67,7 @@ class ReportController extends Controller
         $report = Report::with('user')->where('status', 1)->where('id', $id)
             ->with(['branch', 'request'])
             ->first();
-
+        // print_r($report); exit;
         if ($report) {
             // Check if branch and location exist
             if ($report->branch && $report->branch->location) {

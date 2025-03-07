@@ -130,37 +130,45 @@
                 <ul id="lightSlider">
                     @forelse($branches as $branch)
                         @php
-                            $user = \App\Models\User::find($branch->created_by);
-                        @endphp
-                        <li>
-                            <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
-                                <img src="{{ asset('images/report.png') }}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
-                                <div class="px-4 relative z-50">
-                                    <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                                        <div class="bg-white p-2 rounded-lg">
-                                            <img src="{{ asset(!empty($branch->header_image) ? 'uploads/'.$branch->header_image : 'images/shop.png') }}" style="height:30px; width:40px;" alt="img" class="filter invert"> 
+                            $report = \App\Models\Report::where('branch_id', $branch->id)->where('status', 1)->orderBy('id', 'desc')->first();
+                            if($report)
+                            {
+                                
+                            $user = \App\Models\User::find($report->user_id);
+
+                            @endphp
+                            <li>
+                                <a href="{{ route('report_detail', $report->id) }}">
+                                <div class="bg-gradient-to-b from-[#0B3146] to-[#3A95DD] rounded-3xl px-2 pt-4 pb-2 relative overflow-hidden">
+                                    <img src="{{ asset('images/report.png') }}" alt="img" class="absolute {{ app()->getLocale() == 'ar' ? 'left-[-35px]' : 'right-[-25px]' }} top-[-18px] z-10 h-[140px]">
+                                    <div class="px-4 relative z-50">
+                                        <div class="flex items-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                                            <div class="bg-white p-2 rounded-lg">
+                                                <img src="{{ asset(!empty($branch->header_image) ? 'uploads/'.$branch->header_image : 'images/shop.png') }}" style="height:30px; width:40px;" alt="img" class="filter invert"> 
+                                            </div>
+                                            <h4 class="text-white font-semibold">{{ $branch->branch_name ?? trans('lang.na') }}</h4>
                                         </div>
-                                        <h4 class="text-white font-semibold">{{ $branch->branch_name ?? trans('lang.na') }}</h4>
+                                        
+                                        <div class="my-2">
+                                            @php $userName = $user ? $user->name : trans('lang.na'); @endphp
+                                            <h4 class="text-white text-[20px] font-[500]">{{ $userName }}</h4>
+                                            <p class="text-white/50 text-[16px] font-[400]">{{ ($user && $user->user_type == 0) ? trans('lang.admin') : trans('lang.auditor') }}</p>
+                                            <p class="text-white/50 text-[12px] font-[400]">{{ $branch->created_at }}</p>
+                                        </div>
                                     </div>
                                     
-                                    <div class="my-2">
-                                        @php $userName = $user ? $user->name : trans('lang.na'); @endphp
-                                        <h4 class="text-white text-[20px] font-[500]">{{ $userName }}</h4>
-                                        <p class="text-white/50 text-[16px] font-[400]">{{ ($user && $user->user_type == 0) ? trans('lang.admin') : trans('lang.auditor') }}</p>
-                                        <p class="text-white/50 text-[12px] font-[400]">{{ $branch->created_at }}</p>
+                                    <div class="mt-2 relative z-50">
+                                        <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
+                                            <span class="text-[#2E76B0] font-[600] text-sm">{{ trans('lang.view_report') }}</span>
+                                            <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center">
+                                                <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
+                                            </div>
+                                        </button>
                                     </div>
                                 </div>
-                                
-                                <div class="mt-2 relative z-50">
-                                    <button class="bg-white flex items-center justify-between w-full ps-4 pe-2 py-1 rounded-full group transition">
-                                        <span class="text-[#2E76B0] font-[600] text-sm">{{ trans('lang.view_report') }}</span>
-                                        <div class="bg-[#2E76B0] rounded-full text-white p-2 w-[30px] h-[30px] text-[14px] flex items-cener justify-center">
-                                            <i class="fa-solid fa-arrow-right-long rotate-[-45deg] group-hover:rotate-[0deg] origin-center transition duration-300"></i>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
+                                </a>
+                            </li>
+                            @php  } @endphp
                     @empty
                         <li>{{ trans('lang.no_reports_found') }}</li>
                     @endforelse

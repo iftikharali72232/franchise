@@ -55,7 +55,7 @@ class HomeController extends Controller
          $sectionID = $defaultSection ? $defaultSection->id : null;
          
          $branches = Branch::where("region", "Madinah")->get();
-         $members = User::where('user_type', 1)->take(5)->get();
+         $members = User::where('user_type', 1)->get();
          $sidebranches = Branch::where('status', 1)->take(5)->get();
      
          // Initialize an array to store the series data
