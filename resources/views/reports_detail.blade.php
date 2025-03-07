@@ -152,6 +152,19 @@
                                     </div>
                                 </div>
 
+                                <div class="flex lg:flex-row flex-col lg:items-center mb-4 md:ml-16">
+                                    <div class="lg:w-[150px]">
+                                        <p class="font-semibold text-gray-600">{{ trans('lang.description') }}:</p>
+                                    </div>
+
+                                    <div class="flex md:flex-row flex-col w-full gap-2 py-2">
+                                        <!-- Excellent Rating -->
+                                        <div>
+                                            {{ $question->description}}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Attachments Section -->
                                 @php
                                     $attachments = json_decode($question->attachments, true) ?? [];
@@ -163,7 +176,7 @@
                                     <div class="grid md:grid-cols-6 grid-cols-3 w-full md:gap-4 gap-2">
                                         @if(count($attachments) > 0)
                                             @foreach($attachments as $imgKey => $img)
-                                                <img class="h-20 w-20 rounded-md object-cover" src="{{ url('/' . $img) }}" alt="{{ trans('lang.attachment') }} {{ $imgKey + 1 }}" />
+                                            <a href="{{ url('/' . $img) }}" target="_blank"><img class="h-20 w-20 rounded-md object-cover" src="{{ url('/' . $img) }}" alt="{{ trans('lang.attachment') }} {{ $imgKey + 1 }}" /></a>
                                             @endforeach
                                         @else
                                             <p class="text-sm text-gray-500">{{ trans('lang.no_attachments') }}</p>

@@ -11,6 +11,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LetterController;
 
 Route::get('lang/{locale}', [LangController::class, 'setLocale'])->name('setLocale');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
@@ -53,6 +54,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/generate-pdf', [ReportController::class, 'generatePdf'])->name('generate-pdf');
     Route::post('/send-report', [ReportController::class, 'sendReport'])->name('send-report');
+
+   
+    Route::get('/letters', [LetterController::class, 'index'])->name('letters.index');
+    Route::get('/letters/create', [LetterController::class, 'create'])->name('letters.create');
+    Route::post('/letters/send', [LetterController::class, 'send'])->name('letters.send');
+    Route::get('/letters/{letter}', [LetterController::class, 'show'])->name('letters.show');
 });
 
 // Remove conflicting sections route
@@ -84,9 +91,9 @@ Route::get('/reset_password', function () {
 //     return view('/members');
 // });
 
-Route::get('/letters', function () {
-    return view('/letters');
-});
+// Route::get('/letters', function () {
+//     return view('/letters');
+// });
 
 Route::get('/reports', function () {
     return view('/reports');

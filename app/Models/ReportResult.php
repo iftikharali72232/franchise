@@ -15,6 +15,7 @@ class ReportResult extends Model
         'question_id',
         'answer',
         'attachments',
+        'description'
     ];
 
     public function report()

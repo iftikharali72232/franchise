@@ -33,4 +33,8 @@ class Branch extends Model
     {
         return $this->hasMany(Report::class, 'branch_id');
     }
+    public function letters()
+    {
+        return $this->hasMany(Letter::class);
+    }
 }

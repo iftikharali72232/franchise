@@ -71,6 +71,7 @@ class ReportController extends Controller
                 'report_id' => $validated['report_id'],
                 'section_id' => $validated['section_id'],
                 'question_id' => $validated['question_id'],
+                'description' => $request->description,
             ],
             [
                 'answer' => $request->answer,
