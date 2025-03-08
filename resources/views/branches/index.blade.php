@@ -4,7 +4,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdwlGhZKKQqYyw9f9iME40MzMgC9RL4ko&libraries=places"></script>
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="flex md:flex-row flex-col items-center md:justify-between w-full">
-        <div class="flex items-center space-x-3 md:w-auto w-full md:mb-0 mb-3">
+        <div class="flex items-center space-x-3 rtl:space-x-reverse md:w-auto w-full md:mb-0 mb-3">
             <select class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white md:w-auto w-1/2">
                 <option>{{ trans('lang.region') }}</option>
                 <option>R1</option>
@@ -18,13 +18,15 @@
             </select>
         </div>
 
-        <div class="flex items-center md:justify-end md:w-auto w-full space-x-3">
+        <div class="flex items-center md:justify-end md:w-auto w-full space-x-3 rtl:space-x-reverse">
             <button type="button" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white">
                 {{ trans('lang.previous_visits') }}
             </button>
 
-            <a href="{{ route('branches.create') }}" type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
-                <i class="fa-solid fa-plus"></i>
+            <a href="{{ route('branches.create') }}">
+                <button type="button" class="bg-[#2E76B0] w-[40px] h-[40px] p-1 rounded-full text-white">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </a>
 
             <button type="button" class="bg-[#19B2E7] w-[40px] h-[40px] p-1 rounded-full text-white">
@@ -50,7 +52,7 @@
                         <td class="whitespace-nowrap py-2 px-4">{{ $branch->branch_no }}</td>
                         <td class="whitespace-nowrap py-2 px-4">{{ $branch->city }}</td>
                         <td class="whitespace-nowrap py-2 px-4">
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
                                 <a href="#" onclick="openBranchModal('edit_branch', {{ $branch->id }})" class="text-red-500">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
