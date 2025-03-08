@@ -40,7 +40,7 @@
 
                     <div class="md:col-span-2">
                         <label for="offer_message" class="form-label">{{ trans('lang.offer_message') }}</label>
-                        <textarea name="offer_message" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" rows="5" required></textarea>
+                        <textarea name="offer_message" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-xl" rows="5" required></textarea>
                     </div>
 
                     <div class="md:col-span-2 flex justify-end">
