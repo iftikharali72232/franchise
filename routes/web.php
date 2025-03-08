@@ -12,6 +12,7 @@ use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('lang/{locale}', [LangController::class, 'setLocale'])->name('setLocale');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
@@ -60,6 +61,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/letters/create', [LetterController::class, 'create'])->name('letters.create');
     Route::post('/letters/send', [LetterController::class, 'send'])->name('letters.send');
     Route::get('/letters/{letter}', [LetterController::class, 'show'])->name('letters.show');
+
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
 });
 
 // Remove conflicting sections route

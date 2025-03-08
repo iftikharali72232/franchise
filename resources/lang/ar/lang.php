@@ -235,5 +235,16 @@ return [
     "message" => "الرسالة",
     "date" => "التاريخ",
     "attachment" => "المرفق",
-    "download" => "تحميل"
+    "download" => "تحميل",
+    'basic_details' => 'التفاصيل الأساسية',
+    'name' => 'الاسم',
+    'email' => 'البريد الإلكتروني',
+    'password' => 'كلمة المرور',
+    'confirm_password' => 'تأكيد كلمة المرور',
+    'profile_picture' => 'الصورة الشخصية',
+    'choose_image' => 'اختر صورة',
+    'leave_blank' => 'اتركه فارغًا للحفاظ على الحالي',
+    'notifications' => 'الإشعارات',
+    'email_notifications' => 'إشعارات البريد الإلكتروني عن الأحداث أو التعديلات المهمة',
+    'save_updates' => 'حفظ التحديثات',
 ];

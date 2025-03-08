@@ -242,6 +242,17 @@ return [
     "message" => "Message",
     "date" => "Date",
     "attachment" => "Attachment",
-    "download" => "Download"
+    "download" => "Download",
+    'basic_details' => 'Basic Details',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'profile_picture' => 'Profile Picture',
+    'choose_image' => 'Choose Image',
+    'leave_blank' => 'Leave blank to keep current',
+    'notifications' => 'Notifications',
+    'email_notifications' => 'Email notifications of significant occurrences or modifications',
+    'save_updates' => 'Save Updates',
 
 ];
