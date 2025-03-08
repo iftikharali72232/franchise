@@ -4,7 +4,7 @@
 
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="flex items-center justify-between w-full pb-2 border-b-[3px] border-[#D6E7F54D]">
-        <div class="flex items-center space-x-3 w-full">
+        <div class="flex items-center space-x-3 rtl:space-x-reverse w-full">
             <h4 class="text-2xl text-[#1D3F5D] font-semibold">{{ trans('lang.sections_list') }}</h4>
         </div>
 
@@ -48,7 +48,7 @@
                         @endif
                     </td>
                     <td class="whitespace-nowrap">
-                        <div class="flex items-center space-x-3">
+                        <div class="flex items-center space-x-3 rtl:space-x-reverse">
                             <a href="{{ route('sectionList.show', $section->id) }}" class="text-[#1D3F5D]">
                                 <i class="fa-regular fa-eye"></i>
                             </a>

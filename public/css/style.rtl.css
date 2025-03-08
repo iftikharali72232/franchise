@@ -27,6 +27,27 @@
     margin-right: 10px !important;
   }
 
+  tr td {
+    padding: 15px 0px 15px 15px;
+  }
+  
+  tr th {
+    padding: 15px 0px 15px 15px;
+    text-align: start;
+    font-weight: 600;
+  }
+  
+  tr td:first-child, tr th:first-child {
+    border-radius: 0px 50px 50px 0px !important;
+    padding: 15px 30px 15px 15px !important;
+  }
+  
+  /* Round the last td */
+  tr td:last-child, tr th:last-child {
+    border-radius: 50px 0px 0px 50px !important;
+    padding: 15px 15px 15px 30px !important;
+  }
+
   #lightSlider {
     transform: translate3d(12px, 0px, 0px) !important;
   }

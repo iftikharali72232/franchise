@@ -8,7 +8,7 @@
             <input type="text" class="px-6 py-2 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:outline-none rounded-full" placeholder="{{ trans('lang.search_name') }}">
         </div>
 
-        <div class="flex items-center md:justify-end md:w-auto w-full space-x-3">
+        <div class="flex items-center md:justify-end md:w-auto w-full space-x-3 rtl:space-x-reverse">
             <button type="button" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white">
                 {{ trans('lang.prev_rounds') }}
             </button>
@@ -44,7 +44,7 @@
                     <td class="whitespace-nowrap">{{ $member->phone_number }}</td>
                     <td class="whitespace-nowrap">{{ $member->email }}</td>
                     <td class="whitespace-nowrap">
-                        <div class="flex items-center space-x-3">
+                        <div class="flex items-center space-x-3 rtl:space-x-reverse">
                             <a href="{{ route('members.edit', $member->id) }}" class="text-red-500">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
