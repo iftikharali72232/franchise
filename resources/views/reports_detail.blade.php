@@ -8,7 +8,7 @@
         <div class="flex flex-wrap md:flex-nowrap items-center w-full md:w-auto mb-3 space-x-0 md:space-x-3">
             <!-- Back Button -->
             <div class="w-full md:w-auto md:pb-0 pb-2">
-                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
+                <a href="{{ route('reports_all') }}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-[#1F5077] to-[#3A95DD]">
                     <img src="{{ asset('images/arrow-left.png') }}" class="w-auto {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }}" alt="{{ trans('lang.arrow_left') }}" />
                 </a>
             </div>
