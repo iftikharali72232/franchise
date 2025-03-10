@@ -32,15 +32,15 @@ class RequestController extends Controller
             $vQ = json_decode($data->questions, true);
             foreach($sections as $sectionID)
             {
-                $sss = Section::with('questions')->where('id', $sectionID)->first();
-                foreach($sss->questions as $qkey => $qqq)
-                {
-                    if(!in_array($qqq->id, $vQ))
-                    {
-                        unset($sss->questions[$qkey]);
-                    }
-                }
-                $res['sections'][] = $sss;
+                // $sss = Section::with('questions')->where('id', $sectionID)->first();
+                // foreach($sss->questions as $qkey => $qqq)
+                // {
+                //     if(!in_array($qqq->id, $vQ))
+                //     {
+                //         unset($sss->questions[$qkey]);
+                //     }
+                // }
+                $res['sections'][] = Section::with('questions')->where('id', $sectionID)->first();
             }
             return response()->json([
                 'status' => 1,
