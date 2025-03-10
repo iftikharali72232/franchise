@@ -255,6 +255,6 @@ return [
     'email_notifications' => 'Email notifications of significant occurrences or modifications',
     'save_updates' => 'Save Updates',
     'dont_have_account' => "Don't have an account?",
-
+    'delete_question' => 'Delete Question'
 
 ];

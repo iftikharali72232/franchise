@@ -21,6 +21,7 @@ class SectionController extends Controller
 
     public function store(Request $request)
     {
+        // echo "<pre>";print_r($_POST); exit;
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'shows_to' => 'required|string',
@@ -47,9 +48,18 @@ class SectionController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        // Create questions
-        foreach ($data['questions'] ?? [] as $questionData) {
-            $section->questions()->create($questionData);
+        // Handle Questions
+        if ($request->has('questions')) {
+            foreach ($request->questions as $key => $sdata) {
+                
+                    SectionQuestion::create([
+                        'section_id' => $section->id,
+                        'question' => $sdata['question'],
+                        'answer1' => 'Excellent',
+                        'answer2' => 'Average',
+                        'answer3' => 'Unacceptable',
+                    ]);
+            }
         }
 
         return redirect()->route('sectionList.index')->with('success', 'Section created successfully!');

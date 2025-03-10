@@ -248,5 +248,6 @@ return [
     'email_notifications' => 'إشعارات البريد الإلكتروني عن الأحداث أو التعديلات المهمة',
     'save_updates' => 'حفظ التحديثات',
     'dont_have_account' => "ليس لديك حساب؟",
+    'delete_question' => 'حذف السؤال'
 
 ];
