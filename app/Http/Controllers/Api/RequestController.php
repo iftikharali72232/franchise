@@ -29,10 +29,18 @@ class RequestController extends Controller
         {
             $res['request'] = $data;
             $sections = json_decode($data->section_id, true);
-            
+            $vQ = json_decode($data->questions, true);
             foreach($sections as $sectionID)
             {
-                $res['sections'][] = Section::with('questions')->where('id', $sectionID)->first();
+                $sss = Section::with('questions')->where('id', $sectionID)->first();
+                foreach($sss->questions as $qkey => $qqq)
+                {
+                    if(!in_array($qqq->id, $vQ))
+                    {
+                        unset($sss->questions[$qkey]);
+                    }
+                }
+                $res['sections'][] = $sss;
             }
             return response()->json([
                 'status' => 1,
