@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Branch;
 use App\Models\City;
+use Illuminate\Support\Facades\Log;
 
 class BranchController extends Controller
 {
@@ -59,13 +60,71 @@ class BranchController extends Controller
     }
     public function show($id)
     {
-        $branch = Branch::find($id);
+        $branch = Branch::findOrFail($id);
+        $cities = City::where('status', 1)->pluck('city_name', 'sno'); // Fetch active cities
+        return view('branches.show', compact('branch', 'cities'));
+    }
 
-        if (!$branch) {
-            return response()->json(['error' => 'Branch not found'], 404);
+    public function edit($id)
+{
+    $branch = Branch::findOrFail($id);
+    $cities = City::where('status', 1)->pluck('city_name', 'sno'); // Fetch active cities
+    return view('branches.edit', compact('branch', 'cities'));
+}
+
+
+public function update(Request $request, $id)
+{
+    
+    try {
+        Log::info('Updating branch ID: ' . $id, $request->all());
+
+        $request->validate([
+            'branch_name' => 'required|string|max:255',
+            'branch_no' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'owner_email' => 'required|email',
+            'header_image' => 'nullable|image|max:102400',
+        ]);
+
+        $branch = Branch::findOrFail($id);
+
+        if ($request->hasFile('header_image')) {
+            $image = $request->file('header_image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads'), $imageName);
+
+            if ($branch->header_image) {
+                $oldImagePath = public_path('uploads/' . $branch->header_image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $branch->header_image = $imageName;
         }
 
-        return response()->json($branch);
+        $branch->update([
+            'branch_name' => $request->input('branch_name'),
+            'branch_no' => $request->input('branch_no'),
+            'region' => $request->input('region'),
+            'city' => $request->input('city'),
+            'location' => $request->input('location'),
+            'owner_email' => $request->input('owner_email'),
+            'header_image' => $branch->header_image,
+        ]);
+
+        Log::info('Branch updated successfully: ' . $id);
+
+        return redirect()->route('branches.index')->with('success', 'Branch updated successfully!');
+    } catch (\Exception $e) {
+        Log::error('Error updating branch: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
     }
+}
+
+
 
 }

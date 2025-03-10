@@ -62,6 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/letters/send', [LetterController::class, 'send'])->name('letters.send');
     Route::get('/letters/{letter}', [LetterController::class, 'show'])->name('letters.show');
 
+    Route::get('/branches/{id}/edit', [BranchController::class, 'edit'])->name('branches.edit');
+Route::put('/branches/{id}', [BranchController::class, 'update'])->name('branches.update');
+
+
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 });

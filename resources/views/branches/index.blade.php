@@ -53,14 +53,15 @@
                         <td class="whitespace-nowrap py-2 px-4">{{ $branch->city }}</td>
                         <td class="whitespace-nowrap py-2 px-4">
                             <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                                <a href="#" onclick="openBranchModal('edit_branch', {{ $branch->id }})" class="text-red-500">
+                                <a href="{{ route('branches.edit', $branch->id) }}" class="text-red-500">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <a href="#" onclick="openBranchModal('branch_information', {{ $branch->id }})" class="text-gray-300">
+                                <a href="{{ route('branches.show', $branch->id) }}" class="text-gray-300">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </a>
                             </div>
                         </td>
+
                     </tr>
                 @empty
                     <tr>

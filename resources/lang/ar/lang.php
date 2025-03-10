@@ -46,7 +46,7 @@ return [
     'branches'                         => 'الفروع',
     'reports'                          => 'التقارير',
     'members'                          => 'الأعضاء',
-    'letters'                          => 'مكاتيب',
+    'letters'                          => 'الطلبات',
     'sections'                         => 'الأقسام',
     'settings'                         => 'الإعدادات',
     'logout'                           => 'تسجيل الخروج',
