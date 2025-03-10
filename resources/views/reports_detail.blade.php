@@ -97,6 +97,7 @@
             @if($section->questions && count($section->questions) > 0)
                 @foreach($section->questions as $question)
                     @if($question->answer != "")
+                        <?php //echo"<pre>"; print_r($question); ?>
                         <div class="ml-10">
                             <ol class="list-decimal text-xl text-[#1D3F5D] my-3">
                                 <li>
@@ -138,7 +139,7 @@
                                         <div @if($question->answer != "Average") hidden @endif>
                                             <input class="peer sr-only" value="good" name="rating" id="{{ $question->id }}good" type="radio" readonly/>
                                             <label for="good" class="flex shadow-sm px-4 py-1.5 cursor-pointer flex-col items-center justify-center rounded-lg bg-white transition-transform duration-150 peer-checked:bg-gray-600 peer-checked:text-white text-sm uppercase text-gray-500">
-                                                {{ trans('lang.good') }}
+                                                {{ trans('lang.average') }}
                                             </label>
                                         </div>
 

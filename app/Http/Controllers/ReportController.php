@@ -98,12 +98,13 @@ class ReportController extends Controller
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
-                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'attachments']);
+                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'description', 'attachments']);
                     // echo "<pre>";print_r($questionId); exit;
                     if ($questionId->count() > 0) {
                         foreach ($questionId as $q) {
                             $question = SectionQuestion::where('id', $q->question_id)->first();
                             $question['answer'] = $q->answer;
+                            $question['description'] = $q->description;
                             $question['attachments'] = $q->attachments;
                             $sec['questions'][] = $question;
                         }
@@ -172,12 +173,13 @@ class ReportController extends Controller
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
-                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'attachments']);
+                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'description', 'attachments']);
                     // echo "<pre>";print_r($questionId); exit;
                     if ($questionId->count() > 0) {
                         foreach ($questionId as $q) {
                             $question = SectionQuestion::where('id', $q->question_id)->first();
                             $question['answer'] = $q->answer;
+                            $question['description'] = $q->description;
                             $question['attachments'] = $q->attachments;
                             $sec['questions'][] = $question;
                         }
