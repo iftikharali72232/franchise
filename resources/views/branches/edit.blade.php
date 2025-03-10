@@ -8,72 +8,75 @@
 
         <div class="grid md:grid-cols-4 grid-cols-1 gap-4">
             <div>
-                <label class="text-[#1F5077] pb-1">Branch Name <span class="text-red-500">*</span></label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.branch_name') }} <span class="text-red-500">*</span></label>
                 <input type="text" name="branch_name" value="{{ $branch->branch_name }}" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] rounded-full" required />
             </div>
 
             <div>
-                <label class="text-[#1F5077] pb-1">Branch No <span class="text-red-500">*</span></label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.branch_no') }} <span class="text-red-500">*</span></label>
                 <input type="text" name="branch_no" value="{{ $branch->branch_no }}" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] rounded-full" required />
             </div>
 
             <div>
-                <label class="text-[#1F5077] pb-1">Owner Email <span class="text-red-500">*</span></label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.owner_email') }} <span class="text-red-500">*</span></label>
                 <input type="email" name="owner_email" value="{{ $branch->owner_email }}" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] rounded-full" required />
             </div>
 
             <div>
-                <label class="text-[#1F5077] pb-1">Region <span class="text-red-500">*</span></label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.region') }} <span class="text-red-500">*</span></label>
                 <select name="region" id="region" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                     <option value="">{{ trans('lang.select_region') }}</option>
-                    <option value="Riyadh" {{ $branch->region == 'Riyadh' ? 'selected' : '' }}>Riyadh (الرياض)</option>
-                    <option value="Makkah" {{ $branch->region == 'Makkah' ? 'selected' : '' }}>Makkah (مكة المكرمة)</option>
-                    <option value="Madinah" {{ $branch->region == 'Madinah' ? 'selected' : '' }}>Madinah (المدينة المنورة)</option>
-                    <option value="Eastern Province" {{ $branch->region == 'Eastern Province' ? 'selected' : '' }}>Eastern Province (المنطقة الشرقية)</option>
-                    <option value="Qassim" {{ $branch->region == 'Qassim' ? 'selected' : '' }}>Qassim (القصيم)</option>
-                    <option value="Asir" {{ $branch->region == 'Asir' ? 'selected' : '' }}>Asir (عسير)</option>
-                    <option value="Tabuk" {{ $branch->region == 'Tabuk' ? 'selected' : '' }}>Tabuk (تبوك)</option>
-                    <option value="Hail" {{ $branch->region == 'Hail' ? 'selected' : '' }}>Hail (حائل)</option>
-                    <option value="Northern Borders" {{ $branch->region == 'Northern Borders' ? 'selected' : '' }}>Northern Borders (الحدود الشمالية)</option>
-                    <option value="Jazan" {{ $branch->region == 'Jazan' ? 'selected' : '' }}>Jazan (جازان)</option>
-                    <option value="Najran" {{ $branch->region == 'Najran' ? 'selected' : '' }}>Najran (نجران)</option>
-                    <option value="Al-Baha" {{ $branch->region == 'Al-Baha' ? 'selected' : '' }}>Al-Baha (الباحة)</option>
-                    <option value="Al-Jawf" {{ $branch->region == 'Al-Jawf' ? 'selected' : '' }}>Al-Jawf (الجوف)</option>
+                    <option value="Riyadh" {{ $branch->region == 'Riyadh' ? 'selected' : '' }}>{{ trans('lang.riyadh') }}</option>
+                    <option value="Makkah" {{ $branch->region == 'Makkah' ? 'selected' : '' }}>{{ trans('lang.makkah') }}</option>
+                    <option value="Madinah" {{ $branch->region == 'Madinah' ? 'selected' : '' }}>{{ trans('lang.madinah') }}</option>
+                    <option value="Eastern Province" {{ $branch->region == 'Eastern Province' ? 'selected' : '' }}>{{ trans('lang.eastern_province') }}</option>
+                    <option value="Qassim" {{ $branch->region == 'Qassim' ? 'selected' : '' }}>{{ trans('lang.qassim') }}</option>
+                    <option value="Asir" {{ $branch->region == 'Asir' ? 'selected' : '' }}>{{ trans('lang.asir') }}</option>
+                    <option value="Tabuk" {{ $branch->region == 'Tabuk' ? 'selected' : '' }}>{{ trans('lang.tabuk') }}</option>
+                    <option value="Hail" {{ $branch->region == 'Hail' ? 'selected' : '' }}>{{ trans('lang.hail') }}</option>
+                    <option value="Northern Borders" {{ $branch->region == 'Northern Borders' ? 'selected' : '' }}>{{ trans('lang.northern_borders') }}</option>
+                    <option value="Jazan" {{ $branch->region == 'Jazan' ? 'selected' : '' }}>{{ trans('lang.jazan') }}</option>
+                    <option value="Najran" {{ $branch->region == 'Najran' ? 'selected' : '' }}>{{ trans('lang.najran') }}</option>
+                    <option value="Al-Baha" {{ $branch->region == 'Al-Baha' ? 'selected' : '' }}>{{ trans('lang.al_baha') }}</option>
+                    <option value="Al-Jawf" {{ $branch->region == 'Al-Jawf' ? 'selected' : '' }}>{{ trans('lang.al_jawf') }}</option>
                 </select>
             </div>
-            <select name="city" id="city" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
-                <option value="">{{ trans('lang.all_cities') }}</option>
-                @foreach ($cities as $sno => $city_name)
-                    <option value="{{ $sno }}" {{ old('city', $branch->city) == $sno ? 'selected' : '' }}>
-                        {{ $city_name }}
-                    </option>
-                @endforeach
-            </select>
+
+            <div>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.city') }} <span class="text-red-500">*</span></label>
+                <select name="city" id="city" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full">
+                    <option value="">{{ trans('lang.all_cities') }}</option>
+                    @foreach ($cities as $sno => $city_name)
+                        <option value="{{ $sno }}" {{ old('city', $branch->city) == $sno ? 'selected' : '' }}>
+                            {{ $city_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="md:col-span-4">
-                <label class="text-[#1F5077] pb-1">Location <span class="text-red-500">*</span></label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.location') }} <span class="text-red-500">*</span></label>
                 <input type="text" id="location-input" name="location" value="{{ $branch->location }}" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] rounded-full" required />
                 <div id="map" class="w-full h-64 mt-2 rounded-lg"></div>
             </div>
 
             <div class="md:col-span-4">
-                <label class="text-[#1F5077] pb-1">Header Image</label>
+                <label class="text-[#1F5077] pb-1">{{ trans('lang.header_image') }}</label>
                 <input type="file" name="header_image" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] rounded-full">
 
                 @if ($branch->header_image)
-                    <img src="{{ asset('uploads/' . $branch->header_image) }}" alt="Current Image" class="mt-2 h-32 rounded-lg">
+                    <img src="{{ asset('uploads/' . $branch->header_image) }}" alt="{{ trans('lang.current_image') }}" class="mt-2 h-32 rounded-lg">
                 @endif
             </div>
 
             <div class="md:col-span-4 flex justify-end">
                 <button type="submit" class="px-6 py-3 bg-[#1F5077] text-white rounded-full">
-                    Update
+                    {{ trans('lang.update') }}
                 </button>
             </div>
         </div>
     </form>
 </div>
-
 {{-- Google Maps API for Location Picker --}}
 <script>
     let map, marker;
