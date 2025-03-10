@@ -70,7 +70,7 @@
 </div>
 
 <div id="create_request" class="modal fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-xl shadow-lg lg:w-[50%] md:w-[80%] w-[100%] md:h-auto h-screen">
+    <div class="bg-white rounded-xl shadow-lg lg:w-[50%] md:w-[80%] w-[100%] max-h-[90vh] overflow-hidden">
       <div class="px-6 py-4 bg-[#2E76B0] flex justify-between items-center rounded-t-xl">
         <h2 class="text-xl font-semibold text-white">{{ trans('lang.create_new_request') }}</h2>
         <button type="button" class="close-modal text-white">
@@ -78,11 +78,12 @@
         </button>
       </div>
       
-      <div class="modal-body p-6 overflow-y-auto scrollbar-hidden h-full create_request">
+      <div class="modal-body p-6 overflow-y-auto scrollbar-hidden h-[calc(100vh-150px)] create_request">
         <!-- Modal content will be loaded here via AJAX -->
       </div>
     </div>
 </div>
+
 
 <script>
     function openModal(id) {
