@@ -90,14 +90,15 @@
 
 
 <!-- Sections and Questions -->
+
+
 @if($report->sections && count($report->sections) > 0)
     @foreach($report->sections as $section)
-        <div class="">
+        <div>
             <h4 class="text-xl font-semibold text-[#1D3F5D]">{{ $section->name ?? trans('lang.no_section_name') }}</h4>
             @if($section->questions && count($section->questions) > 0)
                 @foreach($section->questions as $question)
                     @if($question->answer != "")
-                        <?php //echo"<pre>"; print_r($question); ?>
                         <div class="ml-10">
                             <ol class="list-decimal text-xl text-[#1D3F5D] my-3">
                                 <li>
@@ -107,8 +108,8 @@
 
                             <!-- Answer and User Info -->
                             <div class="flex flex-col bg-black/[2%] border border-[#D9D9D9] rounded-lg p-4 w-full">
-                                <!-- User Info -->
-                                <div class="flex items-center mb-4">
+                                 <!-- User Info -->
+                                 <div class="flex items-center mb-4">
                                     <div class="">
                                         <div class="w-[50px] h-[50px] p-2 rounded-full flex items-center justify-center border border-gray-200">
                                             <img src="{{ asset('images/main-user.png') }}" class="filter invert" />
@@ -166,10 +167,24 @@
                                     </div>
                                 </div>
 
+
+                                <!-- Admin Note -->
+                                <div class="flex lg:flex-row flex-col lg:items-center mb-4 md:ml-16">
+                                    <div class="lg:w-[150px]">
+                                        <p class="font-semibold text-gray-600">{{ trans('lang.admin_note') }}:</p>
+                                    </div>
+                                    <div class="flex md:flex-row flex-col w-full gap-2 py-2">
+                                        <input type="text" class="border p-2 rounded w-full" value="{{ $question->admin_note ?? '' }}" data-question-id="{{ $question->result_id }}" onchange="updateAdminNote(this)">
+                                    </div>
+                                </div>
+
                                 <!-- Attachments Section -->
                                 @php
                                     $attachments = json_decode($question->attachments, true) ?? [];
+                                    $adminAttachments = json_decode($question->admin_attachments, true) ?? [];
                                 @endphp
+
+                                <!-- User Attachments -->
                                 <div class="flex lg:flex-row flex-col md:ml-16">
                                     <div class="lg:w-[150px] lg:mb-0 mb-3">
                                         <p class="font-semibold text-gray-600 mt-2">{{ trans('lang.attachments') }}:</p>
@@ -177,27 +192,88 @@
                                     <div class="grid md:grid-cols-6 grid-cols-3 w-full md:gap-4 gap-2">
                                         @if(count($attachments) > 0)
                                             @foreach($attachments as $imgKey => $img)
-                                            <a href="{{ url('/' . $img) }}" target="_blank"><img class="h-20 w-20 rounded-md object-cover" src="{{ url('/' . $img) }}" alt="{{ trans('lang.attachment') }} {{ $imgKey + 1 }}" /></a>
+                                            <div class="relative">
+                                                <a href="{{ url('/' . $img) }}" target="_blank">
+                                                    <img class="h-20 w-20 rounded-md object-cover" src="{{ url('/' . $img) }}" alt="{{ trans('lang.attachment') }} {{ $imgKey + 1 }}" />
+                                                </a>
+                                                <button class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs" onclick="deleteAttachment('{{ $img }}', '{{ $question->result_id }}', 'user')">❌</button>
+                                            </div>
                                             @endforeach
                                         @else
                                             <p class="text-sm text-gray-500">{{ trans('lang.no_attachments') }}</p>
                                         @endif
                                     </div>
                                 </div>
+
+                                <!-- Admin Attachments -->
+                                <div class="flex lg:flex-row flex-col md:ml-16">
+                                    <div class="lg:w-[150px] lg:mb-0 mb-3">
+                                        <p class="font-semibold text-gray-600 mt-2">{{ trans('lang.admin_attachments') }}:</p>
+                                    </div>
+                                    <div class="grid md:grid-cols-6 grid-cols-3 w-full md:gap-4 gap-2">
+                                        @foreach($adminAttachments as $imgKey => $img)
+                                            <div class="relative">
+                                                <a href="{{ url('/' . $img) }}" target="_blank">
+                                                    <img class="h-20 w-20 rounded-md object-cover" src="{{ url('/' . $img) }}" />
+                                                </a>
+                                                <button class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs" onclick="deleteAttachment('{{ $img }}', '{{ $question->result_id }}', 'admin')">❌</button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- File Upload -->
+                                <div class="flex lg:flex-row flex-col md:ml-16 mt-4">
+                                    <div class="lg:w-[150px] lg:mb-0 mb-3">
+                                        <p class="font-semibold text-gray-600 mt-2">{{ trans('lang.upload_attachments') }}:</p>
+                                    </div>
+                                    <input type="file" multiple data-question-id="{{ $question->result_id }}" onchange="uploadAttachment(this)">
+                                </div>
                             </div>
                         </div>
                     @endif
                 @endforeach
-            @else
-                <p class="text-sm text-gray-500">{{ trans('lang.no_questions_found') }}</p>
             @endif
         </div>
     @endforeach
-@else
-    <p class="text-sm text-gray-500">{{ trans('lang.no_sections_found') }}</p>
 @endif
 </div>
+<script>
+function uploadAttachment(input) {
+    let formData = new FormData();
+    formData.append('question_id', input.dataset.questionId);
+    for (let file of input.files) {
+        formData.append('admin_attachments[]', file);
+    }
+    fetch('/upload-admin-images', {
+        method: 'POST',
+        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        body: formData
+    }).then(response => response.json()).then(data => {
+        // if (data.success) location.reload();
+    });
+}
+function deleteAttachment(imagePath, questionId, type) {
+    if (!confirm('<?= trans('lang.is_delete_success') ?>')) return;
+    fetch('/delete-attachment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        body: JSON.stringify({ image: imagePath, question_id: questionId, type: type })
+    }).then(response => response.json()).then(data => {
+        if (data.success) location.reload();
+    });
+}
 
+
+
+function updateAdminNote(input) {
+    fetch('/update-admin-note', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        body: JSON.stringify({ question_id: input.dataset.questionId, admin_note: input.value })
+    });
+}
+</script>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

@@ -255,6 +255,10 @@ return [
     'email_notifications' => 'Email notifications of significant occurrences or modifications',
     'save_updates' => 'Save Updates',
     'dont_have_account' => "Don't have an account?",
-    'delete_question' => 'Delete Question'
+    'delete_question' => 'Delete Question',
+    'is_delete_success' => 'Are you sure you want to delete this image?',
+    'admin_note' => 'Admin Note',
+    'admin_attachments' => 'Admin Attachments',
+    'upload_attachments' => 'Upload Attachments'
 
 ];

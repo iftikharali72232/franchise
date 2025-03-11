@@ -42,6 +42,7 @@ class RequestController extends Controller
                 // }
                 $res['sections'][] = Section::with('questions')->where('id', $sectionID)->first();
             }
+            
             return response()->json([
                 'status' => 1,
                 'data' => $res

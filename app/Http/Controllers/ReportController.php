@@ -98,7 +98,7 @@ class ReportController extends Controller
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
-                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'description', 'attachments']);
+                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get();
                     // echo "<pre>";print_r($questionId); exit;
                     if ($questionId->count() > 0) {
                         foreach ($questionId as $q) {
@@ -106,6 +106,9 @@ class ReportController extends Controller
                             $question['answer'] = $q->answer;
                             $question['description'] = $q->description;
                             $question['attachments'] = $q->attachments;
+                            $question['result_id'] = $q->id;
+                            $question['admin_attachments'] = $q->admin_attachments;
+                            $question['admin_note'] = $q->admin_note;
                             $sec['questions'][] = $question;
                         }
                     }
@@ -173,7 +176,7 @@ class ReportController extends Controller
             $sectionsArray = [];
             if ($sections->count() > 0) {
                 foreach ($sections as $sk => $sec) {
-                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get(['question_id', 'answer', 'description', 'attachments']);
+                    $questionId = ReportResult::where('section_id', $sec->id)->where('report_id', $id)->get();
                     // echo "<pre>";print_r($questionId); exit;
                     if ($questionId->count() > 0) {
                         foreach ($questionId as $q) {
@@ -181,6 +184,9 @@ class ReportController extends Controller
                             $question['answer'] = $q->answer;
                             $question['description'] = $q->description;
                             $question['attachments'] = $q->attachments;
+                            $question['result_id'] = $q->id;
+                            $question['admin_attachments'] = $q->admin_attachments;
+                            $question['admin_note'] = $q->admin_note;
                             $sec['questions'][] = $question;
                         }
                     }
@@ -230,5 +236,100 @@ class ReportController extends Controller
         Mail::to($email)->send(new SendEmail($url));
 
         return response()->json(['message' => 'Email sent successfully!']);
+    }
+    public function deleteAttachment(Request $request)
+{
+    $question = ReportResult::where('id', $request->question_id)->first();
+
+    if ($question) {
+        $attachments = json_decode($question->attachments, true) ?? [];
+        $filteredAttachments = array_values(array_filter($attachments, function ($img) use ($request) {
+            return $img !== $request->image;
+        }));
+
+        // Delete file from storage
+        if (file_exists(public_path($request->image))) {
+            unlink(public_path($request->image));
+        }
+
+        // Save updated attachments
+        $question->attachments = json_encode($filteredAttachments);
+        $question->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'Question not found']);
+}
+// public function saveAdminData(Request $request)
+// {
+//     $question = ReportResult::where('id', $request->question_id)->first();
+    
+//     if ($question) {
+//         // Save Admin Note
+//         $question->admin_note = $request->admin_note;
+
+//         // Handle File Upload
+//         if ($request->hasFile('admin_attachments')) {
+//             $uploadedFiles = [];
+//             foreach ($request->file('admin_attachments') as $file) {
+//                 $fileName = time() . '_' . $file->getClientOriginalName();
+//                 $filePath = $file->move(public_path('sections'), $fileName);
+//                 $uploadedFiles[] = 'sections/' . $fileName;
+//             }
+
+//             $existingAttachments = json_decode($question->admin_attachments, true) ?? [];
+//             $question->admin_attachments = json_encode(array_merge($existingAttachments, $uploadedFiles));
+//         }
+
+//         $question->save();
+
+//         return response()->json(['success' => true]);
+//     }
+
+//     return response()->json(['success' => false, 'message' => 'Question not found']);
+// }
+ // Upload Admin Images
+ public function uploadAdminImages(Request $request)
+ {
+     $question = ReportResult::find($request->question_id);
+
+     if (!$question) {
+         return response()->json(['success' => false, 'message' => 'Question not found']);
+     }
+
+     if ($request->hasFile('admin_attachments')) {
+         $uploadedFiles = [];
+        // print_r($request->file('admin_attachments')); exit;
+         foreach ($request->file('admin_attachments') as $file) {
+             $fileName = time() . '_' . $file->getClientOriginalName();
+             $file->move(public_path('sections'), $fileName);
+             $uploadedFiles[] = 'sections/' . $fileName;
+         }
+
+         $existingAttachments = $question->admin_attachments != NULL ? json_decode($question->admin_attachments, true) : [];
+         $question->admin_attachments = json_encode(array_merge($existingAttachments, $uploadedFiles));
+         $question->save();
+     }
+
+     return response()->json(['success' => true]);
+ }
+public function updateAdminNote(Request $request)
+    {
+        $request->validate([
+            'question_id' => 'required|integer',
+            'admin_note' => 'nullable|string'
+        ]);
+
+        $reportResult = ReportResult::where('id', $request->question_id)->first();
+
+        if (!$reportResult) {
+            return response()->json(['success' => false, 'message' => 'Report result not found'], 404);
+        }
+
+        $reportResult->admin_note = $request->admin_note;
+        $reportResult->save();
+
+        return response()->json(['success' => true, 'message' => 'Admin note updated successfully']);
     }
 }
