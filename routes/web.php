@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/branches/{id}/edit', [BranchController::class, 'edit'])->name('branches.edit');
 Route::put('/branches/{id}', [BranchController::class, 'update'])->name('branches.update');
-Route::post('/delete-attachment', [ReportController::class, 'deleteAttachment']);
+Route::post('/delete-attachment', [ReportController::class, 'deleteAdminImage']);
 Route::post('/save-admin-data', [ReportController::class, 'saveAdminData']);
 Route::post('/update-admin-note', [ReportController::class, 'updateAdminNote'])->name('update.admin.note');
 

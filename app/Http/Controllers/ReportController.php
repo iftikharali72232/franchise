@@ -237,58 +237,33 @@ class ReportController extends Controller
 
         return response()->json(['message' => 'Email sent successfully!']);
     }
-    public function deleteAttachment(Request $request)
-{
-    $question = ReportResult::where('id', $request->question_id)->first();
+ // Delete Admin Image
+ public function deleteAdminImage(Request $request)
+ {
+     $question = ReportResult::find($request->question_id);
 
-    if ($question) {
-        $attachments = json_decode($question->attachments, true) ?? [];
-        $filteredAttachments = array_values(array_filter($attachments, function ($img) use ($request) {
-            return $img !== $request->image;
-        }));
+     if (!$question) {
+         return response()->json(['success' => false, 'message' => 'Question not found']);
+     }
 
-        // Delete file from storage
-        if (file_exists(public_path($request->image))) {
-            unlink(public_path($request->image));
-        }
+     $existingAttachments = json_decode($question->admin_attachments, true) ?? [];
 
-        // Save updated attachments
-        $question->attachments = json_encode($filteredAttachments);
-        $question->save();
+     // Remove the selected image from the array
+     $updatedAttachments = array_filter($existingAttachments, function ($image) use ($request) {
+         return $image !== $request->image;
+     });
 
-        return response()->json(['success' => true]);
-    }
+     $question->admin_attachments = json_encode(array_values($updatedAttachments));
+     $question->save();
 
-    return response()->json(['success' => false, 'message' => 'Question not found']);
-}
-// public function saveAdminData(Request $request)
-// {
-//     $question = ReportResult::where('id', $request->question_id)->first();
-    
-//     if ($question) {
-//         // Save Admin Note
-//         $question->admin_note = $request->admin_note;
+     // Delete the image file from the server
+     $imagePath = public_path($request->image);
+     if (file_exists($imagePath)) {
+         unlink($imagePath);
+     }
 
-//         // Handle File Upload
-//         if ($request->hasFile('admin_attachments')) {
-//             $uploadedFiles = [];
-//             foreach ($request->file('admin_attachments') as $file) {
-//                 $fileName = time() . '_' . $file->getClientOriginalName();
-//                 $filePath = $file->move(public_path('sections'), $fileName);
-//                 $uploadedFiles[] = 'sections/' . $fileName;
-//             }
-
-//             $existingAttachments = json_decode($question->admin_attachments, true) ?? [];
-//             $question->admin_attachments = json_encode(array_merge($existingAttachments, $uploadedFiles));
-//         }
-
-//         $question->save();
-
-//         return response()->json(['success' => true]);
-//     }
-
-//     return response()->json(['success' => false, 'message' => 'Question not found']);
-// }
+     return response()->json(['success' => true]);
+ }
  // Upload Admin Images
  public function uploadAdminImages(Request $request)
  {
