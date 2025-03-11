@@ -250,7 +250,7 @@ function uploadAttachment(input) {
         headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
         body: formData
     }).then(response => response.json()).then(data => {
-        // if (data.success) location.reload();
+        if (data.success) location.reload();
     });
 }
 function deleteAttachment(imagePath, questionId, type) {
