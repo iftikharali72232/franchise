@@ -283,3 +283,27 @@ tr td:last-child, tr th:last-child {
   color: white !important;
   border: 1px solid #1f5077 !important;
 }
+
+/* Single select2 style */
+.select2-selection--single {
+  background: #d6e7f5 !important;
+  padding: 10px 12px !important;
+  border: 1px solid #1f5077 !important;
+  border-radius: 50px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #1f5077 !important;
+  font-weight: 400 !important;
+  padding-left: 10px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 10px;
+}

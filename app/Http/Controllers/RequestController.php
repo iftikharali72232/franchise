@@ -24,7 +24,7 @@ class RequestController extends Controller
             <form action="#" method="POST">
                 <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
                     <div class="">
-                        <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                        <select name="branch_id" id="branch_id" class="select2 w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                             <option value="" selected disabled>اختر الفرع</option>
                             <?php foreach($branches as $branch) { ?>
                                 <option value="<?= $branch->id ?>"><?= $branch->branch_name."  (".$branch->branch_no.")" ?> </option>
@@ -99,7 +99,7 @@ class RequestController extends Controller
             <form action="#" method="POST">
                 <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
                     <div class="">
-                        <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
+                        <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full select2" required>
                             <option value="" selected disabled>Select Branch</option>
                             <?php foreach($branches as $branch) { ?>
                                 <option value="<?= $branch->id ?>"><?= $branch->branch_name."  (".$branch->branch_no.")" ?></option>
@@ -189,6 +189,9 @@ class RequestController extends Controller
                     width: '100%'
                 });
 
+                $('#branch_id').select2();
+
+
                 // Onchange event for section selection
                 $('#section_id').on('change', function () {
                     const selectedSections = $(this).val(); // Get selected section IDs
@@ -253,11 +256,11 @@ class RequestController extends Controller
                 // Set the min attribute of the date input to today's date using jQuery
                 $('#request_date').attr('min', today);
 
-                $('.select2').select2({
-                    placeholder: "Select Section",
-                    allowClear: true, // Adds a clear button
-                    width: '100%' // Ensures the dropdown matches the width of the container
-                });
+                // $('.select2').select2({
+                //     placeholder: "Select Section",
+                //     allowClear: true, // Adds a clear button
+                //     width: '100%' // Ensures the dropdown matches the width of the container
+                // });
                 
                 $.ajaxSetup({
                     headers: {

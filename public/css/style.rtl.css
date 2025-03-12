@@ -72,3 +72,9 @@
     left: auto !important;
     right: 20px !important;
   }
+
+  /* Single select2 style */
+  .select2-container--default .select2-selection--single .select2-selection__arrow{
+    right: auto !important;
+    left: 10px !important;
+  }
