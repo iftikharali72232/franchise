@@ -259,6 +259,9 @@ return [
     'is_delete_success' => 'Are you sure you want to delete this image?',
     'admin_note' => 'Admin Note',
     'admin_attachments' => 'Admin Attachments',
-    'upload_attachments' => 'Upload Attachments'
+    'upload_attachments' => 'Upload Attachments',
+
+    'quality_auditor' => 'Quality Auditor',
+    'technical_auditor' => 'Technical Auditor'
 
 ];

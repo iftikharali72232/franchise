@@ -29,7 +29,7 @@
     </div>
 
     <!-- Report Details Section -->
-    <div class="flex md:flex-row flex-col md:justify-between bg-[#F1FAFE] rounded-[20px] shadow-sm p-3 my-4">
+    <div class="flex md:flex-row flex-col md:justify-between bg-[#F1FAFE] rounded-[20px] shadow-sm p-3 my-4" id="pdf_div1">
         <!-- Left Column -->
         <div class="md:w-1/2 w-full md:order-1 order-2">
             <div class="flex md:mb-3 mb-2">
@@ -83,7 +83,7 @@
     <!-- Sections and Questions -->
     @if($report->sections && count($report->sections) > 0)
         @foreach($report->sections as $section)
-            <div class="">
+            <div class="" id="pdf_div2">
                 <h4 class="text-xl font-semibold text-[#1D3F5D]">{{ $section->name ?? 'No Section Name' }}</h4>
                 @if($section->questions && count($section->questions) > 0)
                     @foreach($section->questions as $question)
@@ -236,31 +236,37 @@
 <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 
-<!-- PDF Download Script -->
-<script>
-    document.getElementById('download-pdf').addEventListener('click', function() {
-        const htmlContent = document.documentElement.outerHTML;
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
-        fetch("http://127.0.0.1:8000/generate-current-page-pdf", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({ html: htmlContent })
-        })
-        .then(response => response.blob())
-        .then(blob => {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'current-page.pdf';
-            link.click();
-        })
-        .catch(error => {
-            console.error('PDF generation failed:', error);
-        });
-    });
+<script>
+document.getElementById('download-pdf').addEventListener('click', async function() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    
+    async function addDivToPdf(divId, yOffset) {
+        const div = document.getElementById(divId);
+        if (!div) return yOffset;
+
+        try {
+            const imgData = await domtoimage.toPng(div);
+            const imgWidth = 190; // Fit in A4 width
+            const imgHeight = (div.clientHeight * imgWidth) / div.clientWidth;
+            
+            pdf.addImage(imgData, 'PNG', 10, yOffset, imgWidth, imgHeight);
+            return yOffset + imgHeight + 10; // Add space for next div
+        } catch (error) {
+            console.error('Error capturing div:', error);
+        }
+        return yOffset;
+    }
+
+    let yOffset = 10;
+    yOffset = await addDivToPdf('pdf_div1', yOffset);
+    yOffset = await addDivToPdf('pdf_div2', yOffset);
+
+    pdf.save('report.pdf');
+});
 </script>
 
 @endsection

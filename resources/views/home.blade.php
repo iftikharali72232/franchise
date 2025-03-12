@@ -7,40 +7,42 @@
             <div class="flex md:flex-row flex-col justify-between px-6 pt-4">
                 <div class="flex items-center justify-center lg:mb-0 mb-2">
                     <h2 class="md:text-[30px] text-[22px] font-600 text-[#93C3E6] flex items-center">
-                        <span class="text-shadow">{{ trans('lang.western_region_branches') }}</span>
+                        <span class="text-shadow">{{ trans('lang.' . Str::snake($selectedRegion)) }}</span>
                         <i class="fa-solid fa-chevron-right {{ app()->getLocale() == 'ar' ? 'rotate-[180deg]' : '' }} md:text-[20px] text-[16px] ms-4"></i>
                     </h2>
                 </div>
 
-                <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
-                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
-                        @forelse($sections as $section)
-                            <option value="{{ $section->id }}" {{ $section->default_section == 1 ? "selected" : "" }}>
-                                {{ $section->name }}
-                            </option>
-                        @empty
-                            <option>{{ trans('lang.no_sections_found') }}</option>
-                        @endforelse
-                    </select>
+                <form method="GET" action="{{ route('home') }}">
+                    <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                        <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="section" onchange="this.form.submit()">
+                            @forelse($sections as $section)
+                                <option value="{{ $section->id }}" {{ $selectedSectionID == $section->id ? 'selected' : '' }}>
+                                    {{ $section->name }}
+                                </option>
+                            @empty
+                                <option>{{ trans('lang.no_sections_found') }}</option>
+                            @endforelse
+                        </select>
 
-                    <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
-                        <option value="">{{ trans('lang.select_region') }}</option>
-                        <!-- Options remain same -->
-                        <option value="Riyadh">Riyadh ({{ trans('lang.riyadh') }})</option>
-                        <option value="Makkah">Makkah ({{ trans('lang.makkah') }})</option>
-                        <option value="Madinah" selected>Madinah ({{ trans('lang.madinah') }})</option>
-                        <option value="Eastern Province">Eastern Province ({{ trans('lang.eastern_province') }})</option>
-                        <option value="Qassim">Qassim ({{ trans('lang.qassim') }})</option>
-                        <option value="Asir">Asir ({{ trans('lang.asir') }})</option>
-                        <option value="Tabuk">Tabuk ({{ trans('lang.tabuk') }})</option>
-                        <option value="Hail">Hail ({{ trans('lang.hail') }})</option>
-                        <option value="Northern Borders">Northern Borders ({{ trans('lang.northern_borders') }})</option>
-                        <option value="Jazan">Jazan ({{ trans('lang.jazan') }})</option>
-                        <option value="Najran">Najran ({{ trans('lang.najran') }})</option>
-                        <option value="Al-Baha">Al-Baha ({{ trans('lang.al_baha') }})</option>
-                        <option value="Al-Jawf">Al-Jawf ({{ trans('lang.al_jawf') }})</option>
-                    </select>
-                </div>
+                        <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="region" onchange="this.form.submit()">
+                            <option value="">{{ trans('lang.select_region') }}</option>
+                            <option value="Riyadh" {{ $selectedRegion == 'Riyadh' ? 'selected' : '' }}>Riyadh ({{ trans('lang.riyadh') }})</option>
+                            <option value="Makkah" {{ $selectedRegion == 'Makkah' ? 'selected' : '' }}>Makkah ({{ trans('lang.makkah') }})</option>
+                            <option value="Madinah" {{ $selectedRegion == 'Madinah' ? 'selected' : '' }}>Madinah ({{ trans('lang.madinah') }})</option>
+                            <option value="Eastern Province" {{ $selectedRegion == 'Eastern Province' ? 'selected' : '' }}>Eastern Province ({{ trans('lang.eastern_province') }})</option>
+                            <option value="Qassim" {{ $selectedRegion == 'Qassim' ? 'selected' : '' }}>Qassim ({{ trans('lang.qassim') }})</option>
+                            <option value="Asir" {{ $selectedRegion == 'Asir' ? 'selected' : '' }}>Asir ({{ trans('lang.asir') }})</option>
+                            <option value="Tabuk" {{ $selectedRegion == 'Tabuk' ? 'selected' : '' }}>Tabuk ({{ trans('lang.tabuk') }})</option>
+                            <option value="Hail" {{ $selectedRegion == 'Hail' ? 'selected' : '' }}>Hail ({{ trans('lang.hail') }})</option>
+                            <option value="Northern Borders" {{ $selectedRegion == 'Northern Borders' ? 'selected' : '' }}>Northern Borders ({{ trans('lang.northern_borders') }})</option>
+                            <option value="Jazan" {{ $selectedRegion == 'Jazan' ? 'selected' : '' }}>Jazan ({{ trans('lang.jazan') }})</option>
+                            <option value="Najran" {{ $selectedRegion == 'Najran' ? 'selected' : '' }}>Najran ({{ trans('lang.najran') }})</option>
+                            <option value="Al-Baha" {{ $selectedRegion == 'Al-Baha' ? 'selected' : '' }}>Al-Baha ({{ trans('lang.al_baha') }})</option>
+                            <option value="Al-Jawf" {{ $selectedRegion == 'Al-Jawf' ? 'selected' : '' }}>Al-Jawf ({{ trans('lang.al_jawf') }})</option>
+                        </select>
+                    </div>
+                </form>
+
             </div>
 
             <div class="pt-6 px-2 pb-0">
@@ -65,6 +67,7 @@
                             $city = ($lat && $long) ? getCityFromCoordinates($lat, $long) : trans('lang.city_not_available');
                         @endphp
                         <li>
+                        <a href="branches/{{$sBranch->id}}">
                             <div class="flex flex-row">
                                 <div class="items-center flex flex-col justify-around">
                                     <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
@@ -80,6 +83,8 @@
                                     <p class="text-gray-400 text-[16px]">{{ $city }}</p>
                                 </div>
                             </div>
+                            
+                            </a>
                         </li>
                     @empty
                         <li>{{ trans('lang.no_branches_found') }}</li>
@@ -100,7 +105,7 @@
                     </h2>
                 </div>
 
-                <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
+                <!-- <div class="flex items-center md:justify-end justify-center space-x-4 {{ app()->getLocale() == 'ar' ? 'space-x-reverse' : '' }}">
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="category" id="category">
                         <option>{{ trans('lang.food') }}</option>
                         <option selected>{{ trans('lang.health') }}</option>
@@ -108,7 +113,7 @@
 
                     <select class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-lg px-4 py-2 shadow-sm focus:outline-none text-gray-900" name="year" id="year">
                         <option value="">{{ trans('lang.select_region') }}</option>
-                        <!-- Options as before -->
+                        <!-- Options as before 
                         <option value="Riyadh">Riyadh ({{ trans('lang.riyadh') }})</option>
                         <option value="Makkah">Makkah ({{ trans('lang.makkah') }})</option>
                         <option value="Madinah" selected>Madinah ({{ trans('lang.madinah') }})</option>
@@ -123,7 +128,7 @@
                         <option value="Al-Baha">Al-Baha ({{ trans('lang.al_baha') }})</option>
                         <option value="Al-Jawf">Al-Jawf ({{ trans('lang.al_jawf') }})</option>
                     </select>
-                </div>
+                </div> -->
             </div>
 
             <div class="pt-6 px-2 pb-0">
@@ -186,6 +191,7 @@
                 <ul class="list-none">
                     @forelse($members as $member)
                         <li>
+                        <a href="members/{{$member->id}}">
                             <div class="flex flex-row border-b border-gray-300 pb-4 mb-4">
                                 <div class="items-center flex flex-col justify-around">
                                     <div class="bg-[#F3F7FC] border border-[#D6E7F5] rounded-full h-[50px] w-[50px] p-3">
@@ -198,6 +204,7 @@
                                     <p class="text-gray-400 text-[16px]">{{ $member->function }}</p>
                                 </div>
                             </div>
+                        </a>
                         </li>
                     @empty
                         <li>{{ trans('lang.no_members_found') }}</li>

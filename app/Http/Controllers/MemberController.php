@@ -63,7 +63,11 @@ class MemberController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
-
+    public function show($id)
+    {
+        $member = User::findOrFail($id);
+        return view('members.show', compact('member'));
+    }
     public function edit($id)
     {
         $member = User::findOrFail($id);

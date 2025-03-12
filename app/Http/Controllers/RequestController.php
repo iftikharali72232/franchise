@@ -27,7 +27,7 @@ class RequestController extends Controller
                         <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                             <option value="" selected disabled>اختر الفرع</option>
                             <?php foreach($branches as $branch) { ?>
-                                <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
+                                <option value="<?= $branch->id ?>"><?= $branch->branch_name."  (".$branch->branch_no.")" ?> </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -102,7 +102,7 @@ class RequestController extends Controller
                         <select name="branch_id" id="branch_id" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required>
                             <option value="" selected disabled>Select Branch</option>
                             <?php foreach($branches as $branch) { ?>
-                                <option value="<?= $branch->id ?>"><?= $branch->branch_name ?></option>
+                                <option value="<?= $branch->id ?>"><?= $branch->branch_name."  (".$branch->branch_no.")" ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -172,6 +172,13 @@ class RequestController extends Controller
             </form>
 
         <?php } ?>
+        <!-- <script>
+            $(document).ready(function () {
+                $('#branch_id').select2({
+                    dropdownParent: $("#create_request") // Modal ya parent container ka ID dein
+                });
+            });
+        </script> -->
 
         <script>
             $(document).ready(function () {
