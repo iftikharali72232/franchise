@@ -4,19 +4,57 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdwlGhZKKQqYyw9f9iME40MzMgC9RL4ko&libraries=places"></script>
 <div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
     <div class="flex md:flex-row flex-col items-center md:justify-between w-full">
-        <div class="flex items-center space-x-3 rtl:space-x-reverse md:w-auto w-full md:mb-0 mb-3">
-            <select class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white md:w-auto w-1/2">
-                <option>{{ trans('lang.region') }}</option>
-                <option>R1</option>
-                <option>R2</option>
-            </select>
+    <div class="flex items-center space-x-3 rtl:space-x-reverse md:w-auto w-full md:mb-0 mb-3">
+    <form method="GET" action="{{ route('branches.index') }}" id="filterForm" class="flex space-x-3">
+        <!-- Region Dropdown -->
+        <select name="region" id="region" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white md:w-auto w-1/2">
+            <option value="">{{ trans('lang.region') }}</option>
+            <option value="Riyadh" {{ request('region') == 'Riyadh' ? 'selected' : '' }}>Riyadh ({{ trans('lang.riyadh') }})</option>
+            <option value="Makkah" {{ request('region') == 'Makkah' ? 'selected' : '' }}>Makkah ({{ trans('lang.makkah') }})</option>
+            <option value="Madinah" {{ request('region') == 'Madinah' ? 'selected' : '' }}>Madinah ({{ trans('lang.madinah') }})</option>
+            <option value="Eastern Province" {{ request('region') == 'Eastern Province' ? 'selected' : '' }}>Eastern Province ({{ trans('lang.eastern_province') }})</option>
+            <option value="Qassim" {{ request('region') == 'Qassim' ? 'selected' : '' }}>Qassim ({{ trans('lang.qassim') }})</option>
+            <option value="Asir" {{ request('region') == 'Asir' ? 'selected' : '' }}>Asir ({{ trans('lang.asir') }})</option>
+            <option value="Tabuk" {{ request('region') == 'Tabuk' ? 'selected' : '' }}>Tabuk ({{ trans('lang.tabuk') }})</option>
+            <option value="Hail" {{ request('region') == 'Hail' ? 'selected' : '' }}>Hail ({{ trans('lang.hail') }})</option>
+            <option value="Northern Borders" {{ request('region') == 'Northern Borders' ? 'selected' : '' }}>Northern Borders ({{ trans('lang.northern_borders') }})</option>
+            <option value="Jazan" {{ request('region') == 'Jazan' ? 'selected' : '' }}>Jazan ({{ trans('lang.jazan') }})</option>
+            <option value="Najran" {{ request('region') == 'Najran' ? 'selected' : '' }}>Najran ({{ trans('lang.najran') }})</option>
+            <option value="Al-Baha" {{ request('region') == 'Al-Baha' ? 'selected' : '' }}>Al-Baha ({{ trans('lang.al_baha') }})</option>
+            <option value="Al-Jawf" {{ request('region') == 'Al-Jawf' ? 'selected' : '' }}>Al-Jawf ({{ trans('lang.al_jawf') }})</option>
+        </select>
 
-            <select class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white md:w-auto w-1/2">
-                <option>{{ trans('lang.city') }}</option>
-                <option>C1</option>
-                <option>C2</option>
-            </select>
-        </div>
+        <?php
+
+            use App\Models\City;
+
+            $cities = City::where('status', 1)->get(['sno', 'city_name', 'city_name_ar']);
+            ?>
+        <!-- City Dropdown -->
+        <select name="city" id="city" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white md:w-auto w-1/2">
+            <option value="">{{ trans('lang.city') }}</option>
+            @foreach ($cities as $city)
+                <option value="{{ $city->sno }}" {{ intval(request('city')) == $city->sno ? 'selected' : '' }}>
+                    <?= $city->city_name ?> (<?= $city->city_name_ar ?>)
+                </option>
+            @endforeach
+        </select>
+    </form>
+</div>
+
+<!-- JavaScript for Auto Submit on Change -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('region').addEventListener('change', function () {
+            document.getElementById('filterForm').submit();
+        });
+
+        document.getElementById('city').addEventListener('change', function () {
+            document.getElementById('filterForm').submit();
+        });
+    });
+</script>
+
 
         <div class="flex items-center md:justify-end md:w-auto w-full space-x-3 rtl:space-x-reverse">
             <button type="button" class="bg-[#1D3F5D] px-6 py-2 rounded-full text-white">

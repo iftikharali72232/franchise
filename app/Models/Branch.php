@@ -17,7 +17,8 @@ class Branch extends Model
         'location',
         'header_image',
         'status',
-        'owner_email'
+        'owner_email',
+        'owner_mobile'
     ];
 
     // Optional: Define relationships if the branch is related to other models, like an organization

@@ -20,6 +20,12 @@
             </div>
             <div class="">
                 <label class="text-[#1F5077] pb-1">
+                    {{ trans('lang.mobile') }} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="owner_mobile" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="{{ trans('lang.mobile') }}" />
+            </div>
+            <div class="">
+                <label class="text-[#1F5077] pb-1">
                     {{ trans('lang.owner_email') }} <span class="text-red-500">*</span>
                 </label>
                 <input type="email" name="owner_email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" placeholder="{{ trans('lang.owner_email') }}" />

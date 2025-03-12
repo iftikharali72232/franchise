@@ -8,12 +8,26 @@ use Illuminate\Support\Facades\Log;
 
 class BranchController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $branches = Branch::all(); // Retrieve all branches
+        $query = Branch::query();
+    
+        // Apply region filter
+        if ($request->has('region') && !empty($request->region)) {
+            $query->where('region', $request->region);
+        }
+    
+        // Apply city filter
+        if ($request->has('city') && !empty($request->city)) {
+            $query->where('city', $request->city);
+        }
+    
+        $branches = $query->get(); // Retrieve filtered branches
         $cities = City::where('status', 1)->pluck('city_name', 'sno'); // Fetch active cities
+    
         return view('branches.index', compact('branches', 'cities'));
     }
+    
     public function list()
     {
         $branches = Branch::all(); // Fetch all branches or apply filters if needed
@@ -34,6 +48,7 @@ class BranchController extends Controller
             'city' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'owner_email' => 'required|email',
+            'owner_mobile' => 'required',
             'header_image' => 'nullable|image|max:102400', // 100MB max size
         ]);
     
@@ -53,7 +68,8 @@ class BranchController extends Controller
             'city' => $request->input('city'),
             'location' => $request->input('location'),
             'header_image' => $headerImage,
-            'owner_email' => $request->input('owner_email')
+            'owner_email' => $request->input('owner_email'),
+            'owner_mobile' => $request->input('owner_mobile')
         ]);
     
        return redirect()->route('branches.index');
@@ -86,6 +102,7 @@ public function update(Request $request, $id)
             'city' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'owner_email' => 'required|email',
+            'owner_mobile' => 'required',
             'header_image' => 'nullable|image|max:102400',
         ]);
 
@@ -113,6 +130,7 @@ public function update(Request $request, $id)
             'city' => $request->input('city'),
             'location' => $request->input('location'),
             'owner_email' => $request->input('owner_email'),
+            'owner_mobile' => $request->input('owner_mobile'),
             'header_image' => $branch->header_image,
         ]);
 

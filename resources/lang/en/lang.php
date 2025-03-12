@@ -262,6 +262,7 @@ return [
     'upload_attachments' => 'Upload Attachments',
 
     'quality_auditor' => 'Quality Auditor',
-    'technical_auditor' => 'Technical Auditor'
+    'technical_auditor' => 'Technical Auditor',
+    'mobile' => 'Mobile'
 
 ];
