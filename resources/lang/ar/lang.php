@@ -253,6 +253,8 @@ return [
     'admin_note' => 'ملاحظة المشرف',
     'admin_attachments' => 'مرفقات المشرف',
     'upload_attachments' => 'رفع المرفقات',
+    'quality_auditor' => 'مدقق الجودة',
+    'technical_auditor' => 'مدقق فني',
 
 
 ];
