@@ -263,6 +263,7 @@ return [
 
     'quality_auditor' => 'Quality Auditor',
     'technical_auditor' => 'Technical Auditor',
-    'mobile' => 'Mobile'
+    'mobile' => 'Mobile',
+    'send_whatsapp' => 'Send Whatsapp'
 
 ];

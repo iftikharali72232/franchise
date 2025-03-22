@@ -255,7 +255,8 @@ return [
     'upload_attachments' => 'رفع المرفقات',
     'quality_auditor' => 'مدقق الجودة',
     'technical_auditor' => 'مدقق فني',
-    'mobile' => 'الجوال'
+    'mobile' => 'الجوال',
+    'send_whatsapp' => 'إرسال واتساب'
 
 
 

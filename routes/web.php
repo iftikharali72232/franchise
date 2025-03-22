@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/generate-pdf', [ReportController::class, 'generatePdf'])->name('generate-pdf');
     Route::post('/send-report', [ReportController::class, 'sendReport'])->name('send-report');
+    Route::post('/send-report-watsapp', [ReportController::class, 'sendWhatsappReport'])->name('send-report-watsapp');
 
    
     Route::get('/letters', [LetterController::class, 'index'])->name('letters.index');

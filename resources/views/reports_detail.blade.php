@@ -32,6 +32,12 @@
                 <span>{{ trans('lang.send_email') }}</span>
                 <i class="fa-solid fa-envelope ps-2"></i>
             </button>
+
+             <!-- Send Email Button -->
+             <button id="send-whatsapp" type="button" class="bg-[#3A95DD] px-6 py-3 rounded-full text-white">
+                <span>{{ trans('lang.send_whatsapp') }}</span>
+                <i class="fa-solid fa-envelope ps-2"></i>
+            </button>
         </div>
     </div>
 
@@ -347,5 +353,35 @@ document.getElementById('download-pdf').addEventListener('click', async function
         });
     });
 </script>
+<!-- Send Email Script -->
+<script>
+    document.getElementById('send-whatsapp').addEventListener('click', function() {
+        const ownerEmail = "{{ $report->branch->owner_mobile }}"; // Get the owner's email from the report
+        if (!ownerEmail) {
+            alert("No owner mobile found for this branch.");
+            return;
+        }
 
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch("{{ route('send-report-watsapp') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                id: "{{ $report->id }}",
+                mobile: ownerEmail // Use the owner's email
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message || "Whatsapp sent successfully to " + ownerEmail);
+        })
+        .catch(error => {
+            console.error('Whatsapp sending failed:', error);
+        });
+    });
+</script>
 @endsection

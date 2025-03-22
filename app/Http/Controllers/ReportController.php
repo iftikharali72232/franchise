@@ -237,6 +237,25 @@ class ReportController extends Controller
 
         return response()->json(['message' => 'Email sent successfully!']);
     }
+    public function sendWhatsappReport(Request $request)
+    {
+        $data = $request->validate([
+            "id" => "required",
+            "mobile" => "required"
+        ]);
+
+        $report = Report::with('branch')->where('id', $data['id'])->first();
+        $data['branch_name'] = isset($report->branch->branch_name) ? $report->branch->branch_name : "Unknown Branch Name";
+        // print_r($data);
+        $whatsapp = sendReportWhatsapp($data);
+        // print_r($whatsapp);
+        if(isset($whatsapp['messages'], $whatsapp['messages'][0]['message_status']) && $whatsapp['messages'][0]['message_status'] == "accepted")
+        {
+            return response()->json(['message' => 'Report whatsapp sent successfully!']);
+        } else {
+            return response()->json(['message' => 'Report whatsapp sending failed']);
+        }
+    }
  // Delete Admin Image
  public function deleteAdminImage(Request $request)
  {
