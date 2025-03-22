@@ -248,7 +248,7 @@ class ReportController extends Controller
         $data['branch_name'] = isset($report->branch->branch_name) ? $report->branch->branch_name : "Unknown Branch Name";
         // print_r($data);
         $whatsapp = sendReportWhatsapp($data);
-        print_r($whatsapp);
+        // print_r($whatsapp);
         if(isset($whatsapp['messages'], $whatsapp['messages'][0]['message_status']) && $whatsapp['messages'][0]['message_status'] == "accepted")
         {
             return response()->json(['message' => 'Report whatsapp sent successfully!']);
