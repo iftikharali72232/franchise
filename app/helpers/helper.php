@@ -144,14 +144,14 @@ function sendReportWhatsapp($data)
                 "parameters": [
                 	{
                 		"type": "text",
-                        "payload": "/'.(base64_encode($data['id'])).'"  
+                        "text": "/'.(base64_encode($data['id'])).'"  
                     }
                 ]
             }
         ]
     }
 }';
-    echo $json;
+    // echo $json;
     $curl = curl_init();
 		
     curl_setopt_array($curl, array(
