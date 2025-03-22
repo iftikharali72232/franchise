@@ -117,18 +117,7 @@ function send_message($data, $mobile)
 }
 function sendReportWhatsapp($data)
 {
-    $curl = curl_init();
-		
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://graph.facebook.com/v20.0/378517282013470/messages',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{
+    $json = '{
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
         "to": "'.$data['mobile'].'",
@@ -161,7 +150,20 @@ function sendReportWhatsapp($data)
                 }
             ]
         }
-    }',
+    }';
+    echo $json;
+    $curl = curl_init();
+		
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://graph.facebook.com/v20.0/378517282013470/messages',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => $json,
     CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
         'Authorization: Bearer EAAOh9TZC2MtUBOZCzd0p4u5w9YoFZAqLJF7sZBMsdDdirZCvZChVUj5UZCNv4yqZAwyXHFIEb4QFbv7qLDGhPFcwZA0fJuNYlfe23qx7wPeZCxaWdcNya1aRZC7hdZCuEpf49gWKk28rgT2twDWmFOq8yg7I3A2v1emQZBWdoQhPTu78UUjqNSwkBTBZBmhnUjSHF3yyjHDAZDZD'
