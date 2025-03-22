@@ -118,39 +118,39 @@ function send_message($data, $mobile)
 function sendReportWhatsapp($data)
 {
     $json = '{
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": "'.$data['mobile'].'",
-        "type": "template",
-        "template": {
-            "name": "report_sending_link",
-            "language": {
-                "code": "en"
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": "'.$data['mobile'].'",
+    "type": "template",
+    "template": {
+        "name": "report_sending_link",
+        "language": {
+            "code": "en"
+        },
+        "components": [
+            {
+                "type": "body",
+                "parameters": [
+                    {
+                        "type": "text",
+                        "text": "'.$data['branch_name'].'"
+                    }
+                ]
             },
-            "components": [
-                {
-                    "type": "body",
-                    "parameters": [
-                        {
-                            "type": "text",
-                            "text": "'.$data['branch_name'].'"
-                        }
-                    ]
-                },
-                {
-                    "type": "button",
-                    "index": "0",
-                    "sub_type": "url",
-                    "parameters": [
-                        {
-                            "type": "text",
-                            "text": "/'.base64_encode($data['id']).'"
-                        }
-                    ]
-                }
-            ]
-        }
-    }';
+            {
+                "type": "button",
+                "index": 0,
+                "sub_type": "url",
+                "parameters": [
+                    {
+                        "type": "payload",
+                        "payload": "https://checkfranchise.net/report_view/'.(base64_encode($data['id'])).'"  
+                    }
+                ]
+            }
+        ]
+    }
+}';
     echo $json;
     $curl = curl_init();
 		
