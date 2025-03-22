@@ -139,12 +139,12 @@ function sendReportWhatsapp($data)
             },
             {
                 "type": "button",
-                "index": 0,
+                "index": "0",
                 "sub_type": "url",
                 "parameters": [
-                    {
-                        "type": "payload",
-                        "payload": "https://checkfranchise.net/report_view/'.(base64_encode($data['id'])).'"  
+                	{
+                		"type": "text",
+                        "payload": "/'.(base64_encode($data['id'])).'"  
                     }
                 ]
             }
