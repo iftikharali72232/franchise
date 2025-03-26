@@ -15,6 +15,8 @@ use App\Http\Controllers\LetterController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('lang/{locale}', [LangController::class, 'setLocale'])->name('setLocale');
+
+Route::get('/about-us', [PageController::class, 'aboutUs']);
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
 
 Route::get('/', function () {
