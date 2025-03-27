@@ -18,6 +18,8 @@ Route::get('lang/{locale}', [LangController::class, 'setLocale'])->name('setLoca
 
 Route::get('/about-us', [PageController::class, 'aboutUs']);
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact.us');
+Route::post('/contact-us', [PageController::class, 'submitContactForm'])->name('contact.submit');
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -38,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
     Route::get('/branches/list', [BranchController::class, 'list'])->name('branches.list');
     Route::get('/branches/{id}', [BranchController::class, 'show'])->name('branches.show'); // Keep this last
+
+    Route::get('/admin/contact-messages', [PageController::class, 'viewMessages'])->name('contact.messages');
 
     // Automatically generates routes for index, create, store, edit, update, and destroy
     Route::resource('sectionList', SectionController::class);
