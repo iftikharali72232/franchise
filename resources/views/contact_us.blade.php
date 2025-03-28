@@ -1,43 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Meshraq</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-6">
-        <div class="container">
-            <h1>Contact Us</h1>
-            
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+@extends('layouts.app')
 
-            <form action="{{ route('contact.submit') }}" method="POST">
-                @csrf
-                <div class="mb-3">
+@section('content')
+<div class="w-full rounded-xl bg-white bg-clip-border shadow-md p-4">
+    <div class="p-4 border-b border-gray-200">
+        <h3 class="text-xl font-semibold">Contact Us</h3>
+    </div>
+
+    <div class="p-4">
+        
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <form action="{{ route('contact.submit') }}" method="POST">
+            @csrf
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+                <div class="">
                     <label class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" required value="{{ old('name') }}">
+                    <input type="text" name="name" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required value="{{ old('name') }}">
                     @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                <div class="mb-3">
+                <div class="">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
+                    <input type="email" name="email" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-full" required value="{{ old('email') }}">
                     @error('email') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                <div class="mb-3">
+                <div class="md:col-span-2">
                     <label class="form-label">Message</label>
-                    <textarea name="message" class="form-control" rows="4" required>{{ old('message') }}</textarea>
+                    <textarea name="message" class="w-full px-6 py-3 border border-[#1F5077] bg-[#D6E7F5] text-[#1F5077] focus:bg-[#D6E7F5]/30 focus:border-[#1F5077]/70 focus:outline-none rounded-xl" rows="4" required>{{ old('message') }}</textarea>
                     @error('message') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-        </div>
+                <div class="md:col-span-2">
+                    <button type="submit" class="px-[40px] py-[20px] bg-[#1F5077] text-white font-semibold rounded-full">Send Message</button>
+                </div>
+            </div>
+        </form>
     </div>
-</body>
-</html>
+        
+</div>
+@endsection
