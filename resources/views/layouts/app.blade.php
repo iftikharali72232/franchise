@@ -66,8 +66,9 @@
             <img class="animation__wobble" src="{{asset('img/logo.png')}}" alt="AdminLTELogo" height="60" width="60">
           </div> -->
         <!-- Sidebar -->
+        @if (!Request::is('contact-us'))
         @include('layouts.panel.sidebar')
-
+        @endif
       @endguest
 
       @guest
@@ -77,8 +78,9 @@
       <!-- Main Body -->
       <div class="flex flex-col flex-1 overflow-y-auto">
           <!-- Topnav -->
+          @if (!Request::is('contact-us'))
           @include('layouts.panel.topnav')
-
+          @endif
           <!-- Content -->
           <div class="p-4">
           @yield('content')
