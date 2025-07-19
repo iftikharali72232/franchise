@@ -51,14 +51,14 @@
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
         <!-- card 1 -->
         <?php foreach($res as $report){ ?>
-            <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6">
+            <div class="bg-[#F1FAFE] rounded-[30px] shadow-sm p-6 report-card">
                 <a href="{{ route('report_detail', $report->id) }}">
                     <div class="flex mb-3">
                         <div class="w-1/2">
                             <p class="text-sm font-semibold text-[#1D3F5D]">{{ trans('lang.branch_name') }}:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->branch->branch_name ?? "" ?></p>
+                            <p class="text-sm text-[#3A95DD] branch-name"><?= $report->branch->branch_name ?? "" ?></p>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">{{ trans('lang.auditor_name') }}:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->user->name ?? "" ?></p>
+                            <p class="text-sm text-[#3A95DD] auditor-name"><?= $report->user->name ?? "" ?></p>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">{{ trans('lang.section') }}:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->section ?? "" ?></p>
+                            <p class="text-sm text-[#3A95DD] section-name"><?= $report->section ?? "" ?></p>
                         </div>
                     </div>
 
@@ -109,7 +109,7 @@
                             <p class="text-sm font-semibold text-[#1D3F5D]">{{ trans('lang.created_date') }}:</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-[#3A95DD]"><?= $report->created_at ?? "" ?></p>
+                            <p class="text-sm text-[#3A95DD] date"><?= $report->created_at ?? "" ?></p>
                         </div>
                     </div>
                 </a>

@@ -22,7 +22,7 @@
             </div>
             
             <input 
-                id="search"
+                id="global_search" 
                 type="text" 
                 placeholder="{{ trans('lang.quick_search') }}" 
                 class="w-full {{ app()->getLocale() == 'ar' ? 'pl-3 pr-12' : 'pr-3 pl-12' }} py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none text-gray-900"

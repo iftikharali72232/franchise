@@ -44,7 +44,7 @@
                     <th class="whitespace-nowrap">{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="latter_list_data">
                 @foreach($letters as $letter)
                 <tr class="hover:bg-[#F1FAFEB2]">
                     <td class="whitespace-nowrap">{{ $letter->branch->owner_email }}</td>

@@ -79,3 +79,114 @@ function previewImage(event) {
     preview.src = "/images/profile-placeholder.jpg"; // Placeholder image if no image selected
   }
 }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('global_search');
+        const tableBody = document.getElementById('branch_list_data');
+        const rows = tableBody.querySelectorAll('tr');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value.toLowerCase();
+
+            rows.forEach(row => {
+                const branchName = row.cells[0]?.innerText.toLowerCase() || '';
+                const branchNo   = row.cells[1]?.innerText.toLowerCase() || '';
+
+                if (branchName.includes(query) || branchNo.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+
+     document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('global_search');
+        const tableBody = document.getElementById('latter_list_data');
+        const rows = tableBody.querySelectorAll('tr');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value.toLowerCase();
+
+            rows.forEach(row => {
+                const branchName = row.cells[0]?.innerText.toLowerCase() || '';
+                const branchNo   = row.cells[1]?.innerText.toLowerCase() || '';
+
+                if (branchName.includes(query) || branchNo.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('global_search');
+        const tableBody = document.getElementById('member_list_data');
+        const rows = tableBody.querySelectorAll('tr');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value.toLowerCase();
+
+            rows.forEach(row => {
+                const cell1 = row.cells[0]?.innerText.toLowerCase() || '';
+                const cell2   = row.cells[1]?.innerText.toLowerCase() || '';
+                const cell3 = row.cells[2]?.innerText.toLowerCase() || '';
+                const cell4   = row.cells[3]?.innerText.toLowerCase() || '';
+
+                if (cell1.includes(query) || cell2.includes(query) || cell3.includes(query) || cell4.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('global_search');
+        const tableBody = document.getElementById('service_list_data');
+        const rows = tableBody.querySelectorAll('tr');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value.toLowerCase();
+
+            rows.forEach(row => {
+                const cell1 = row.cells[0]?.innerText.toLowerCase() || '';
+                // const cell2   = row.cells[1]?.innerText.toLowerCase() || '';
+                // const cell3 = row.cells[0]?.innerText.toLowerCase() || '';
+                // const cell4   = row.cells[1]?.innerText.toLowerCase() || '';
+
+                if (cell1.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('global_search');
+        const cards = document.querySelectorAll('.report-card');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value.toLowerCase();
+
+            cards.forEach(card => {
+                // You can add more fields here as needed
+                const branchName = card.querySelector('p.branch-name')?.innerText.toLowerCase() || '';
+                const auditorName = card.querySelector('p.auditor-name')?.innerText.toLowerCase() || '';
+                const sectionName = card.querySelector('p.section-name')?.innerText.toLowerCase() || '';
+                const date = card.querySelector('p.date')?.innerText.toLowerCase() || '';
+                if (branchName.includes(query) || auditorName.includes(query) || sectionName.includes(query) || date.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+

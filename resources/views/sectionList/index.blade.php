@@ -29,7 +29,7 @@
                     <th class="whitespace-nowrap">{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="section_list_data">
                 @forelse($sections as $section)
                 <tr class="hover:bg-[#F1FAFEB2]">
                     <td class="whitespace-nowrap">{{ $section->name }}</td>
